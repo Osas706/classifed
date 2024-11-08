@@ -1,0 +1,224 @@
+.createAdForm{
+  /* background-color: yellow; */
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+
+
+
+  .createAdDetails, .userDetails {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    gap: 10px;
+    margin-top: 20px;
+    /* background-color: pink; */
+    /* align-items: center;
+    justify-content: center; */
+
+    h2 {
+      color: #0a1128;
+      font-size: 44px;
+    }
+
+    h3{
+      font-size: 35px;
+      color: #0a1128;
+    }
+
+    p {
+      font-size: 23px;
+      color: #dde0bd;
+    }
+
+    .double {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      /* background-color: skyblue; */
+
+      label{
+        /* background-color: yellow; */
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16px;
+        letter-spacing: -0.04em;
+       select{
+          width: 100%;
+          height: 45px;
+          padding: 10px;
+          outline: none;
+          border-radius: 2px;
+          border: 1px solid #dde0bd;
+        }
+      }
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 16px;
+      letter-spacing: -0.04em;
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        height: 45px;
+        padding: 10px;
+        outline: none;
+        border-radius: 2px;
+        border: 1px solid #dde0bd;
+        color: #0a1128;
+      }
+
+      .description {
+        min-height: 150px;
+      }
+
+      .radioBox {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        height: 24px;
+
+        label {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          height: 24px;
+
+          .checkbox[type="checkbox"] {
+            accent-color: #dde0bd;
+            width: min-content;
+          }
+        }
+      }
+
+
+  
+    }
+
+    .imageUpload{
+      width: 100%;
+      height: 250px;
+
+      img{
+        width: 100%;
+        height: 90%;
+        object-fit: contain;
+        border-radius: 10px;
+        border: 1px solid #dde0bd;
+        background-color: #dde0bd;
+      }
+    }
+
+    .displayImageUpload{
+      width: 130px;
+      height: 150px;
+      margin: 0px auto;
+
+      img{
+        width: 100%;
+        height: 90%;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 1px solid #dde0bd;
+        background-color: #dde0bd;
+      }
+    }
+
+    .postAd{
+      border: none;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      font-size: 18px;
+      background-color: #221a4b;
+      border-radius: 10px;
+      color: #dde0bd;
+      z-index: 4;
+
+      .icon{
+        font-size: 18px;
+      }
+    }
+
+    .postAd:hover{
+      opacity: 0.8;
+    }
+  }
+
+  .userDetails {
+    margin-top: 150px;
+
+    .radio{
+      display: flex;
+      flex: 1 !important;
+      flex-direction: row;
+      align-items: center;
+
+      input[type="checkbox"] {
+        accent-color: #dde0bd;
+        width: min-content;
+      }
+    }
+
+    h3{
+      text-align: right;
+    }
+
+    p{
+      text-align: right;
+    }
+
+  }
+
+
+}
+
+@media (max-width: 1050px) {
+}
+
+@media (max-width: 750px) {
+  .createAdForm {
+    flex-direction: column;
+
+    h2 {
+      font-size: 28px !important;
+    }
+
+    h3{
+      font-size: 23px !important;
+    }
+
+    p {
+      font-size: 13px !important;
+    }
+  }
+
+  .userDetails {
+    margin-top: 0px !important;
+
+    h3{
+      text-align: left !important;
+    }
+
+    p{
+      text-align: left !important;
+    }
+
+  }
+}
