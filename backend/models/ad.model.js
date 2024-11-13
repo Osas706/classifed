@@ -22,7 +22,7 @@ const adSchema = new mongoose.Schema({
         type : String,
         required: false
     },
-    Price: {
+    price: {
         type : Number,
         required: false
     },

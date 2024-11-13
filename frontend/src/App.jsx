@@ -8,6 +8,9 @@ import Footer from "./components/footer/Footer";
 import Login from "./components/login/Login";
 import Profile from "./pages/profile/Profile";
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Ad from "./pages/ad/Ad";
+
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -25,6 +28,7 @@ const App = () => {
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/create-ad" element={<CreateAd />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/ad/:id" element={<Ad />} />
 
           <Route path='*' element={<Navigate to="/" />} />
         </Routes>

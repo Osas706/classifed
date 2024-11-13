@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './Home.css';
 import Header from '../../components/header/Header';
 import Categories from '../../components/categories/Categories';
-import FoodDisplay from '../../components/foodDisplay/FoodDisplay';
 import AppDownload from '../../components/appDownload/AppDownload';
+import AdDisplay from '../../components/adsDisplay/AdDisplay';
 
 const Home = () => {
   const [category, setCategory] = useState('All');
@@ -12,7 +12,7 @@ const Home = () => {
     <div>
       <Header />
       <Categories category={category} setCategory={setCategory} />
-      <FoodDisplay category={category} />
+      <AdDisplay category={category} />
       <AppDownload />
     </div>
   )

@@ -5,17 +5,17 @@ import UserModel from "../models/user.model.js";
 export const authMiddleware = async (req, res, next) => {
   //  const {token} = req.headers;
   const token = req.cookies.token;
-  if (!token) {
-    return res.status(400).json({ success: false, message: "Not Authorized, No Token Provided" });
-  }
+  // if (!token) {
+  //   return res.status(400).json({ success: false, message: "Not Authorized, No Token Provided" });
+  // }
 
   console.log(token);
 
   try {
     const token_decode = jwt.verify(token, "random#secret1");
-    if (!token_decode) {
-      res.status(401).json({ error: "Unauthorized: Invalid Token" });
-    };
+    // if (!token_decode) {
+    //   res.status(401).json({ error: "Unauthorized: Invalid Token" });
+    // };
 
     //  req.body.userId = token_decode.id;
 
@@ -44,7 +44,7 @@ export const generateTokenAndSetCookie = (id, res) => {
     res.cookie('token', token, {
         maxAge: 15 * 24 * 60 * 60 * 1000, //milliseconds
         httpOnly: true, //prevent XSS attcks , cross-site scripting attacks
-        sameSite: "strict", // CSRF attcks, cross-site request forgery attack
-        // secure: process.env.NODE_ENV !== 'development',
+        //sameSite: "strict", // CSRF attcks, cross-site request forgery attack
+        // secure: true,
     });
 };

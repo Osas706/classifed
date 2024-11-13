@@ -1,0 +1,42 @@
+import React, { useContext } from 'react';
+import './AdItem.css';
+import {Link} from 'react-router-dom';
+import { Watermark} from 'antd';
+// import { StoreContext } from '../../context/storeContext';
+
+const AdItem = ({adImage, title, price, description, id}) => {
+  // const { url} = useContext(StoreContext);
+
+  return (
+    <div className='ad-item'>
+      <div className="ad-item-img-container">
+        <Watermark
+          image='/mark.png'
+          offset={[150, 200]}
+          rotate={-20}
+        >
+          <img className='ad-item-image' src={adImage} alt="" />
+        </Watermark>  
+      </div>
+
+      <div className="ad-item-info">
+        <div className="ad-item-title">
+          <p>{title}</p>
+        </div>
+
+        <div className="desc">
+         {description}
+        </div>
+    
+        <div className="price">
+          <p className="ad-item-price">₦{price}</p>
+
+          <Link className='view-btn' to={`/ad/${id}`}>view</Link>
+        </div>
+      
+      </div>
+    </div>
+  )
+}
+
+export default AdItem;

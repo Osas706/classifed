@@ -1,5 +1,5 @@
 import express from 'express';
-import { addAd , listFood, removeFood} from '../controllers/ad.controller.js';
+import { addAd , listAds} from '../controllers/ads.controller.js';
 // import { authMiddleware } from '../middleware/auth.js';
 
 const router = express.Router();
@@ -7,8 +7,8 @@ const router = express.Router();
 
 //routes
 router.post("/add", addAd);
-// router.get("/list", listFood);
-// router.post("/remove", removeFood);
+router.get("/list", listAds);
+
 
 
 export default router;

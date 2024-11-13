@@ -8,10 +8,11 @@ import "./CreateAd.css";
 import Background from "../../components/Background";
 import { StoreContext } from "../../context/storeContext";
 import axios from "axios";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const CreateAd = () => {
-  const { url , user} = useContext(StoreContext);
+  const { url, user } = useContext(StoreContext);
+  const [loading, setLoading] = useState(false);
   const [adData, setAdData] = useState({
     title: "",
     description: "",
@@ -20,7 +21,6 @@ const CreateAd = () => {
     price: 0,
     terms: "negotiable",
     adImage: "",
-
     firstName: "",
     lastName: "",
     email: "",
@@ -29,14 +29,6 @@ const CreateAd = () => {
     country: "",
     state: "",
   });
-
-
-  useEffect(() => {
-    return console.log(user);
-     
-  }, [])
-  
-
   const [countriesList, setCountriesList] = useState([]);
   const [stateList, setStateList] = useState([]);
 
@@ -57,11 +49,11 @@ const CreateAd = () => {
     }
 
     if (name === "adImage") {
-      setAdData({ ...adData, [name]: e.target.files[0] });
+      setAdData({ ...adData, [name]: e?.target?.files[0] });
     }
 
     if (name === "displayImage") {
-      setAdData({ ...adData, [name]: e.target.files[0] });
+      setAdData({ ...adData, [name]: e?.target?.files[0] });
     }
 
     if (name === "country") {
@@ -83,23 +75,27 @@ const CreateAd = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const formData = new FormData();
 
     formData.append("title", adData.title);
     formData.append("description", adData.description);
     formData.append("category", adData.category);
     formData.append("condition", adData.condition);
-    formData.append("country", adData.country);
+    formData.append("price", adData.price);
+    formData.append("terms", adData.terms);
+    formData.append("adImage", adData.adImage);
+    formData.append("firstName", adData.firstName);
+    formData.append("lastName", adData.lastName);
+    formData.append("email", adData.email);
+    formData.append("phoneNumber", adData.phoneNumber);
+    formData.append("displayImage", adData.displayImage);
     formData.append("state", adData.state);
-    // formData.append("adImage", adData.adImage);
-    // formData.append("displayImage", adData.displayImage);
-  
+    formData.append("country", adData.country);
+
     try {
       const res = await axios.post(`${url}/api/ads/add`, formData);
-      console.log(res);
-      
-
-      if(res.data.success){
+      if (res.data.success) {
         setAdData({
           title: "",
           description: "",
@@ -108,7 +104,7 @@ const CreateAd = () => {
           price: 0,
           terms: "negotiable",
           adImage: "",
-      
+
           firstName: "",
           lastName: "",
           email: "",
@@ -120,16 +116,16 @@ const CreateAd = () => {
 
         toast.success(res.data.message);
       }
-
-
     } catch (error) {
+      toast.error(error.message);
       console.log(error);
-      
-    }
+    } finally {
+      setLoading(false);
+    };
   };
 
   return (
-    <form onSubmit={handleSubmit} className="createAdForm" >
+    <form onSubmit={handleSubmit} className="createAdForm">
       <Background />
       {/* ****************createAdDetails*********************** */}
       <div className="createAdDetails">
@@ -142,6 +138,7 @@ const CreateAd = () => {
             type="text"
             name="title"
             placeholder="Enter your ad title..."
+            required
             value={adData.title}
             onChange={onChangeHandler}
           />
@@ -346,8 +343,8 @@ const CreateAd = () => {
           By Continuing, I agree to the terms of use & privacy policy.
         </label>
 
-        <button  className="postAd">
-          Post Ad <FiSend className="icon" />
+        <button disabled={loading} type="submit" className="postAd">
+          {loading ? "Posting Ad..." : "Post Ad"} <FiSend className="icon" />
         </button>
       </div>
     </form>

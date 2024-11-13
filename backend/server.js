@@ -4,11 +4,10 @@ import { connectDB } from "./config/db.js";
 import adsRouter from "./routes/ads.route.js";
 import userRouter from "./routes/user.route.js";
 import 'dotenv/config';
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
-// import authMiddleware from "./middleware/auth.js";
+import cookieParser from 'cookie-parser'; 
 import { v2 as cloudinary } from 'cloudinary';
-
+import formidable from 'express-formidable';
+ 
 
 //app config
 const app = express();
@@ -20,22 +19,13 @@ cloudinary.config({
     api_secret: '_orIYNQVmM3VdNPZAjIrY8bK7vE' // Click 'View API Keys' above to copy your API secret
 });
 
-// const __dirname = path.resolve();
-
 //middleware
-app.use(express.json({
-    limit: '5mb'
-}));
+app.use(express.json());
 app.use(cors());
-app.use(bodyParser.urlencoded({
-    extended: false,
-    type: 'application/*+json',
-    limit: '10mb'
-}));
+app.use(express.urlencoded({extended: true }));  
+app.use(express.text())
+app.use(formidable());
 app.use(cookieParser());
-
-
-
 
 //db connection
 connectDB();
@@ -44,12 +34,16 @@ connectDB();
 app.use("/api/ads", adsRouter);
 app.use("/api/user", userRouter);
 
-// app.use("/images", express.static('uploads'));
 
 //test api
 app.get("/", (req, res) => {
    res.send('HEllO')
 });
+
+// app.post("/test", (req, res) => {
+//     console.log("req.body", req.fields)
+//     return res.send(req.fields)
+//  }); 
 
 app.listen(port, () => {
     console.log(`Server started on http://localhost:${port}`);
