@@ -3,27 +3,37 @@ import "./AdDisplay.css";
 import { StoreContext } from "../../context/storeContext";
 import AdItem from "../adItem/AdItem";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { FaExpand } from "react-icons/fa";
+import { BiMailSend } from "react-icons/bi";
+import { FiSend } from "react-icons/fi";
 
-
-const AdDisplay = ({ category }) => {
-  const { url } = useContext(StoreContext);
+const AdDisplay = () => {
+  const { url, category } = useContext(StoreContext);
   const [adList, setAdList] = useState([]);
+  const [newsLetter, setNewsLetter] = useState('');  
 
-  const fetchAdList = async() => {
+  const fetchAdList = async () => {
     const res = await axios.get(`${url}/api/ads/list`);
-    setAdList(res.data.data)
+    setAdList(res.data.data);
   };
 
   useEffect(() => {
     fetchAdList();
-  }, [category])
+  }, [category]);
 
   return (
     <div className="ad-display" id="ad-display">
-      <h2>Top ads near you</h2>
+      <div className="top">
+        <h2>Top ads near you</h2>
+
+        <Link className="view-all" to={"/categories"}>
+          View All <FaExpand className="icon" />
+        </Link>
+      </div>
 
       <div className="ad-display-list">
-        {adList?.map((item, index) => {
+        {adList?.slice(0, 8).map((item, index) => {
           if (category === "All" || category === item.category) {
             return (
               <AdItem
@@ -38,7 +48,30 @@ const AdDisplay = ({ category }) => {
           }
         })}
       </div>
-      
+
+      <div className="news-letter">
+        <div className="title">
+          <BiMailSend className="title-icon" />
+
+          <div className="title-detail">
+            <h3>Subscribe to Newsletter</h3>
+            <p>and receive new ads in inbox</p>
+          </div>
+        </div>
+
+        <form className="form">
+          <input 
+            type="text" placeholder="Enter your email" 
+            name="" 
+            onChange={(e) => setNewsLetter(e.target.value)}
+          />
+
+          <button type="submit">
+            Subcribe
+            <FiSend />
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

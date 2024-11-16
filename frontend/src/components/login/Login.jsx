@@ -4,10 +4,11 @@ import { StoreContext } from "../../context/storeContext";
 
 import axios from "axios";
 import { RxCross2 } from "react-icons/rx";
+import { toast } from "react-toastify";
 
 const Login = ({ setShowLogin }) => {
   const { url, setUser } = useContext(StoreContext);
-  const [currentState, setCurrentState] = useState("Sign Up");
+  const [currentState, setCurrentState] = useState("Login");
 
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
@@ -29,6 +30,13 @@ const Login = ({ setShowLogin }) => {
       e.preventDefault();
       setLoading(true);
 
+      const formData = new FormData();
+
+      formData.append("firstName", data.firstName);
+      formData.append("lastName", data.lastName);
+      formData.append("email", data.email);
+      formData.append("password", data.password);
+
       let newUrl = url;
       if(currentState === 'Login'){
         newUrl += "/api/user/login"
@@ -36,16 +44,18 @@ const Login = ({ setShowLogin }) => {
         newUrl += "/api/user/register"
       };
 
-      const res = await axios.post(newUrl, data);
+      const res = await axios.post(newUrl, formData);
       console.log(res);
       
       if(res.data.success){
         setUser(res.data.user);
-        localStorage.setItem("user", res.data?.user?._id)
+        toast.success('Welcome, Now create your ad');
+        localStorage.setItem("user", res.data?.userInfo?._id)
         setShowLogin(false);
       }  
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.message);
     } finally {
       setLoading(false);
     }

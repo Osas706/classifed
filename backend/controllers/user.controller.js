@@ -5,15 +5,15 @@ import validator from "validator";
 import { generateTokenAndSetCookie } from "../middleware/auth.js";
 
 //createToken
-const createToken = (id) => {
-  return jwt.sign({ id }, "random#secret1", {
-    expiresIn: "15d",
-  });
-};
+// const createToken = (id) => {
+//   return jwt.sign({ id }, "random#secret1", {
+//     expiresIn: "15d",
+//   });
+// };
 
 //login user
-const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+export const loginUser = async (req, res) => {
+  const { email, password } = req.fields;
 
   try {
     //check if user exists
@@ -31,7 +31,9 @@ const loginUser = async (req, res) => {
     //create token and send response
     generateTokenAndSetCookie(user._id, res);
 
-    res.status(201).json({ success: true, user });
+    const { password: pass, ...userInfo } = user._doc;
+
+    res.status(201).json({ success: true, userInfo });
   } catch (error) {
     console.log(error, "Error in loginUser controller");
     res.status(404).json({ success: false, message: "Error", error });
@@ -39,8 +41,8 @@ const loginUser = async (req, res) => {
 };
 
 //register user
-const registerUser = async (req, res) => {
-  const { firstName, lastName, password, email } = req.body;
+export const registerUser = async (req, res) => {
+  const { firstName, lastName, password, email } = req.fields;
 
   try {
     //checking is user already exists
@@ -57,7 +59,7 @@ const registerUser = async (req, res) => {
     //password
     if (password.length < 6) {
       return res.status(400).json({ success: false, message: "Please enter strong password" });
-    }
+    };
 
     //hashing user password
     const salt = await bcrypt.genSalt(10);
@@ -70,17 +72,33 @@ const registerUser = async (req, res) => {
       password: hashedPassword,
     });
 
-
-
-   generateTokenAndSetCookie(user._id, res);
-
     const user = await newUser.save();
+    generateTokenAndSetCookie(user._id, res);
 
-    res.status(201).json({ success: true });
+    const { password: pass, ...userInfo } = user._doc;
+
+    res.status(201).json({ success: true, userInfo });
   } catch (error) {
     console.log(error, "Error in registerUser controller");
     res.status(404).json({ success: false, message: "Error", error });
   }
 };
 
-export { loginUser, registerUser };
+//get current user
+export const getMe = async (req, res) => {
+  const userId = req?.user._id;
+  // console.log(req);
+  
+  try {
+    const user = await UserModel.findById(userId).select("-password");
+    
+    if(!user){
+      res.status(400).json({ message: "User not found" });
+    };
+    
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error, 'Error in getMe Controller');
+    res.status(404).json({ success: false, message: "Something went wrong", error});
+  };
+};

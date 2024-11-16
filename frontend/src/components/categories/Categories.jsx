@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Categories.css";
 import { IoCarSportOutline } from "react-icons/io5";
 import { FaTv } from "react-icons/fa6";
@@ -11,8 +11,11 @@ import { PiDog } from "react-icons/pi";
 import { FaLaptop } from "react-icons/fa6";
 import { GiPaintRoller } from "react-icons/gi";
 import { FaRegHeart } from "react-icons/fa";
+import { StoreContext } from "../../context/storeContext";
 
-const Categories = ({ category, setCategory }) => {
+const Categories = () => {
+  const { category, setCategory } = useContext(StoreContext);
+  
   return (
     <div className="explore-menu" id="explore-menu">
       <h1>Ads By Category</h1>

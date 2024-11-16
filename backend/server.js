@@ -36,14 +36,19 @@ app.use("/api/user", userRouter);
 
 
 //test api
-app.get("/", (req, res) => {
-   res.send('HEllO')
-});
+// app.get("/", (req, res) => {
+//    res.send('HEllO')
+// });
 
-// app.post("/test", (req, res) => {
-//     console.log("req.body", req.fields)
-//     return res.send(req.fields)
-//  }); 
+app.post("/test", (req, res) => {
+    console.log("test", req.fields)
+    return res.send(req.fields)
+ }); 
+
+ app.get("/test", (req, res) => {
+    console.log("get", req.fields)
+    return res.send(req.fields)
+ }); 
 
 app.listen(port, () => {
     console.log(`Server started on http://localhost:${port}`);

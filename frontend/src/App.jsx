@@ -10,6 +10,7 @@ import Profile from "./pages/profile/Profile";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Ad from "./pages/ad/Ad";
+import Background from "./components/Background";
 
 
 const App = () => {

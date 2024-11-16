@@ -6,13 +6,12 @@ import AppDownload from '../../components/appDownload/AppDownload';
 import AdDisplay from '../../components/adsDisplay/AdDisplay';
 
 const Home = () => {
-  const [category, setCategory] = useState('All');
-
+  
   return (
     <div>
       <Header />
-      <Categories category={category} setCategory={setCategory} />
-      <AdDisplay category={category} />
+      <Categories />
+      <AdDisplay />
       <AppDownload />
     </div>
   )

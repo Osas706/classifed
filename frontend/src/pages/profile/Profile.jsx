@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import axios from 'axios';
 import DisplayUploadImg from "/hi.png";
 import './Profile.css';
 import Background from "../../components/Background";
+import { StoreContext } from "../../context/storeContext";
 
 const Profile = () => {
+  const { url } = useContext(StoreContext);
+
+  const fetchUser = async () => {
+    const res = await axios.get(`${url}/api/user/me`);
+    console.log(res);
+    
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   return (
     <div className="profile-cont">
       <Background />

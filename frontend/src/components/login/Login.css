@@ -1,6 +1,6 @@
 .login{
     position: absolute;
-    z-index: 2;
+    z-index: 12;
     width: 100%;
     height: 100%;
     background-color: #00000090;
