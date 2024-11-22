@@ -32,9 +32,10 @@ const AdDisplay = () => {
         </Link>
       </div>
 
+      {/* *****************ad display list ***************** */}
       <div className="ad-display-list">
         {adList?.slice(0, 8).map((item, index) => {
-          if (category === "All" || category === item.category) {
+          if (category === "All" ) {
             return (
               <AdItem
                 key={index}
@@ -43,6 +44,23 @@ const AdDisplay = () => {
                 description={item.description}
                 price={item?.price}
                 adImage={item.adImage}
+                state={item.state}
+              />
+            );
+          }
+        })}
+
+        {adList?.map((item, index) => {
+          if (category === item.category) {
+            return (
+              <AdItem
+                key={index}
+                id={item._id}
+                title={item.title}
+                description={item.description}
+                price={item?.price}
+                adImage={item.adImage}
+                state={item.state}
               />
             );
           }

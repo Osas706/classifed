@@ -20,9 +20,6 @@ const CategoriesPage = () => {
   const [adList, setAdList] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  console.log(adList);
-  
-
   //pagination start************************
   const [currentPage, setCurrentPage] = useState(1);
   const adsPerPage = 6;
@@ -195,7 +192,6 @@ const CategoriesPage = () => {
 
         <div className="categoriesDisplay">
           {loading && <div className="loader"></div>}
-
           {ads.map((item, index) => {
             if (category === "All" || category === item.category) {
               return (
@@ -206,6 +202,7 @@ const CategoriesPage = () => {
                   description={item.description}
                   price={item?.price}
                   adImage={item.adImage}
+                  state={item.state}
                 />
               );
             }
@@ -219,7 +216,6 @@ const CategoriesPage = () => {
           <li>
             <p onClick={prevPage}>prev</p>
           </li>
-
           {numbers.map((n, i) => (
             <li className={currentPage === n ? "pagi-active" : ""} key={i}>
               <p onClick={() => changePage(n)}>{n}</p>

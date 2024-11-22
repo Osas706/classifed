@@ -1,0 +1,196 @@
+.adItem{
+  margin-top: 60px;
+  display: flex;
+  gap: 20px;
+
+  .ad{
+    display: flex;
+    gap: 20px;
+    /* border: 1px solid #DDE0BD;
+    padding: 20px; */
+
+    img{
+      max-width: 400px;
+      height: 100%;
+      border-radius: 14px;
+      object-fit: cover;
+      margin-bottom: 20px;
+      background-color: whitesmoke;
+    }
+
+    .adDetails{
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      color: #002140;
+
+      h1{
+        font-size: 45px;
+        text-transform:capitalize ;
+      }
+
+      .adDdesc{
+        margin-bottom: 30px;
+      }
+
+      p{
+
+      }
+
+      span{
+        display: flex;
+        gap: 20px;
+
+        p{
+        }
+      }
+
+      .pricee{
+        font-size: 23px;
+        font-weight: 700;
+      }
+    }
+  }
+
+  .adAdvertizer{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 2px solid #002140;
+    background-color: #002140;
+    border-radius: 15px;
+    margin-left: auto;
+    gap: 20px;
+    height: max-content;
+    align-items: center;
+
+    .top{
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      border: 1px solid white;
+      color: white;
+      padding: 3px 6px;
+      border-radius: 3px;
+      width: max-content;
+      cursor: pointer;
+    } 
+
+    .body{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: max-content;
+
+      h3{
+        color: white;
+      }
+  
+      img{
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 1px solid white;
+      }
+  
+      .adAdvertizerDetails{
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+  
+        span{
+          display: flex;
+          gap: 4px;
+          text-transform: capitalize;
+        }
+      }
+    }
+
+    .warning{
+     display: flex;
+     width: 150px;
+     font-size: 12px;
+     border: 1px solid white;
+     padding: 4px 7px;
+     margin-top: 20px;
+     color: white;
+    }
+
+  }
+}
+
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+
+.loading {
+  width: 58px;
+  height: 58px;
+  border: 5px solid;
+  border-color: #002140 transparent;
+  position: absolute;
+  top: 50%;
+  right: 45%;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+.loadingCont{
+  background-color: transparent;
+  margin: auto;
+  width: 50vw;
+  height: 50vh;
+  position: relative;
+
+ 
+}
+
+
+@media (max-width: 1050px) {
+  .adItem{
+    flex-direction: column;
+
+    .ad{
+      flex-direction: column;
+
+      img{
+        margin: 0px auto;
+      }
+
+      .adDetails{
+        align-items: center;
+      }
+    }
+
+    .adAdvertizer{
+      align-items: center;
+      margin: 6px auto;
+
+      .body{
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+      }
+
+      .warning{
+        display: flex;
+        width: 350px;
+        text-align: center;
+       }
+   
+    }
+  }
+}
+
+@media (max-width: 750px) {
+
+}

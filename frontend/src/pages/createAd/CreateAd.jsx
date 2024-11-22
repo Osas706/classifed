@@ -16,8 +16,8 @@ const CreateAd = () => {
   const [adData, setAdData] = useState({
     title: "",
     description: "",
-    category: "Select Category",
-    condition: "Select Condition",
+    category: "",
+    condition: "",
     price: 0,
     terms: "negotiable",
     adImage: "",

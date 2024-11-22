@@ -1,21 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const [searchData, setSearchData] = useState({
-    search: "",
-    location: "select location",
-    category: "select category",
-  });
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchLocation, setSearchLocation] = useState('');
+  const [searchCategory, setSearchCategory] = useState('');
+  const navigate = useNavigate();
 
-  const onChangeHandler = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('searchTerm', searchTerm);
+    urlParams.set('searchLocation', searchLocation);
+    urlParams.set('searchCategory', searchCategory);
 
-    setSearchData({ ...searchData, [name]: value });
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
   };
 
-  const handleSubmit = async () => {};
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get('searchTerm');
+    const searchLocationFromUrl = urlParams.get('searchLocation');
+    const searchCategoryFromUrl = urlParams.get('searchCategory');
+
+    if(searchTermFromUrl || searchLocationFromUrl || searchCategoryFromUrl){
+      setSearchTerm(searchTermFromUrl)
+      setSearchLocation(searchLocationFromUrl)  
+      setSearchCategory(searchCategoryFromUrl)
+    };
+  }, [location.search]);
 
   return (
     <div className="head">
@@ -33,11 +48,11 @@ const Header = () => {
             type="text"
             placeholder="What are you looking for ?"
             name="search"
-            value={searchData.search}
-            onChange={onChangeHandler}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
 
-          <select id="location" name="location" onChange={onChangeHandler}>
+          <select id="location" name="location" onChange={(e) => setSearchLocation(e.target.value)}>
             <option value="">Select Available Location</option>
             <option value="lagos">Lagos</option>
             <option value="abuja">Abuja</option>
@@ -46,7 +61,7 @@ const Header = () => {
             <option value="ogun">Ogun</option>
           </select>
 
-          <select id="category" name="category" onChange={onChangeHandler}>
+          <select id="category" name="category" onChange={(e) => setSearchCategory(e.target.value)}>
             <option value=""> Select Category</option>
             <option value="cars">Cars</option>
             <option value="electronics">Electronics</option>

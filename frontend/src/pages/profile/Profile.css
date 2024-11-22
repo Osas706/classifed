@@ -22,7 +22,8 @@
       align-self: center;
       height: 150px;
       width: 130px;
-      background-color: #dde0bd;
+      background-color: #bfe2d0;
+      border: 2px solid #002140;
       border-radius: 60px
     }
 
@@ -32,15 +33,15 @@
       padding: 10px;
       outline: none;
       border-radius: 8px;
-      border: 1px solid #dde0bd;
+      border: 1px solid #002140;
       color: #0a1128;
       font-size: 16px;
       padding: 0px 20px;
     }
 
     .update-btn{
-      color: #dde0bd;
-      background-color: #221a4b;
+      color: white;
+      background-color: #002140;
       margin: 10px auto;
       border: none;
       padding: 10px 20px;

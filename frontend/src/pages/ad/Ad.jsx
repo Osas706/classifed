@@ -1,31 +1,106 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Ad.css";
 import { StoreContext } from "../../context/storeContext";
+import { formatAdDate } from "../../utils/utils";
+import { FaPhoneSquare } from "react-icons/fa";
 import axios from "axios";
+import Background from '../../components/Background';
 
 const Ad = () => {
   const params = useParams();
   const { url, user } = useContext(StoreContext);
+  const [ad, setAd] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [click, setClick] = useState(false);
+  const formattedDate = formatAdDate(ad.createdAt);
+  console.log(ad);
 
   const fetchAd = async () => {
     try {
+      setLoading(true);
       const res = await axios.get(`${url}/api/ads/${params.id}`);
-      console.log(res.data.ad);
-      
+      setAd(res?.data?.ad);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchAd()
-  }, [])
+    fetchAd();
+  }, []);
 
-  return( 
-   <div>
+  return (
+    <>
+      <Background />
+      {loading ? (
+        <div className="loadingCont">
+          <div className="loading"></div>
+        </div>
+      ) : (
+        <div className="adItem">
+        <div className="ad">
+          <img
+            src={ad.adImage}
+            onContextMenu={(e) => e.preventDefault()}
+            alt=""
+          />
 
-   </div>)
+          <div className="adDetails">
+            <h1>{ad.title}</h1>
+            <p className="adDdesc">{ad.description}</p>
+
+            <span>
+              <p>Category: {ad.category}</p>
+              <p>Conditon: {ad.condition}</p>
+            </span>
+
+            <p>Term: {ad.terms}</p>
+
+            <p className="pricee">₦{ad?.price?.toLocaleString()}</p>
+
+            <span>
+              <p>{ad.country}</p>
+              <p>{ad.state}</p>
+            </span>
+
+            <p>Date Added: {formattedDate}</p>
+          </div>
+        </div>
+
+        <div className="adAdvertizer">
+          <div className="top" onClick={() => setClick(!click)}>
+            Click to {click ? "hide" : "show"} contact <FaPhoneSquare />
+          </div>
+
+          {click && (
+            <div className="body">
+              <h3>Ad posted by:</h3>
+              <img src={ad.displayImage} alt="" />
+
+              <div className="adAdvertizerDetails">
+                <span>
+                  <p>{ad.firstName}</p>
+                  <p>{ad.lastName}</p>
+                </span>
+
+                <p>{ad.email}</p>
+
+                <p>{ad.phoneNumber}</p>
+              </div>
+            </div>
+          )}
+
+          <span className="warning">
+            WARNING: Do not contact users with unsolicited services or offers
+          </span>
+        </div>
+      </div>
+      )}
+    </>
+  );
 };
 
 export default Ad;

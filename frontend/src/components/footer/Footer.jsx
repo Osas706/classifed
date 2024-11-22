@@ -3,13 +3,14 @@ import './Footer.css';
 import Facebook from '/facebook_icon.png';
 import Linkedin from '/linkedin_icon.png';
 import Twitter from '/twitter_icon.png';
+import { FaStore } from "react-icons/fa6";
 
 const Footer = () => {
   return (
     <div className='footer' id='footer'>
       <div className="footer-content">
         <div className="footer-content-left">
-          <h2 className='logo'>247<span>Market</span></h2>
+          <h2 className='logo'>247<span>Market <FaStore /></span></h2>
           <p>Buy and sell everything from used cars to mobile phones and computers, or search for property, jobs and more.</p>
 
           <div className="footer-social-icons">

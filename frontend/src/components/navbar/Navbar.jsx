@@ -8,6 +8,7 @@ import { TbCategory } from "react-icons/tb"
 import { MdAdd } from "react-icons/md";
 import { BiLogOut } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
+import { FaStore } from "react-icons/fa6";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
@@ -24,7 +25,7 @@ const Navbar = ({ setShowLogin }) => {
     <div className="navbar">
       <Link to={"/"}>
         <h2 className="logo">
-          247<span>Market</span>
+          247<span>Market <FaStore /> </span> 
         </h2>
       </Link>
 

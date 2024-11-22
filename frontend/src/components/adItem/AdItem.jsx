@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import './AdItem.css';
 import {Link} from 'react-router-dom';
 import { Watermark} from 'antd';
+import { RiMapPinLine } from "react-icons/ri";
+
 // import { StoreContext } from '../../context/storeContext';
 
-const AdItem = ({adImage, title, price, description, id}) => {
+const AdItem = ({adImage, title, price, description, id, state}) => {
   // const { url} = useContext(StoreContext);
 
   return (
@@ -27,6 +29,8 @@ const AdItem = ({adImage, title, price, description, id}) => {
         <div className="desc">
          {description}
         </div>
+
+        <p className='state'><RiMapPinLine />{state}</p>
     
         <div className="price">
           <p className="ad-item-price">₦{price}</p>

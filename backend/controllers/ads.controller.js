@@ -17,7 +17,6 @@ export const addAd = async (req, res) => {
     country,
     state,
   } = req.fields;
-  console.log(req.fields);
 
   let adImage = req.files?.adImage?.path;
   let displayImage = req.files?.displayImage?.path;
@@ -73,6 +72,25 @@ export const listAds = async (req, res) => {
     res.status(201).json({ success: true, data: ads });
   } catch (error) {
     console.log(error, "Error in listAds controller");
+    res.status(404).json({ success: false, message: "Error", error });
+  }
+};
+
+// list searchedAds
+export const searchedAds = async (req, res) => {
+  const searchTerm = req.query.searchTerm || '';
+  const searchLocation = req.query.searchLocation || '';
+  const searchCategory = req.query.searchCategory || '';
+  
+  try {
+    const ads = await AdModel.find({
+      title: { $regex: searchTerm, $options: 'i'},
+      state : { $regex: searchLocation, $options: 'i'},
+      category: { $regex: searchCategory, $options: 'i'}
+    });
+    res.status(201).json({ success: true, data: ads });
+  } catch (error) { 
+    console.log(error, "Error in searchedAds controller");
     res.status(404).json({ success: false, message: "Error", error });
   }
 };

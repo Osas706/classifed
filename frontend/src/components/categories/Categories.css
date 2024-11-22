@@ -2,11 +2,18 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    border-bottom: 2px solid #002140;
+    padding-bottom: 10px;
 }
 
 .explore-menu h1{
     color: #0A1128;
     font-weight: 500;
+}
+
+.explore-menu p{
+    color: #0A1128;
+    font-weight: 300;
 }
 
 .explore-menu-list{
@@ -26,9 +33,9 @@
 
 .explore-menu-list-item .icon{
    font-size: 110px;
-   color: #648767;
+   color: #0A1128;
    border: 4px solid transparent;
-   background-color: #DDE0BD;
+   background-color: #bfe2d0;
    padding: 30px;
    border-radius: 40px;
    cursor: pointer;
@@ -37,7 +44,8 @@
 
 .explore-menu-list-item p{
     margin-top: 10px;
-    color: #DDE0BD;
+    padding-bottom: 4px;
+    color: #0A1128;
     font-size: 16px;
     font-weight: 800;
     cursor: pointer;
@@ -45,6 +53,7 @@
 
 .explore-menu-list-item .p{
    color: #0A1128;
+   border-bottom: 4px solid #0A1128;
 }
 
 .explore-menu hr{

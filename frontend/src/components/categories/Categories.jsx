@@ -19,6 +19,7 @@ const Categories = () => {
   return (
     <div className="explore-menu" id="explore-menu">
       <h1>Ads By Category</h1>
+      <p>Select to explore</p>
 
       <div className="explore-menu-list">
         <div
@@ -110,7 +111,6 @@ const Categories = () => {
         </div>
       </div>
 
-      <hr />
     </div>
   );
 };

@@ -55,7 +55,7 @@
     padding: 10px;
     border-radius: 4px;
     color: white;
-    background-color: #648767;
+    background-color: #002140;
     font-size: 15px;
     cursor: pointer;
 }
@@ -67,7 +67,7 @@
     margin-top: -15px;
 
     input[type="checkbox"] {
-        accent-color: #dde0bd;
+        accent-color: #002140;
         width: min-content;
       }
 }
@@ -77,7 +77,7 @@
 }
 
 .login p span{
-    color: #648767;
+    color: #002140;
     font-weight: 500;
     cursor: pointer;
 }
