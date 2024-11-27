@@ -102,9 +102,6 @@
 }
 
 @media (max-width: 1050px) {
-}
-
-@media (max-width: 750px) {
   .ad-display {
     .top {
       h2 {
@@ -123,7 +120,7 @@
       }
     }
   }
-
+  
   .news-letter{
     flex-direction: column;
     gap: 10px;
@@ -134,4 +131,9 @@
         }
     }
   }
+}
+
+@media (max-width: 750px) {
+
+
 }

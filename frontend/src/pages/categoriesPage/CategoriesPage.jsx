@@ -60,7 +60,7 @@ const CategoriesPage = () => {
 
   useEffect(() => {
     fetchAdList();
-  }, [category,]);
+  }, [category]);
 
   return (
     <div className="categoriesPage">
@@ -192,6 +192,7 @@ const CategoriesPage = () => {
 
         <div className="categoriesDisplay">
           {loading && <div className="loader"></div>}
+
           {ads.map((item, index) => {
             if (category === "All" || category === item.category) {
               return (
@@ -216,6 +217,7 @@ const CategoriesPage = () => {
           <li>
             <p onClick={prevPage}>prev</p>
           </li>
+          
           {numbers.map((n, i) => (
             <li className={currentPage === n ? "pagi-active" : ""} key={i}>
               <p onClick={() => changePage(n)}>{n}</p>

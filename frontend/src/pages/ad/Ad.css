@@ -1,3 +1,34 @@
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+
+.loadingCont{
+  background-color: transparent;
+  margin: auto;
+  width: 50vw;
+  height: 50vh;
+  position: relative;
+  
+  .loading {
+    width: 58px;
+    height: 58px;
+    border: 5px solid;
+    border-color: #002140 transparent;
+    position: absolute;
+    top: 50%;
+    right: 45%;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+}
+
 .adItem{
   margin-top: 60px;
   display: flex;
@@ -120,39 +151,34 @@
   }
 }
 
+.relatedAds{
+  background-color: whitesmoke;
+  border-radius: 20px;
+  padding: 50px 10px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
+  h2{
+    color: #002140;
+    font-size: 30px;
+    text-decoration: underline;
+    align-self: left !important;
+    padding-bottom: 10px;
+    opacity: 0.8;
   }
-  100% {
-    transform: rotate(360deg);
-  }
-} 
 
-.loading {
-  width: 58px;
-  height: 58px;
-  border: 5px solid;
-  border-color: #002140 transparent;
-  position: absolute;
-  top: 50%;
-  right: 45%;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
+  .relatedAdsDisplay{
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 30px;
+    row-gap: 50px;
+    margin-top: 20px;
+  }
 }
 
-.loadingCont{
-  background-color: transparent;
-  margin: auto;
-  width: 50vw;
-  height: 50vh;
-  position: relative;
-
- 
-}
 
 
 @media (max-width: 1050px) {

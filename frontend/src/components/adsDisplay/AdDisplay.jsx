@@ -11,11 +11,20 @@ import { FiSend } from "react-icons/fi";
 const AdDisplay = () => {
   const { url, category } = useContext(StoreContext);
   const [adList, setAdList] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [newsLetter, setNewsLetter] = useState('');  
 
   const fetchAdList = async () => {
-    const res = await axios.get(`${url}/api/ads/list`);
-    setAdList(res.data.data);
+    try {
+      setLoading(true);
+    
+      const res = await axios.get(`${url}/api/ads/list`);
+      setAdList(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }finally{
+      setLoading(false);
+    }
   };
 
   useEffect(() => {

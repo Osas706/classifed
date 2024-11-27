@@ -8,14 +8,12 @@ import { TbMoodCry } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
 const Search = () => {
-  const { url } = useContext(StoreContext);
+  const { url, user } = useContext(StoreContext);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchLocation, setSearchLocation] = useState('');
   const [searchCategory, setSearchCategory] = useState('');
   const [loading, setLoading] = useState(false);
   const [searchedAds, setSearchedAds] = useState([]);
-  console.log(searchedAds.length);
-
 
   //pagination start************************
   const [currentPage, setCurrentPage] = useState(1);
@@ -135,6 +133,7 @@ const Search = () => {
             <div className="loading"></div>
           </div>
         )}
+        
         {search.map((item, index) => {
           return (
             <AdItem
@@ -149,7 +148,7 @@ const Search = () => {
           );
         })}
 
-        {search.length === 0 && (
+        {!loading && search.length === 0 && (
           <div className="noAd">
             <h3>There are currently no results for this search <TbMoodCry /></h3>
             <p>You can click on the button below to create a new ad</p>

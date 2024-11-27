@@ -13,11 +13,12 @@ export const formatAdDate = (createdAt) => {
     return createdAtDate.toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
+      year: "numeric"
     });
   } else if (timeDifferenceInDays === 1) {
     return "1 day ago";
   } else if (timeDifferenceInHours >= 1) {
-    return `${timeDifferenceInHours}h`;
+    return `${timeDifferenceInHours} hour ago`;
   } else if (timeDifferenceInMinutes >= 1) {
     return `${timeDifferenceInMinutes}m`;
   } else {

@@ -20,7 +20,7 @@ export const addAd = async (req, res) => {
 
   let adImage = req.files?.adImage?.path;
   let displayImage = req.files?.displayImage?.path;
-  // const userId = req.user._id.toString();
+  const userId = req.user._id.toString();
 
   if (adImage || displayImage) {
     const adUploadedResponse = await cloudinary.uploader
@@ -53,7 +53,7 @@ export const addAd = async (req, res) => {
     phoneNumber,
     country,
     state,
-    // user: userId,
+    user: userId,
   });
 
   try {
@@ -97,14 +97,17 @@ export const searchedAds = async (req, res) => {
 
 //get an ad
 export const getAd = async (req, res) => {
-  
   try {
     const ad = await AdModel.findById(req.params.id);
     if (!ad) {
       res.status(404).json({ success: false, message: "Ad not found" });
     }
 
-    res.status(201).json({ success: true, ad });
+    //fetch ads created by this same user
+    const adUserId = ad.user;
+    const relatedAds = await AdModel.find({user: adUserId});
+
+    res.status(201).json({ success: true, ad , relatedAds});
   } catch (error) {
     console.log(error, "Error in getAd controller");
     res.status(404).json({ success: false, message: "Error", error });

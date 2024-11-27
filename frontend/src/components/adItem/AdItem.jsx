@@ -4,10 +4,7 @@ import {Link} from 'react-router-dom';
 import { Watermark} from 'antd';
 import { RiMapPinLine } from "react-icons/ri";
 
-// import { StoreContext } from '../../context/storeContext';
-
 const AdItem = ({adImage, title, price, description, id, state}) => {
-  // const { url} = useContext(StoreContext);
 
   return (
     <div className='ad-item'>
@@ -33,7 +30,7 @@ const AdItem = ({adImage, title, price, description, id, state}) => {
         <p className='state'><RiMapPinLine />{state}</p>
     
         <div className="price">
-          <p className="ad-item-price">₦{price}</p>
+          <p className="ad-item-price">₦{price?.toLocaleString()}</p>
 
           <Link className='view-btn' to={`/ad/${id}`}>view</Link>
         </div>
