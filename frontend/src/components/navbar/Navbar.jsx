@@ -75,7 +75,7 @@ const Navbar = ({ setShowLogin }) => {
               </li>
               <hr />
 
-              <li onClick={() => navigate("/profile")}>
+              <li onClick={() => navigate(`/profile/${user}`)}>
                 <CgProfile className="icon"/>
                 <p>Profile</p>
               </li>

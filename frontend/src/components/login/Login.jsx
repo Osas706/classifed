@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Login.css";
 import { StoreContext } from "../../context/storeContext";
-
 import axios from "axios";
 import { RxCross2 } from "react-icons/rx";
 import { toast } from "react-toastify";
@@ -50,7 +49,8 @@ const Login = ({ setShowLogin }) => {
       if(res.data.success){
         setUser(res.data.user);
         toast.success('Welcome, Now create your ad');
-        localStorage.setItem("user", res.data?.userInfo?._id)
+        localStorage.setItem("user", res.data?.userInfo?._id);
+        localStorage.setItem('token', res.data?.token);
         setShowLogin(false);
       }  
     } catch (error) {

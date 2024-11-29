@@ -76,6 +76,19 @@ export const listAds = async (req, res) => {
   }
 };
 
+//get my ads(ads created by d logged in user)
+export const getMyAds = async (req, res) => {
+  const userId = req.params.id;
+  
+  try {
+    const ads = await AdModel.find({ user: userId });
+    res.status(201).json({ success: true, data: ads });
+  } catch (error) {
+    console.log(error, 'Error in getMyAds Controller');
+    res.status(404).json({ success: false, message: "Something went wrong", error });
+  };
+};
+
 // list searchedAds
 export const searchedAds = async (req, res) => {
   const searchTerm = req.query.searchTerm || '';

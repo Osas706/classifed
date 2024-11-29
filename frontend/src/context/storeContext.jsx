@@ -6,7 +6,8 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
   const url = "http://localhost:8000";
   const [user, setUser] = useState("");
-  console.log(user);
+  const [token, setToken] = useState("");
+  // console.log(token);
 
   const [category, setCategory] = useState('All');
   
@@ -14,9 +15,9 @@ const StoreContextProvider = (props) => {
   useEffect(() => {
     if (localStorage.getItem("user")) {
       setUser(localStorage.getItem("user"));
+      setToken(localStorage?.getItem("token"))
     }
-    console.log(user);
-  }, [user]);
+  }, [user, token]);
 
   //   //store values
   const contextValue = {

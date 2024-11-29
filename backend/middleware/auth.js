@@ -1,31 +1,16 @@
-import jwt from "jsonwebtoken";
+import Jwt from "jsonwebtoken";
 import UserModel from "../models/user.model.js";
 
-// export const generateTokenAndSetCookie = (id, res) => {
-//   console.log(res);
-  
-//   const token = jwt.sign({ id }, "random#secret1", {
-//     expiresIn: "15d",
-//   });
-
-//   res.cookie('token', token, {
-//       maxAge: 15 * 24 * 60 * 60 * 1000, //milliseconds
-//       httpOnly: true, //prevent XSS attcks , cross-site scripting attacks
-//       //sameSite: "strict", // CSRF attcks, cross-site request forgery attack
-//       // secure: true,
-//   });
-// };
-
 export const authMiddleware = async (req, res, next) => {
-  // console.log(req);
-  
-  const token = req?.cookies?.token;
-  if (!token) {
-    return res.status(400).json({ success: false, message: "Not Authorized, No Token Provided" });
-  }
+  console.log(req);
 
   try {
-    const token_decode = jwt.verify(token, "random#secret1");
+    const token = req?.cookies?.token;
+    if (!token) {
+      return res.status(400).json({ success: false, message: "Not Authorized, No Token Provided" });
+    }
+
+    const token_decode = Jwt.verify(token, process.env.JWT_SECRET);
     if (!token_decode) {
       res.status(401).json({ error: "Unauthorized: Invalid Token" });
     };

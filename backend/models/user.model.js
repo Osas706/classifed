@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    displayPicture: {
+    displayImage: {
         type: String,
         required: false,
     },
@@ -22,12 +22,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    phoneNumber: {
-        type: Number,
-        unique: true,
+    newPassword: {
+        type: String,
         required: false,
     },
-    coubtry: {
+    phoneNumber: {
+        type: Number,
+        unique: false,
+        required: false,
+    },
+    country: {
         type: String,
         required: false,
     },
@@ -36,7 +40,7 @@ const userSchema = new mongoose.Schema({
         required: false,
     },
     
-},{minimize: false}, {timestamps: true});
+},{timestamps: true});
 
 const UserModel = mongoose.models.user || mongoose.model('user', userSchema);
 
