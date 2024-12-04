@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./Ad.css";
 import { StoreContext } from "../../context/storeContext";
 import { formatAdDate } from "../../utils/utils";
 import { FaPhoneSquare } from "react-icons/fa";
+import { FaRegSmile } from "react-icons/fa";
 import axios from "axios";
 import Background from "../../components/Background";
 import AdItem from "../../components/adItem/AdItem";
@@ -103,11 +104,12 @@ const Ad = () => {
         </div>
       )}
 
-      <div className="relatedAds">
-        <h2>More Ads From This Seller</h2>
+     {
+     (<div className="relatedAds">
+       <h2>More Ads From This Seller</h2>
 
         <div className="relatedAdsDisplay">
-          {relatedAds.slice(0, 3).map((item, index) => {
+          {relatedAds.slice(1, 4).map((item, index) => {
             return (
               <AdItem
                 key={index}
@@ -120,8 +122,22 @@ const Ad = () => {
               />
             );
           })}
+
+
         </div>
-      </div>
+
+        {loading && (
+          <div className="loaderCont">
+            <span className="lineLoader"></span>
+          </div>
+        )} 
+
+        {loading && relatedAds.length === 0 && (
+          <div className="noAd">
+            <h3>No more ads from this seller currently. <FaRegSmile /></h3>
+          </div>
+        )}
+      </div>)}
     </>
   );
 };

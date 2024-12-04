@@ -21,29 +21,31 @@ const CategoriesPage = () => {
   const [loading, setLoading] = useState(false);
 
   //pagination start************************
-  const [currentPage, setCurrentPage] = useState(1);
-  const adsPerPage = 6;
-  const lastIndex = currentPage * adsPerPage;
-  const firstIndex = lastIndex - adsPerPage;
-  const ads = adList.slice(firstIndex, lastIndex);
-  const numberOfPages = Math.ceil(adList.length / adsPerPage);
-  const numbers = [...Array(numberOfPages + 1).keys()].slice(1);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const adsPerPage = 6;
+  // const lastIndex = currentPage * adsPerPage;
+  // const firstIndex = lastIndex - adsPerPage;
+  // const ads = adList.slice(firstIndex, lastIndex);
+  // console.log(ads);
+  
+  // const numberOfPages = Math.ceil(adList.length / adsPerPage);
+  // const numbers = [...Array(numberOfPages + 1).keys()].slice(1);
 
-  const prevPage = () => {
-    if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+  // const prevPage = () => {
+  //   if (currentPage !== 1) {
+  //     setCurrentPage(currentPage - 1);
+  //   }
+  // };
 
-  const nextPage = () => {
-    if (currentPage !== numberOfPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
+  // const nextPage = () => {
+  //   if (currentPage !== numberOfPages) {
+  //     setCurrentPage(currentPage + 1);
+  //   }
+  // };
 
-  const changePage = (id) => {
-    setCurrentPage(id);
-  };
+  // const changePage = (id) => {
+  //   setCurrentPage(id);
+  // };
   //end ************************
 
   const fetchAdList = async () => {
@@ -193,7 +195,7 @@ const CategoriesPage = () => {
         <div className="categoriesDisplay">
           {loading && <div className="loader"></div>}
 
-          {ads.map((item, index) => {
+          {adList.map((item, index) => {
             if (category === "All" || category === item.category) {
               return (
                 <AdItem
@@ -212,7 +214,7 @@ const CategoriesPage = () => {
       </div>
 
       {/* **********pagination************** */}
-      <nav>
+      {/* <nav>
         <ul className="pagination">
           <li>
             <p onClick={prevPage}>prev</p>
@@ -228,7 +230,7 @@ const CategoriesPage = () => {
             <p onClick={nextPage}>next</p>
           </li>
         </ul>
-      </nav>
+      </nav> */}
     </div>
   );
 };

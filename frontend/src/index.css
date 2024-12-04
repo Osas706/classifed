@@ -28,6 +28,12 @@ button {
   margin: auto;
 }
 
+@media (max-width: 1050px){
+  .app{
+    width: 100%;
+  }
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;

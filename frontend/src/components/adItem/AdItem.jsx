@@ -11,8 +11,9 @@ const AdItem = ({adImage, title, price, description, id, state}) => {
       <div className="ad-item-img-container">
         <Watermark
           image='/mark.png'
-          offset={[150, 200]}
+          offset={[150, 150]}
           rotate={-20}
+          width={150}
         >
           <img className='ad-item-image' src={adImage} onContextMenu={(e) => e.preventDefault()} alt="" />
         </Watermark>  

@@ -1,28 +1,78 @@
 .head {
   height: 34vw;
-  margin: 30px auto;
-  background: url("/bic.jpg");
+  margin: 40px auto;
+  /* background: url("/bic.jpg"); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   object-fit: contain;
   position: relative;
-  border: 1px solid #0a1128;
-  border-radius: 4px;
+  /* border: 1px solid #0a1128;
+  border-radius: 4px; */
+}
+
+@keyframes slide{
+  0%{
+      transform: translateX(0);
+  }
+  25%{
+      transform: translateX(0);
+  }
+  30%{
+      transform: translateX(-100%);
+  }
+  50%{
+      transform: translateX(-100%);
+  }
+  55%{
+      transform: translateX(-200%);
+  }
+  75%{
+      transform: translateX(-200%);
+  }
+  80%{
+      transform: translateX(-300%);
+  }
+  100%{
+      transform: translateX(-300%);
+  }
 }
 
 .header {
   /* From https://css.glass */
   /* From https://css.glass */
-  background: rgba(255, 255, 255, 0.08);
+  /* background: rgba(255, 255, 255, 0.08); */
   /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
-  backdrop-filter: blur(1.7px);
-  -webkit-backdrop-filter: blur(1.7px);
-  margin: auto;
+  /* backdrop-filter: blur(1.7px);
+  -webkit-backdrop-filter: blur(1.7px); */
+  /* margin: auto;
   width: 100%;
   height: 100%;
-  border-radius: 4px;
+  border-radius: 4px; */
   /* opacity: 0.8; */
+
+  width: 100vmin;
+  height: 100%;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  overflow: hidden;
+  border-radius: 8px;
+  height: 34vw;
+
+  .wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    animation: slide 16s infinite;
+  }
+
+
+  img{
+    width: 100% !important;
+    object-fit: cover;
+  }
 }
 
 .header-content {
@@ -41,7 +91,7 @@
 .header-content h2 {
   font-weight: 500;
   color: white;
-  font-size: max(4.2vw, 22px);
+  font-size: 28px;
   text-shadow: 2px 2px black;
 }
 
@@ -99,9 +149,15 @@
 
 @media (max-width: 1050px) {
   .head {
-    height: 60vw;
+    margin: 80px auto;
     background-size: cover;
     background-position: center;
+  }
+
+  .header{
+        height: 60vw;
+    width: 90vmin;
+    margin-top: 10px;
   }
 
   .header-content {
@@ -111,6 +167,12 @@
 }
 
 @media (max-width: 750px) {
+  .head {
+    /* height: 60vw; */
+    background-size: cover;
+    background-position: center;
+  }
+
   .header-content {
     max-width: 65%;
     bottom: 55%;

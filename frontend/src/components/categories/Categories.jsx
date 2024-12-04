@@ -17,14 +17,14 @@ const Categories = () => {
   const { category, setCategory } = useContext(StoreContext);
   
   return (
-    <div className="explore-menu" id="explore-menu">
+    <div className="explore-ad" id="explore-ad">
       <h1>Ads By Category</h1>
       <p>Select to explore</p>
 
-      <div className="explore-menu-list">
+      <div className="explore-ad-list">
         <div
           onClick={() => setCategory('cars')}
-          className="explore-menu-list-item"
+          className="explore-ad-list-item"
         >
           <IoCarSportOutline className={category === "cars" ? "icon active " : "icon" }/>
           <p className={category === "cars" ? "p" : "" }>cars</p>
@@ -32,7 +32,7 @@ const Categories = () => {
 
         <div
           onClick={() => setCategory('electronics')}
-          className="explore-menu-list-item"
+          className="explore-ad-list-item"
         >
           <FaTv className={category === "electronics" ? "icon active " : "icon" }/>
           <p className={category === "electronics" ? "p" : "" }>Electronics</p>
@@ -40,7 +40,7 @@ const Categories = () => {
 
         <div
           onClick={() => setCategory('mobiles')}
-          className="explore-menu-list-item"
+          className="explore-ad-list-item"
         >
           <HiDevicePhoneMobile className={category === "mobiles" ? "icon active " : "icon" }/>
           <p className={category === "mobiles" ? "p" : "" }>Mobiles</p>
@@ -48,7 +48,7 @@ const Categories = () => {
 
         <div
           onClick={() => setCategory('furnitures')}
-          className="explore-menu-list-item"
+          className="explore-ad-list-item"
         >
           <MdOutlineChair className={category === "furnitures" ? "icon active " : "icon" }/>
           <p className={category === "furnitures" ? "p" : "" }>Furnitures</p>
@@ -56,7 +56,7 @@ const Categories = () => {
 
         <div
           onClick={() => setCategory('fashion')}
-          className="explore-menu-list-item"
+          className="explore-ad-list-item"
         >
           <LuShirt className={category === "fashion" ? "icon active " : "icon" }/>
           <p className={category === "fashion" ? "p" : "" }>Fashion</p>
@@ -64,7 +64,7 @@ const Categories = () => {
 
         <div
           onClick={() => setCategory('jobs')}
-          className="explore-menu-list-item"
+          className="explore-ad-list-item"
         >
           <IoBriefcaseOutline className={category === "jobs" ? "icon active " : "icon" }/>
           <p className={category === "jobs" ? "p" : "" }>Jobs</p>
@@ -72,7 +72,7 @@ const Categories = () => {
 
         <div
           onClick={() => setCategory('apartment')}
-          className="explore-menu-list-item"
+          className="explore-ad-list-item"
         >
           <BsHouse className={category === "apartment" ? "icon active " : "icon" }/>
           <p className={category === "apartment" ? "p" : "" }>Apartment</p>
@@ -80,7 +80,7 @@ const Categories = () => {
 
         <div
           onClick={() => setCategory('animals')}
-          className="explore-menu-list-item"
+          className="explore-ad-list-item"
         >
           <PiDog className={category === "animals" ? "icon active " : "icon" }/>
           <p className={category === "animals" ? "p" : "" }>Animals</p>
@@ -88,7 +88,7 @@ const Categories = () => {
 
         <div
           onClick={() => setCategory('computer')}
-          className="explore-menu-list-item"
+          className="explore-ad-list-item"
         >
           <FaLaptop className={category === "computer" ? "icon active " : "icon" }/>
           <p className={category === "computer" ? "p" : "" }>Laptops & PCs</p>
@@ -96,7 +96,7 @@ const Categories = () => {
 
         <div
           onClick={() => setCategory('services')}
-          className="explore-menu-list-item"
+          className="explore-ad-list-item"
         >
           <GiPaintRoller className={category === "services" ? "icon active " : "icon" }/>
           <p className={category === "services" ? "p" : "" }>Services</p>
@@ -104,7 +104,7 @@ const Categories = () => {
 
         <div
           onClick={() => setCategory('personals')}
-          className="explore-menu-list-item"
+          className="explore-ad-list-item"
         >
           <FaRegHeart className={category === "personals" ? "icon active " : "icon" }/>
           <p className={category === "personals" ? "p" : "" }>Personals</p>

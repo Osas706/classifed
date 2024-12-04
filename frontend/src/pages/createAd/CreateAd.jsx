@@ -92,6 +92,7 @@ const CreateAd = () => {
     formData.append("displayImage", adData.displayImage);
     formData.append("state", adData.state);
     formData.append("country", adData.country);
+    formData.append("user", user);
 
     try {
       const res = await axios.post(`${url}/api/ads/add`, formData);

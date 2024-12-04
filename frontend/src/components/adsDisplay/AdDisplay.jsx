@@ -76,6 +76,10 @@ const AdDisplay = () => {
         })}
       </div>
 
+      {loading && <div className="loaderCont">
+        <span class="lineLoader"></span>
+      </div>}
+
       <div className="news-letter">
         <div className="title">
           <BiMailSend className="title-icon" />

@@ -159,7 +159,7 @@ export const updateMe = async (req, res) => {
 
       const uploadedResponse = await cloudinary.uploader.upload(displayImage);
       displayImage = uploadedResponse.secure_url;
-    }
+    };
 
     user.firstName = firstName || user.firstName;
     user.lastName = lastName || user.lastName;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
+import Img from '/bic.jpg';
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -35,6 +36,14 @@ const Header = () => {
   return (
     <div className="head">
       <div className="header">
+
+        <div class="wrapper">
+         <img src={Img} alt="" />
+         <img src={Img} alt="" />
+         <img src={Img} alt="" />
+         <img src={Img} alt="" />
+        </div>
+
         <div className="header-content">
           <h2>Welcome to Nigeria's Largest Marketplace</h2>
           <p>

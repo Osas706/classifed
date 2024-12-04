@@ -16,11 +16,13 @@ export const addAd = async (req, res) => {
     phoneNumber,
     country,
     state,
+    user
   } = req.fields;
+  
 
-  let adImage = req.files?.adImage?.path;
-  let displayImage = req.files?.displayImage?.path;
-  const userId = req.user._id.toString();
+  let adImage = req?.files?.adImage?.path;
+  let displayImage = req?.files?.displayImage?.path;
+  // const userId = req?.user?._id?.toString();
 
   if (adImage || displayImage) {
     const adUploadedResponse = await cloudinary.uploader
@@ -53,7 +55,7 @@ export const addAd = async (req, res) => {
     phoneNumber,
     country,
     state,
-    user: userId,
+    user: user,
   });
 
   try {
@@ -87,6 +89,44 @@ export const getMyAds = async (req, res) => {
     console.log(error, 'Error in getMyAds Controller');
     res.status(404).json({ success: false, message: "Something went wrong", error });
   };
+};
+
+//delete my ad
+export const deleteAd = async (req, res) => {
+  const adId = req?.params?.id
+  console.log(req);
+  
+
+  try {
+    const ad = await AdModel.findById(adId);
+    console.log(ad);
+    
+
+    if (!ad) {
+      return res.status(404).json({success: false, message: "Ad not found" });
+    }
+
+    // if (ad?.user?.toString() !== req.user._id.toString()) {
+    //   return res.status(401).json({ error: "You are not authorized to delete this post" });
+    // }
+
+    if (ad?.adImage) {
+      const adImageId = ad?.adImage.split("/").pop().split(".")[0];
+      await cloudinary.uploader.destroy(adImageId);
+    }
+
+    if (ad?.displayImage) {
+      const adImageId = ad?.displayImage.split("/").pop().split(".")[0];
+      await cloudinary.uploader.destroy(adImageId);
+    }
+
+    await AdModel.findByIdAndDelete(adId);
+
+    res.status(200).json({ success: true, message: "Ad deleted successfully" });
+  } catch (error) {
+    console.log("error in deleteAd controller", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
 };
 
 // list searchedAds
