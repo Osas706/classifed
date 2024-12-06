@@ -78,6 +78,8 @@ const Search = () => {
     const urlParams = new URLSearchParams();
 
     urlParams.set('searchTerm', searchTerm);
+    urlParams.set('searchCategory', searchCategory);
+    urlParams.set('searchLocation', searchLocation);
 
     const searchQuery = urlParams.toString();
 
@@ -100,7 +102,7 @@ const Search = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        <select id="location" name="location">
+        <select id="location" name="location" onChange={(e) => setSearchLocation(e.target.value)}>
           <option value="">Select Available Location</option>
           <option value="lagos">Lagos</option>
           <option value="abuja">Abuja</option>
@@ -109,7 +111,7 @@ const Search = () => {
           <option value="ogun">Ogun</option>
         </select>
 
-        <select id="category" name="category">
+        <select id="category" name="category" onChange={(e) => setSearchCategory(e.target.value)}>
           <option value=""> Select Category</option>
           <option value="cars">Cars</option>
           <option value="electronics">Electronics</option>

@@ -3,16 +3,18 @@ import UploadImg from "/upload.png";
 import DisplayUploadImg from "/hi.png";
 import { FiSend } from "react-icons/fi";
 import { GetCountries, GetState } from "react-country-state-city";
-
 import "./CreateAd.css";
 import Background from "../../components/Background";
 import { StoreContext } from "../../context/storeContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Map from "../../components/map/Map";
 
 const CreateAd = () => {
   const { url, user } = useContext(StoreContext);
   const [loading, setLoading] = useState(false);
+  const [lat, setLat] = useState('');
+  const [long, setLong] = useState('');
   const [adData, setAdData] = useState({
     title: "",
     description: "",
@@ -36,6 +38,13 @@ const CreateAd = () => {
     GetCountries().then((result) => {
       setCountriesList(result);
     });
+
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition((postion) => {
+        setLat(postion.coords.latitude);
+        setLong(postion.coords.longitude);
+      });
+    };
   }, []);
 
   const onChangeHandler = (e) => {
@@ -59,7 +68,6 @@ const CreateAd = () => {
     if (name === "country") {
       const country = countriesList[value]; //here you will get full country object.
       setAdData({ ...adData, [name]: country?.name });
-      //console.log(country);
 
       GetState(country?.id).then((result) => {
         setStateList(result);
@@ -69,7 +77,6 @@ const CreateAd = () => {
     if (name === "state") {
       const state = stateList[value]; //here you will get full state object.
       setAdData({ ...adData, [name]: state?.name });
-      // console.log(state);
     }
   };
 
@@ -92,6 +99,8 @@ const CreateAd = () => {
     formData.append("displayImage", adData.displayImage);
     formData.append("state", adData.state);
     formData.append("country", adData.country);
+    formData.append("lat", lat);
+    formData.append("long", long);
     formData.append("user", user);
 
     try {
@@ -156,22 +165,57 @@ const CreateAd = () => {
           />
         </label>
 
+        <span>Feel free to adjust latitude and longitude to the exact location of your ad (use google map to get latitude & longitude)...</span>
+
+        <div className="double">
+          <label htmlFor="lat">
+            Latitude
+            <input
+              type="text"
+              name="firstName"
+              placeholder="Latitude Loading..."
+              value={lat}
+              onChange={(e) => setLat(e.target.value)}
+            />
+          </label>
+
+          <label htmlFor="long">
+            Longitude
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Longitude Loading..."
+              value={long}
+              onChange={(e) => setLong(e.target.value)}
+            />
+          </label>
+        </div>
+
+        {(lat || long ) && 
+        (<label htmlFor="">
+          Location on map
+          <div className="mapCreateAtCont">
+          
+            <Map lat={lat} long={long} title={adData?.title} />
+          </div>
+        </label>)}
+      
         <div className="double">
           <label htmlFor="category">
             Select Category
             <select id="category" name="category" onChange={onChangeHandler}>
               <option value="">Select category for your ad</option>
-              <option value="cars">Cars</option>
-              <option value="electronics">Electronics</option>
-              <option value="mobiles">Mobiles</option>
-              <option value="furnitures">Furnitures</option>
-              <option value="fashion">Fashion</option>
-              <option value="jobs">Jobs</option>
-              <option value="apartment">Apartment</option>
-              <option value="animals">Animals</option>
-              <option value="computer">Laptop or Pc</option>
-              <option value="services">Services</option>
-              <option value="personals">Personals</option>
+              <option value="Cars">Cars</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Mobiles">Mobiles</option>
+              <option value="Furnitures">Furnitures</option>
+              <option value="Fashion">Fashion</option>
+              <option value="Jobs">Jobs</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Animals">Animals</option>
+              <option value="Laptop or Pc">Laptop or Pc</option>
+              <option value="Services">Services</option>
+              <option value="Personals">Personals</option>
             </select>
           </label>
 
@@ -179,10 +223,10 @@ const CreateAd = () => {
             Select Condition
             <select id="condition" name="condition" onChange={onChangeHandler}>
               <option value="">Select Condition</option>
-              <option value="old">Old</option>
-              <option value="fairlyUsed">Fairly Used</option>
-              <option value="slightlyNew">Slightly New</option>
-              <option value="brandNew">Brand New</option>
+              <option value="Old">Old</option>
+              <option value="Fairly Used">Fairly Used</option>
+              <option value="Slightly New">Slightly New</option>
+              <option value="Brand New">Brand New</option>
             </select>
           </label>
         </div>

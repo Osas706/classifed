@@ -5,13 +5,21 @@ const adSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "UserModel",
         required: true,
-      },
+    },
     title: {
         type : String,
         required: true
     },
     description: {
         type : String,
+        required: false
+    },
+    lat: {
+        type : Number,
+        required: false
+    },
+    long: {
+        type : Number,
         required: false
     },
     category: {

@@ -20,7 +20,7 @@ export const formatAdDate = (createdAt) => {
   } else if (timeDifferenceInHours >= 1) {
     return `${timeDifferenceInHours} hour ago`;
   } else if (timeDifferenceInMinutes >= 1) {
-    return `${timeDifferenceInMinutes}m`;
+    return `${timeDifferenceInMinutes} minutes ago`;
   } else {
     return "Just now";
   }

@@ -2,7 +2,6 @@ import Jwt from "jsonwebtoken";
 import UserModel from "../models/user.model.js";
 
 export const authMiddleware = async (req, res, next) => {
-  console.log(req);
 
   try {
     const token = req?.cookies?.token;
@@ -18,7 +17,6 @@ export const authMiddleware = async (req, res, next) => {
     req.body.userId = token_decode.id;
 
     const user = await UserModel.findById(token_decode.id).select("-password");
-    console.log(user);
 
     if (!user) {
       res.status(404).json({ error: "User not found" });

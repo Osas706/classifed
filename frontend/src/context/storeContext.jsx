@@ -7,7 +7,6 @@ const StoreContextProvider = (props) => {
   const url = "http://localhost:8000";
   const [user, setUser] = useState("");
   const [token, setToken] = useState("");
-  // console.log(token);
 
   const [category, setCategory] = useState('All');
   

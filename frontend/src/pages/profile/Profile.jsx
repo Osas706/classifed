@@ -15,7 +15,6 @@ import { Link, useNavigate } from "react-router-dom";
 const Profile = () => {
   const displayImageRef = useRef(null);
   const { url, user } = useContext(StoreContext);
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [delLoading, setDelLoading] = useState(false);
   const [userData, setUserData] = useState({
@@ -30,6 +29,7 @@ const Profile = () => {
     userId: user,
   });
   const [myAdList, setMyAdList] = useState([]);
+  
   const [displayImage, setDisplayImage] = useState(null);
   const [joinedSinceDate, setJoinedSinceDate] = useState("");
 
@@ -101,6 +101,7 @@ const Profile = () => {
       setLoading(true);
 
       const res = await axios.get(`${url}/api/ads/my-ads/${user}`);
+      
       setMyAdList(res?.data?.data);
     } catch (error) {
       console.log(error);
@@ -109,32 +110,22 @@ const Profile = () => {
     }
   };
 
-  useEffect(() => {
-    fetchUser();
-    fetchMyAds();
-  }, []);
-
   //delete ad
   const deleteAd = async (adId) => {
     try {
       setDelLoading(true)
       toast.warning('Deleting ad now ...')
       const res = await axios.delete(`${url}/api/ads/delete/${adId}`);
-      console.log(res);
-      
+
+      setMyAdList(
+        myAdList.filter(ad => ad._id !== adId)
+      );      
 
       if (res?.data?.success === true) {
         toast.success(res?.data?.message)
         console.log(data.message);
       };
 
-      setMyAdList((prev) =>
-        prev.filter((item) => item._id !== adId)
-      );
-      toast.loading(false)
-
-      navigate('/profile')
-      
     } catch (error) {
       console.log(error);
       // toast.error(error)
@@ -142,6 +133,12 @@ const Profile = () => {
       setDelLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchUser();
+    fetchMyAds();
+  }, []);
+
 
   return (
     <div className="profile-cont">
@@ -263,18 +260,20 @@ const Profile = () => {
                 title={item.title}
                 description={item.description}
                 price={item?.price}
-                adImage={item.adImage}
-                state={item.state}
+                adImage={item?.adImage}
+                state={item?.state}
               />
 
-             <button disabled={delLoading}  onClick={() => deleteAd(item?._id)} >{delLoading ? <GiSandsOfTime className="trash" /> :<FaTrash className="trash"/> }</button> 
+              <button disabled={delLoading}  onClick={() => deleteAd(item?._id) } >
+                {delLoading ? <GiSandsOfTime className="trash" /> : <FaTrash className="trash"/> }
+              </button> 
             </div>
-          );
+          )
         })}
 
         {loading && (
           <div className="loaderCont">
-            <span className="lineLoader"></span>
+            <span className="ballLoader"></span>
           </div>
         )} 
 

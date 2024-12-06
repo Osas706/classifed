@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 const Login = ({ setShowLogin }) => {
   const { url, setUser } = useContext(StoreContext);
   const [currentState, setCurrentState] = useState("Login");
-
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     firstName: "",
@@ -44,7 +43,6 @@ const Login = ({ setShowLogin }) => {
       };
 
       const res = await axios.post(newUrl, formData);
-      console.log(res);
       
       if(res.data.success){
         setUser(res.data.user);

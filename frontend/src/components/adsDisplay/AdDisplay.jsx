@@ -3,6 +3,7 @@ import "./AdDisplay.css";
 import { StoreContext } from "../../context/storeContext";
 import AdItem from "../adItem/AdItem";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { FaExpand } from "react-icons/fa";
 import { BiMailSend } from "react-icons/bi";
@@ -26,6 +27,12 @@ const AdDisplay = () => {
       setLoading(false);
     }
   };
+
+  const subscribeToNewsletter = (e) => {
+    e.preventDefault();
+    toast.success(`${newsLetter} subscribed to 247market Newsletter`);
+    setNewsLetter('')
+  }
 
   useEffect(() => {
     fetchAdList();
@@ -77,7 +84,7 @@ const AdDisplay = () => {
       </div>
 
       {loading && <div className="loaderCont">
-        <span class="lineLoader"></span>
+        <span className="ballLoader"></span>
       </div>}
 
       <div className="news-letter">
@@ -90,10 +97,11 @@ const AdDisplay = () => {
           </div>
         </div>
 
-        <form className="form">
+        <form className="form" onSubmit={subscribeToNewsletter}>
           <input 
             type="text" placeholder="Enter your email" 
             name="" 
+            value={newsLetter}
             onChange={(e) => setNewsLetter(e.target.value)}
           />
 

@@ -7,7 +7,6 @@ import { v2 as cloudinary } from 'cloudinary';
 //login user
 export const loginUser = async (req, res) => {
   const { email, password } = req.fields;
-  // console.log(req);
 
   try {
     //check if user exists
@@ -33,8 +32,6 @@ export const loginUser = async (req, res) => {
 
     const { password: pass, ...userInfo } = user._doc;
 
-    // console.log(res);
-
     res
       .status(201)
       .cookie("token", token, { httpOnly: true, maxAge: 15 * 24 * 60 * 60 * 1000 })
@@ -53,23 +50,17 @@ export const registerUser = async (req, res) => {
     //checking is user already exists
     const exists = await UserModel.findOne({ email });
     if (exists) {
-      return res
-        .status(400)
-        .json({ success: false, message: "User already exists" });
+      return res.status(400).json({ success: false, message: "User already exists" });
     }
 
     //validating email format & strong password
     if (!validator.isEmail(email)) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Please enter a valid email" });
+      return res.status(400).json({ success: false, message: "Please enter a valid email" });
     }
 
     //password
     if (password.length < 6) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Please enter strong password" });
+      return res.status(400).json({ success: false, message: "Please enter strong password" });
     }
 
     //hashing user password
@@ -92,8 +83,7 @@ export const registerUser = async (req, res) => {
 
     const { password: pass, ...userInfo } = user._doc;
 
-    res
-      .status(201)
+    res.status(201)
       .cookie("token", token, { httpOnly: true, maxAge: 15 * 24 * 60 * 60 * 1000 })
       .json({ success: true, userInfo, token });
   } catch (error) {
@@ -104,9 +94,7 @@ export const registerUser = async (req, res) => {
 
 //get current user
 export const getMe = async (req, res) => {
-  // const userId = req?.user._id;
   const userId = req?.params.id;
-  // console.log(req);
 
   try {
     const user = await UserModel.findById(userId).select("-password");
@@ -118,12 +106,11 @@ export const getMe = async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     console.log(error, "Error in getMe Controller");
-    res
-      .status(404)
-      .json({ success: false, message: "Something went wrong", error });
+    res.status(404).json({ success: false, message: "Something went wrong", error });
   }
 };
 
+//update current user
 export const updateMe = async (req, res) => {
   if(req?.fields?.userId !== req.params.id) {
     return res.status(400).json({error: 'You can only update your own account!'});
@@ -171,16 +158,12 @@ export const updateMe = async (req, res) => {
 
     user = await user.save();
 
-    console.log(user);
-
     // password should be null in response
     user.password = null;
     
     return res.status(200).json({user, success: true, message: "Updated Successfully"});
   } catch (error) {
     console.log(error, "Error in updateMe Controller");
-    res
-      .status(404)
-      .json({ success: false, message: "Something went wrong", error });
+    res.status(404).json({ success: false, message: "Something went wrong", error });
   }
 };

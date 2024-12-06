@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./Ad.css";
 import { StoreContext } from "../../context/storeContext";
 import { formatAdDate } from "../../utils/utils";
@@ -8,12 +8,15 @@ import { FaRegSmile } from "react-icons/fa";
 import axios from "axios";
 import Background from "../../components/Background";
 import AdItem from "../../components/adItem/AdItem";
+import Map from "../../components/map/Map";
 
 const Ad = () => {
   const params = useParams();
   const { url, user } = useContext(StoreContext);
   const [ad, setAd] = useState({});
   const [relatedAds, setRelatedAds] = useState([]);
+  const [lat, setLat] = useState(null);
+  const [long, setLong] = useState(null);
   const [loading, setLoading] = useState(false);
   const [click, setClick] = useState(false);
   const formattedDate = formatAdDate(ad.createdAt);
@@ -23,6 +26,8 @@ const Ad = () => {
       setLoading(true);
       const res = await axios.get(`${url}/api/ads/${params.id}`);
       setAd(res?.data?.ad);
+      setLat(res?.data?.ad?.lat);
+      setLong(res?.data?.ad?.long);
       setRelatedAds(res?.data?.relatedAds);
     } catch (error) {
       console.log(error);
@@ -33,7 +38,7 @@ const Ad = () => {
 
   useEffect(() => {
     fetchAd();
-  }, []);
+  }, [params.id]);
 
   return (
     <>
@@ -104,40 +109,47 @@ const Ad = () => {
         </div>
       )}
 
-     {
-     (<div className="relatedAds">
-       <h2>More Ads From This Seller</h2>
-
-        <div className="relatedAdsDisplay">
-          {relatedAds.slice(1, 4).map((item, index) => {
-            return (
-              <AdItem
-                key={index}
-                id={item._id}
-                title={item?.title}
-                description={item?.description}
-                price={item?.price}
-                adImage={item?.adImage}
-                state={item?.state}
-              />
-            );
-          })}
-
-
+      {(lat || long) && (
+        <div className="mapCont">
+          <Map lat={lat} long={long} title={ad?.title} />
         </div>
+      )}
 
-        {loading && (
-          <div className="loaderCont">
-            <span className="lineLoader"></span>
-          </div>
-        )} 
+      {
+        <div className="relatedAds">
+          <h2>More Ads From This Seller</h2>
 
-        {loading && relatedAds.length === 0 && (
-          <div className="noAd">
-            <h3>No more ads from this seller currently. <FaRegSmile /></h3>
+          <div className="relatedAdsDisplay">
+            {relatedAds.slice(1, 6).map((item, index) => {
+              return (
+                <AdItem
+                  key={index}
+                  id={item._id}
+                  title={item?.title}
+                  description={item?.description}
+                  price={item?.price}
+                  adImage={item?.adImage}
+                  state={item?.state}
+                />
+              );
+            })}
           </div>
-        )}
-      </div>)}
+
+          {loading && (
+            <div className="loaderCont">
+              <span className="ballLoader"></span>
+            </div>
+          )}
+
+          {loading && relatedAds.length === 0 && (
+            <div className="noAd">
+              <h3>
+                No more ads from this seller currently. <FaRegSmile />
+              </h3>
+            </div>
+          )}
+        </div>
+      }
     </>
   );
 };
