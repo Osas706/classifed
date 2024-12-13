@@ -25,6 +25,8 @@ const Ad = () => {
     try {
       setLoading(true);
       const res = await axios.get(`${url}/api/ads/${params.id}`);
+      console.log(res);
+      
       setAd(res?.data?.ad);
       setLat(res?.data?.ad?.lat);
       setLong(res?.data?.ad?.long);
@@ -115,7 +117,7 @@ const Ad = () => {
         </div>
       )}
 
-      {
+
         <div className="relatedAds">
           <h2>More Ads From This Seller</h2>
 
@@ -141,7 +143,7 @@ const Ad = () => {
             </div>
           )}
 
-          {loading && relatedAds.length === 0 && (
+          {!loading && relatedAds.length < 2 && (
             <div className="noAd">
               <h3>
                 No more ads from this seller currently. <FaRegSmile />
@@ -149,7 +151,6 @@ const Ad = () => {
             </div>
           )}
         </div>
-      }
     </>
   );
 };

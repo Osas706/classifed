@@ -21,7 +21,7 @@ const CreateAd = () => {
     category: "",
     condition: "",
     price: 0,
-    terms: "negotiable",
+    terms: "Negotiable",
     adImage: "",
     firstName: "",
     lastName: "",
@@ -53,7 +53,7 @@ const CreateAd = () => {
 
     setAdData({ ...adData, [name]: value });
 
-    if (e.target.id === "fixedPrice" || e.target.id === "negotiable") {
+    if (e.target.id === "Fixed Price" || e.target.id === "Negotiable") {
       setAdData({ ...adData, terms: e.target.id });
     }
 
@@ -106,23 +106,23 @@ const CreateAd = () => {
     try {
       const res = await axios.post(`${url}/api/ads/add`, formData);
       if (res.data.success) {
-        setAdData({
-          title: "",
-          description: "",
-          category: "Select Category",
-          condition: "Select Condition",
-          price: 0,
-          terms: "negotiable",
-          adImage: "",
+        // setAdData({
+        //   title: "",
+        //   description: "",
+        //   category: "Select Category",
+        //   condition: "Select Condition",
+        //   price: 0,
+        //   terms: "negotiable",
+        //   adImage: "",
 
-          firstName: "",
-          lastName: "",
-          email: "",
-          phoneNumber: "",
-          displayImage: "",
-          country: "",
-          state: "",
-        });
+        //   firstName: "",
+        //   lastName: "",
+        //   email: "",
+        //   phoneNumber: "",
+        //   displayImage: "",
+        //   country: "",
+        //   state: "",
+        // });
 
         toast.success(res.data.message);
       }
@@ -248,22 +248,22 @@ const CreateAd = () => {
               <input
                 type="checkbox"
                 name="fixedPrice"
-                id="fixedPrice"
+                id="Fixed Price"
                 className="checkbox"
                 onChange={onChangeHandler}
-                checked={adData?.terms === "fixedPrice"}
+                checked={adData?.terms === "Fixed Price"}
               />
-              fixed Price
+              Fixed Price
             </label>
 
             <label htmlFor="negotiable">
               <input
                 type="checkbox"
                 name="negotiable"
-                id="negotiable"
+                id="Negotiable"
                 className="checkbox"
                 onChange={onChangeHandler}
-                checked={adData?.terms === "negotiable"}
+                checked={adData?.terms === "Negotiable"}
               />
               Negotiable
             </label>

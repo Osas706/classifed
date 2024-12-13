@@ -9,6 +9,8 @@ import { MdAdd } from "react-icons/md";
 import { BiLogOut } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { FaStore } from "react-icons/fa6";
+import { RiCompassDiscoverLine } from "react-icons/ri";
+import { MdOutlineBookmarks } from "react-icons/md";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
@@ -18,13 +20,21 @@ const Navbar = ({ setShowLogin }) => {
   const logout = () => {
     localStorage.removeItem("user");
     setUser('');
+    setMenu("home")
     navigate("/");
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
     <div className="navbar">
       <Link to={"/"}>
-        <h2 className="logo">
+        <h2 className="logo" onClick={() => {setMenu("home"), scrollToTop()}}>
           247<span>Market <FaStore /> </span> 
         </h2>
       </Link>
@@ -36,6 +46,14 @@ const Navbar = ({ setShowLogin }) => {
           className={menu === "home" ? "active" : ""}
         >
           Home
+        </Link>
+
+        <Link
+          to={'/discover'}
+          onClick={() => setMenu("discover")}
+          className={menu === "discover" ? "active" : ""}
+        >
+          Discover
         </Link>
 
         <Link
@@ -59,35 +77,57 @@ const Navbar = ({ setShowLogin }) => {
         {!user ? (
           <button onClick={() => setShowLogin(true)}>Post an Ad</button>
         ) : (
-          <div className="navbar-profile">
-            <CgProfile className="icon"/>
+          <>
+            {/* <MdOutlineBookmarks className="bookmarkList" onClick={() => {navigate("/bookmark"), setMenu("") }} /> */}
+            <div className="navbar-profile">
+              <MdOutlineBookmarks className="icon"/>
 
-            <ul className="nav-profile-dropdown">
-              <li onClick={() => navigate("/create-ad")}>
-                <MdAdd className="icon"/>
-                <p>Create Ad</p>
-              </li>
-              <hr />
+              <ul className="nav-profile-dropdown">
+                <li onClick={() => {navigate(`/bookmark`), setMenu("")}}>
+                  <MdOutlineBookmarks className="icon"/>
+                  <p>Bookmark</p>
+                </li>
+                <hr />
+              </ul>
+            </div>
 
-              <li onClick={() => navigate("/categories")}>
-                <TbCategory className="icon"/>
-                <p>Categories</p>
-              </li>
-              <hr />
+            <div className="navbar-profile">
+              <CgProfile className="icon"/>
 
-              <li onClick={() => navigate(`/profile/${user}`)}>
-                <CgProfile className="icon"/>
-                <p>Profile</p>
-              </li>
-              <hr />
+              <ul className="nav-profile-dropdown">
+                <li onClick={() => {navigate("/create-ad"), setMenu("")}}>
+                  <MdAdd className="icon"/>
+                  <p>Create Ad</p>
+                </li>
+                <hr />
 
-              <li onClick={logout}>
-                <BiLogOut className="icon"/>
-                <p>Logout</p>
-              </li>
-              <hr />
-            </ul>
-          </div>
+                <li onClick={() => {navigate("/discover"), setMenu("")}}>
+                  <RiCompassDiscoverLine className="icon"/>
+                  <p>Discover</p>
+                </li>
+                <hr />
+
+                <li onClick={() => {navigate("/categories"), setMenu("")}}>
+                  <TbCategory className="icon"/>
+                  <p>Categories</p>
+                </li>
+                <hr />
+
+                <li onClick={() => {navigate(`/profile/${user}`), setMenu("")}}>
+                  <CgProfile className="icon"/>
+                  <p>Profile</p>
+                </li>
+                <hr />
+
+                <li onClick={logout}>
+                  <BiLogOut className="icon"/>
+                  <p>Logout</p>
+                </li>
+                <hr />
+              </ul>
+            </div>
+          </>
+
         )}
       </div>
     </div>

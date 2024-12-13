@@ -28,10 +28,15 @@ const Profile = () => {
     // newPassword: null,
     userId: user,
   });
+  console.log(userData);
+  
   const [myAdList, setMyAdList] = useState([]);
   
   const [displayImage, setDisplayImage] = useState(null);
-  const [joinedSinceDate, setJoinedSinceDate] = useState("");
+  const [joinedSinceDate, setJoinedSinceDate] = useState(null);
+  const [updatedSinceDate, setUpdatedSinceDate] = useState(null);
+  console.log(updatedSinceDate);
+  
 
   //on change handler
   const onChangeHandler = (e) => {
@@ -58,10 +63,13 @@ const Profile = () => {
   //fetch current user details
   const fetchUser = async () => {
     const res = await axios.get(`${url}/api/user/${user}`);
+    console.log(res);
+    
 
     setUserData(res?.data);
     setDisplayImage(res?.data?.displayImage);
     setJoinedSinceDate(formatMemberSinceDate(res?.data?.createdAt));
+    setUpdatedSinceDate(formatMemberSinceDate(res?.data?.updatedAt));
   };
 
   //handle update function
@@ -117,11 +125,11 @@ const Profile = () => {
       toast.warning('Deleting ad now ...')
       const res = await axios.delete(`${url}/api/ads/delete/${adId}`);
 
-      setMyAdList(
-        myAdList.filter(ad => ad._id !== adId)
-      );      
-
       if (res?.data?.success === true) {
+        setMyAdList(
+          myAdList.filter(ad => ad._id !== adId)
+        );   
+
         toast.success(res?.data?.message)
         console.log(data.message);
       };
@@ -162,12 +170,12 @@ const Profile = () => {
           alt="profile"
         />
 
-        <span>{joinedSinceDate}</span>
+        <span>{parseInt(joinedSinceDate) || updatedSinceDate}</span>
 
         <div className="doubleInput">
           <input
             type="text"
-            placeholder="firstName"
+            placeholder="First Name"
             id="firstName"
             name="firstName"
             value={userData?.firstName}
@@ -176,7 +184,7 @@ const Profile = () => {
 
           <input
             type="text"
-            placeholder="lastName"
+            placeholder="Last Name"
             id="lastName"
             name="lastName"
             value={userData?.lastName}
@@ -186,7 +194,7 @@ const Profile = () => {
 
         <input
           type="email"
-          placeholder="email"
+          placeholder="Email"
           id="email"
           name="email"
           value={userData?.email}
@@ -262,6 +270,9 @@ const Profile = () => {
                 price={item?.price}
                 adImage={item?.adImage}
                 state={item?.state}
+                condition={item?.condition}
+                terms={item?.terms}
+                item={item}
               />
 
               <button disabled={delLoading}  onClick={() => deleteAd(item?._id) } >

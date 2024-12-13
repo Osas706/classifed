@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import AdModel from "../models/ad.model.js";
+import * as Jimp from "jimp-watermark";
 
 //add food item
 export const addAd = async (req, res) => {
@@ -18,26 +19,37 @@ export const addAd = async (req, res) => {
     state,
     lat,
     long,
-    user
+    user,
   } = req.fields;
-  
 
   let adImage = req?.files?.adImage?.path;
   let displayImage = req?.files?.displayImage?.path;
 
-  if (adImage || displayImage) {
+  if (adImage) {
+    Jimp.addWatermark(adImage, "../mark.png")
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     const adUploadedResponse = await cloudinary.uploader
       .upload(adImage)
       .catch((error) => {
         console.log(error);
       });
+
+    adImage = adUploadedResponse?.secure_url;
+  }
+
+  if (displayImage) {
     const displayUploadedResponse = await cloudinary.uploader
       .upload(displayImage)
       .catch((error) => {
         console.log(error);
       });
 
-    adImage = adUploadedResponse?.secure_url;
     displayImage = displayUploadedResponse?.secure_url;
   }
 
@@ -73,7 +85,7 @@ export const addAd = async (req, res) => {
 //list all ads
 export const listAds = async (req, res) => {
   try {
-    const ads = await AdModel.find({}).sort({ createdAt: -1 }) ;
+    const ads = await AdModel.find({}).sort({ createdAt: -1 });
     res.status(201).json({ success: true, data: ads });
   } catch (error) {
     console.log(error, "Error in listAds controller");
@@ -84,25 +96,45 @@ export const listAds = async (req, res) => {
 //get my ads(ads created by d logged in user)
 export const getMyAds = async (req, res) => {
   const userId = req.params.id;
-  
+
   try {
     const ads = await AdModel.find({ user: userId }).sort({ createdAt: -1 });
     res.status(201).json({ success: true, data: ads });
   } catch (error) {
-    console.log(error, 'Error in getMyAds Controller');
+    console.log(error, "Error in getMyAds Controller");
+    res
+      .status(404)
+      .json({ success: false, message: "Something went wrong", error });
+  }
+};
+
+//getDiscoverAds
+export const getDiscoverAds = async (req, res) => {
+  const state = req.query.searchLocation || "";
+  const country = req.query.searchCategory || "";
+
+  try {
+    const ads = await AdModel.find({
+      state: { $regex: state, $options: "i" },
+      country: { $regex: country, $options: "i" },
+    }).sort({ createdAt: -1 });
+
+    res.status(201).json({ success: true, data: ads });
+  } catch (error) {
+    console.log(error, "Error in getDiscoverAds Controller");
     res.status(404).json({ success: false, message: "Something went wrong", error });
-  };
+  }
 };
 
 //delete my ad
 export const deleteAd = async (req, res) => {
-  const adId = req?.params?.id
+  const adId = req?.params?.id;
 
   try {
     const ad = await AdModel.findById(adId);
-  
+
     if (!ad) {
-      return res.status(404).json({success: false, message: "Ad not found" });
+      return res.status(404).json({ success: false, message: "Ad not found" });
     }
 
     // if (ad?.user?.toString() !== req.user._id.toString()) {
@@ -130,18 +162,18 @@ export const deleteAd = async (req, res) => {
 
 // list searchedAds
 export const searchedAds = async (req, res) => {
-  const searchTerm = req.query.searchTerm || '';
-  const searchLocation = req.query.searchLocation || '';
-  const searchCategory = req.query.searchCategory || '';
-  
+  const searchTerm = req.query.searchTerm || "";
+  const searchLocation = req.query.searchLocation || "";
+  const searchCategory = req.query.searchCategory || "";
+
   try {
     const ads = await AdModel.find({
-      title: { $regex: searchTerm, $options: 'i'},
-      state : { $regex: searchLocation, $options: 'i'},
-      category: { $regex: searchCategory, $options: 'i'}
+      title: { $regex: searchTerm, $options: "i" },
+      state: { $regex: searchLocation, $options: "i" },
+      category: { $regex: searchCategory, $options: "i" },
     });
     res.status(201).json({ success: true, data: ads });
-  } catch (error) { 
+  } catch (error) {
     console.log(error, "Error in searchedAds controller");
     res.status(404).json({ success: false, message: "Error", error });
   }
@@ -157,9 +189,9 @@ export const getAd = async (req, res) => {
 
     //fetch ads created by this same user
     const adUserId = ad.user;
-    const relatedAds = await AdModel.find({user: adUserId});
+    const relatedAds = await AdModel.find({ user: adUserId });
 
-    res.status(201).json({ success: true, ad , relatedAds});
+    res.status(201).json({ success: true, ad, relatedAds });
   } catch (error) {
     console.log(error, "Error in getAd controller");
     res.status(404).json({ success: false, message: "Error", error });

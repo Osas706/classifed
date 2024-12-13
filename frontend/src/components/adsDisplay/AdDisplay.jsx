@@ -8,10 +8,13 @@ import { Link } from "react-router-dom";
 import { FaExpand } from "react-icons/fa";
 import { BiMailSend } from "react-icons/bi";
 import { FiSend } from "react-icons/fi";
+import ErrorImg from '/error.png';
+import Item from "antd/es/list/Item";
 
 const AdDisplay = () => {
   const { url, category } = useContext(StoreContext);
   const [adList, setAdList] = useState([]);
+  
   const [loading, setLoading] = useState(false);
   const [newsLetter, setNewsLetter] = useState('');  
 
@@ -38,6 +41,10 @@ const AdDisplay = () => {
     fetchAdList();
   }, [category]);
 
+  const filteredAds = category === "All" ? adList : adList.filter(item => item.category === category);
+  const displayedAds = filteredAds.slice(0, 8);
+
+
   return (
     <div className="ad-display" id="ad-display">
       <div className="top">
@@ -50,8 +57,7 @@ const AdDisplay = () => {
 
       {/* *****************ad display list ***************** */}
       <div className="ad-display-list">
-        {adList?.slice(0, 8).map((item, index) => {
-          if (category === "All" ) {
+        {displayedAds.map((item, index) => {
             return (
               <AdItem
                 key={index}
@@ -61,31 +67,28 @@ const AdDisplay = () => {
                 price={item?.price}
                 adImage={item.adImage}
                 state={item.state}
+                condition={item?.condition}
+                terms={item?.terms}
+                item={item}
               />
             );
-          }
-        })}
-
-        {adList?.map((item, index) => {
-          if (category === item.category) {
-            return (
-              <AdItem
-                key={index}
-                id={item._id}
-                title={item.title}
-                description={item.description}
-                price={item?.price}
-                adImage={item.adImage}
-                state={item.state}
-              />
-            );
-          }
         })}
       </div>
+
+      {
+          (!loading && displayedAds.length === 0) && (
+            <div className="displayError">
+              <img src={ErrorImg} alt="" />
+              <h3>Oops! Something went wrong. <br /> Make sure you are connectedto the internet or try again later.</h3>
+            </div>
+          )
+        }
 
       {loading && <div className="loaderCont">
         <span className="ballLoader"></span>
       </div>}
+
+      <div className="lineStroke"></div>
 
       <div className="news-letter">
         <div className="title">

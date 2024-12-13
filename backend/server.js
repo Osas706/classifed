@@ -19,6 +19,7 @@ cloudinary.config({
     api_secret: '_orIYNQVmM3VdNPZAjIrY8bK7vE' // Click 'View API Keys' above to copy your API secret
 });
 
+
 //middleware
 app.use(cookieParser());
 app.use(express.json());

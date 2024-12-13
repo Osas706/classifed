@@ -12,6 +12,8 @@ import Search from "./pages/search/Search";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { StoreContext } from "./context/storeContext";
+import Discover from "./pages/discover/Discover";
+import Bookmarked from "./pages/bookmarked/Bookmarked";
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -30,8 +32,10 @@ const App = () => {
           <Route path="/categories" element={<CategoriesPage />} />
           { user ? <Route path="/create-ad" element={<CreateAd />} />  : ''}
           { user ? <Route path="/profile/:id" element={<Profile />} /> : ''}
+          <Route path="/discover" element={<Discover />} />
           <Route path="/ad/:id" element={<Ad />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/bookmark" element={<Bookmarked />} />
 
           <Route path='*' element={<Navigate to="/" />} />
         </Routes>

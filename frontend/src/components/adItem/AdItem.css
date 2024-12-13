@@ -9,6 +9,33 @@
   background-color: whitesmoke;
 }
 
+.ad-item-img-container{
+  position: relative;
+
+  .bookmarkBtn{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: #bfe2d0;
+    border: none;
+    padding: 5px 3px;
+    border-radius: 5px;
+
+    .bookmarkImg{
+      width: 28px;
+      height: auto;
+    }
+
+    .bookmark{
+      font-size: 28px;
+      font-weight: 700 !important;
+      color: #002140;
+    }
+  }
+
+
+}
+
 .ad-item-image {
   width: 100%;
   border-radius: 15px 15px 0px 0px;

@@ -2,12 +2,10 @@
   height: 34vw;
   margin: 30px auto;
   position: relative;
-  border: 3px solid #0a1128;
-  border-radius: 4px;
+  /* border: 3px solid #0a1128; */
+  border-radius: 14px;
 }
 
-/* .header {
-} */
 
 .header-content {
   position: absolute;
@@ -25,8 +23,8 @@
 .header-content h2 {
   font-weight: 500;
   color: white;
-  font-size: 28px;
-  text-shadow: 2px 2px black;
+  font-size: 58px;
+  text-shadow: 4px 2px black;
 }
 
 .header-content p {
@@ -56,6 +54,7 @@
     outline: none;
     border: 1px solid #002140;
     font-weight: 500;
+    border-radius: 0px;
   }
 
   input:hover,
@@ -92,6 +91,11 @@
   .header-content {
     max-width: 45%;
     bottom: 50%;
+
+    h2{
+      font-size: 28px;
+      text-shadow: 2px 2px black;
+    }
   }
 }
 

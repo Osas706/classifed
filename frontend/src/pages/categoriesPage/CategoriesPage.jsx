@@ -21,31 +21,32 @@ const CategoriesPage = () => {
   const [loading, setLoading] = useState(false);
 
   //pagination start************************
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const adsPerPage = 6;
-  // const lastIndex = currentPage * adsPerPage;
-  // const firstIndex = lastIndex - adsPerPage;
-  // const ads = adList.slice(firstIndex, lastIndex);
+  const [currentPage, setCurrentPage] = useState(1);
+  const adsPerPage = 6;
+  const lastIndex = currentPage * adsPerPage;
+  const firstIndex = lastIndex - adsPerPage;
+  const filteredAds = category === "All" ? adList : adList.filter(item => item.category === category);
+  const ads = filteredAds.slice(firstIndex, lastIndex);
   // console.log(ads);
   
-  // const numberOfPages = Math.ceil(adList.length / adsPerPage);
-  // const numbers = [...Array(numberOfPages + 1).keys()].slice(1);
+  const numberOfPages = Math.ceil((category === "All" ? adList.length : ads.length) / adsPerPage);
+  const numbers = [...Array(numberOfPages + 1).keys()].slice(1);
 
-  // const prevPage = () => {
-  //   if (currentPage !== 1) {
-  //     setCurrentPage(currentPage - 1);
-  //   }
-  // };
+  const prevPage = () => {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
-  // const nextPage = () => {
-  //   if (currentPage !== numberOfPages) {
-  //     setCurrentPage(currentPage + 1);
-  //   }
-  // };
+  const nextPage = () => {
+    if (currentPage !== numberOfPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
-  // const changePage = (id) => {
-  //   setCurrentPage(id);
-  // };
+  const changePage = (id) => {
+    setCurrentPage(id);
+  };
   //end ************************
 
   const fetchAdList = async () => {
@@ -195,7 +196,7 @@ const CategoriesPage = () => {
         <div className="categoriesDisplay">
           {loading && <div className="loader"></div>}
 
-          {adList.map((item, index) => {
+          {ads.map((item, index) => {
             if (category === "All" || category === item.category) {
               return (
                 <AdItem
@@ -206,6 +207,9 @@ const CategoriesPage = () => {
                   price={item?.price}
                   adImage={item.adImage}
                   state={item.state}
+                  condition={item?.condition}
+                  terms={item?.terms}
+                  item={item}
                 />
               );
             }
@@ -214,7 +218,7 @@ const CategoriesPage = () => {
       </div>
 
       {/* **********pagination************** */}
-      {/* <nav>
+      <nav>
         <ul className="pagination">
           <li>
             <p onClick={prevPage}>prev</p>
@@ -230,7 +234,7 @@ const CategoriesPage = () => {
             <p onClick={nextPage}>next</p>
           </li>
         </ul>
-      </nav> */}
+      </nav>
     </div>
   );
 };

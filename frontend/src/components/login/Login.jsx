@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Login.css";
 import { StoreContext } from "../../context/storeContext";
+import { GetCountries, GetState } from "react-country-state-city";
 import axios from "axios";
 import { RxCross2 } from "react-icons/rx";
 import { toast } from "react-toastify";
@@ -14,13 +15,31 @@ const Login = ({ setShowLogin }) => {
     lastName: "",
     email: "",
     password: "",
+    country: "",
+    state: "",
   });
+  const [countriesList, setCountriesList] = useState([]);
+  const [stateList, setStateList] = useState([]);
 
   const onChangeHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
 
     setData({ ...data, [name]: value });
+
+    if (name === "country") {
+      const country = countriesList[value]; //here you will get full country object.
+      setData({ ...data, [name]: country?.name });
+
+      GetState(country?.id).then((result) => {
+        setStateList(result);
+      });
+    }
+
+    if (name === "state") {
+      const state = stateList[value]; //here you will get full state object.
+      setData({ ...data, [name]: state?.name });
+    }
   };
 
   const onLogin = async (e) => {
@@ -34,23 +53,25 @@ const Login = ({ setShowLogin }) => {
       formData.append("lastName", data.lastName);
       formData.append("email", data.email);
       formData.append("password", data.password);
+      formData.append("state", data.state);
+      formData.append("country", data.country);
 
       let newUrl = url;
-      if(currentState === 'Login'){
-        newUrl += "/api/user/login"
-      }else{
-        newUrl += "/api/user/register"
-      };
+      if (currentState === "Login") {
+        newUrl += "/api/user/login";
+      } else {
+        newUrl += "/api/user/register";
+      }
 
       const res = await axios.post(newUrl, formData);
-      
-      if(res.data.success){
+
+      if (res.data.success) {
         setUser(res.data.user);
-        toast.success('Welcome, Now create your ad');
+        toast.success("Welcome, Now create your ad");
         localStorage.setItem("user", res.data?.userInfo?._id);
-        localStorage.setItem('token', res.data?.token);
+        localStorage.setItem("token", res.data?.token);
         setShowLogin(false);
-      }  
+      }
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
@@ -58,6 +79,12 @@ const Login = ({ setShowLogin }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    GetCountries().then((result) => {
+      setCountriesList(result);
+    });
+  }, []);
 
   return (
     <div className="login">
@@ -101,6 +128,26 @@ const Login = ({ setShowLogin }) => {
             placeholder=" Your Email"
             required
           />
+
+          {currentState === "Sign Up" && (
+            <>
+              <select onChange={onChangeHandler} name="country" id="country">
+                {countriesList.map((item, index) => (
+                  <option key={index} value={index}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+
+              <select onChange={onChangeHandler} name="state" id="state">
+                {stateList.map((item, index) => (
+                  <option key={index} value={index}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </>
+          )}
 
           <input
             onChange={onChangeHandler}

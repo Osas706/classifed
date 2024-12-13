@@ -129,13 +129,13 @@ const Search = () => {
         <button type="submit">Search Now</button>
       </form>
 
+      {loading && (
+        <div className="loadingCont">
+          <div className="ballLoader"></div>
+        </div>
+      )}
+
       <div className="searchDisplay">
-        {loading && (
-          <div className="loadingCont">
-            <div className="loading"></div>
-          </div>
-        )}
-        
         {search.map((item, index) => {
           return (
             <AdItem
@@ -146,6 +146,9 @@ const Search = () => {
               price={item?.price}
               adImage={item.adImage}
               state={item.state}
+              condition={item?.condition}
+              terms={item?.terms}
+              item={item}
             />
           );
         })}

@@ -1,44 +1,23 @@
-.searchPage {
+.discoverCont{
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  h1 {
+  h1{
     margin-top: 30px;
+    text-align: center;
   }
 
-  .searchForm {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 20px auto;
-    gap: 5px;
-    margin-top: 20px;
-
-    input,
-    select {
-      display: flex;
-      padding: 10px;
-    }
-
-    button {
-      padding: 10px;
-      background-color: #002140;
-      color: white;
-    }
+  h4{
+    font-weight: 700;
   }
 
   @keyframes split {
-    0%,
-    25% {
-      width: 64px;
-    }
-    100% {
-      width: 148px;
-    }
-  }
-
-  .loadingCont {
+    0% , 25%{ width: 64px }
+    100%{ width: 148px }
+  } 
+  
+  .loadingCont{
     width: 40%;
     height: 20px;
     /* background-color: #bfe2d0; */
@@ -48,17 +27,17 @@
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-
+  
     .ballLoader {
       width: 64px;
       height: 48px;
       position: relative;
       animation: split 1s ease-in infinite alternate;
     }
-
-    .ballLoader::before,
-    .ballLoader::after {
-      content: "";
+    
+  
+    .ballLoader::before , .ballLoader::after {
+      content: '';
       position: absolute;
       height: 48px;
       width: 48px;
@@ -70,7 +49,7 @@
       /* opacity: 0.75; */
       backdrop-filter: blur(20px);
     }
-
+    
     .ballLoader::after {
       left: auto;
       right: 0;
@@ -79,34 +58,36 @@
     }
   }
 
-  .searchDisplay {
+  .discoverDisplay{
     /* width: 80%; */
     border-radius: 20px;
-    margin-top: 20px;
+    margin-top: 40px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 30px;
     row-gap: 50px;
 
-    .noAd {
+    .noAd{
       display: flex;
       flex-direction: column;
       align-items: center;
       margin: 40px auto;
       gap: 10px;
 
-      h3 {
+      h3{
         display: flex;
         align-items: center;
         color: #002140;
       }
 
-      .toCreateAd {
+      .toCreateAd{
         padding: 10px 15px;
         background-color: #002140;
         color: white;
         border-radius: 4px;
       }
+
+
     }
   }
 

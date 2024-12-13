@@ -44,7 +44,7 @@ export const loginUser = async (req, res) => {
 
 //register user
 export const registerUser = async (req, res) => {
-  const { firstName, lastName, password, email } = req.fields;
+  const { firstName, lastName, password, email, state, country } = req.fields;
 
   try {
     //checking is user already exists
@@ -71,6 +71,8 @@ export const registerUser = async (req, res) => {
       firstName: firstName,
       lastName: lastName,
       email: email,
+      state: state,
+      country: country,
       password: hashedPassword,
     });
 
