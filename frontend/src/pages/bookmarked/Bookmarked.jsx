@@ -1,18 +1,48 @@
-import React, { useContext } from 'react';
-import './Bookmarked.css';
-import { StoreContext } from '../../context/storeContext';
-import AdItem from '../../components/adItem/AdItem';
+import React, { useContext } from "react";
+import "./Bookmarked.css";
+import { StoreContext } from "../../context/storeContext";
+import AdItem from "../../components/adItem/AdItem";
+import Background from "../../components/Background";
+import { PiTrashLight } from "react-icons/pi";
+import { BsFillEmojiDizzyFill } from "react-icons/bs";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Bookmarked = () => {
-  const { bookmarksData } = useContext(StoreContext);
-  console.log(bookmarksData);
-  
+  const { url, user, bookmarks, fetchBookmarks } = useContext(StoreContext);
+
+  const emptyBookmark = async () => {
+    try {
+      const res = await axios.delete(`${url}/api/user/empty-bookmarks/${user}`);
+      console.log(res);
+      toast.success("Bookmark Empty !");
+
+      const removeSimilarItems = (prefix) => {
+        Object.keys(localStorage).forEach((key) => {
+          if (key.startsWith(prefix)) {
+            localStorage.removeItem(key);
+          }
+        });
+      };
+
+      removeSimilarItems("bookmark");
+      fetchBookmarks();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className='bookmarkCont'>
-      <h1>Ads your Bookmark Collection</h1>
+    <div className="bookmarkCont">
+      <Background />
+      <h1>Ads in your Bookmark Collection</h1>
+
+      <button className="emptyBookmark" onClick={emptyBookmark}>
+        Empty Collection <PiTrashLight className="iconEmpty" />
+      </button>
 
       <div className="bookmarkDisplay">
-        {bookmarksData?.map((item, index) => {
+        {bookmarks?.map((item, index) => {
           return (
             <AdItem
               key={index}
@@ -37,8 +67,17 @@ const Bookmarked = () => {
           </div>
         )} */}
       </div>
-    </div>
-  )
-}
 
-export default Bookmarked
+      {bookmarks.length === 0 && (
+        <div className="noBookmarks">
+          <h3>
+            You haven't boomark any ad{" "}
+            <BsFillEmojiDizzyFill className="noBook" />
+          </h3>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Bookmarked;

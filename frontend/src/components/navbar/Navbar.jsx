@@ -3,7 +3,7 @@ import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../../context/storeContext";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 import { TbCategory } from "react-icons/tb"
 import { MdAdd } from "react-icons/md";
 import { BiLogOut } from "react-icons/bi";
@@ -14,13 +14,25 @@ import { MdOutlineBookmarks } from "react-icons/md";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
-  const { user, setUser } = useContext(StoreContext);
+  const { user, setUser, bookmarks } = useContext(StoreContext);
   const navigate = useNavigate();
 
   const logout = () => {
     localStorage.removeItem("user");
+
+    const removeSimilarItems = (prefix) => {
+      Object.keys(localStorage).forEach((key) => {
+        if (key.startsWith(prefix)) {
+          localStorage.removeItem(key);
+        }
+      });
+    };
+    removeSimilarItems("bookmark");
+
     setUser('');
     setMenu("home")
+    toast.success("Bye see you soon");
+
     navigate("/");
   };
 
@@ -80,14 +92,16 @@ const Navbar = ({ setShowLogin }) => {
           <>
             {/* <MdOutlineBookmarks className="bookmarkList" onClick={() => {navigate("/bookmark"), setMenu("") }} /> */}
             <div className="navbar-profile">
-              <MdOutlineBookmarks className="icon"/>
+              <div>
+                <MdOutlineBookmarks onClick={() => {navigate(`/bookmark`), setMenu("")}} className="icon"/> 
+                {(bookmarks?.length > 0) && <span>{bookmarks?.length }</span>}
+              </div>
 
               <ul className="nav-profile-dropdown">
                 <li onClick={() => {navigate(`/bookmark`), setMenu("")}}>
                   <MdOutlineBookmarks className="icon"/>
                   <p>Bookmark</p>
                 </li>
-                <hr />
               </ul>
             </div>
 

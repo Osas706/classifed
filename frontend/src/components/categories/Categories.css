@@ -33,6 +33,24 @@
     display: none;
 }
 
+.explore-ad-list-item{
+  position: relative;
+  /* background-color: red; */
+
+  .number{
+    position: absolute;
+    top: -2px;
+    /* bottom: 0 !important; */
+    right: 0;
+    left: 0;
+    color: #002140;
+
+    font-size: 90px;
+    opacity: 0.1;
+
+  }
+}
+
 
 .explore-ad-list-item .icon{
    font-size: 110px;

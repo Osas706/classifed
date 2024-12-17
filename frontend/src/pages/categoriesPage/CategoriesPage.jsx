@@ -14,6 +14,7 @@ import { FaLaptop } from "react-icons/fa6";
 import { GiPaintRoller } from "react-icons/gi";
 import { FaRegHeart } from "react-icons/fa";
 import { StoreContext } from "../../context/storeContext";
+import Background from "../../components/Background";
 
 const CategoriesPage = () => {
   const { url, category, setCategory } = useContext(StoreContext);
@@ -67,6 +68,7 @@ const CategoriesPage = () => {
 
   return (
     <div className="categoriesPage">
+      <Background />
       <h1>All Categories</h1>
 
       <div className="categoriesCont">

@@ -205,17 +205,17 @@ const CreateAd = () => {
             Select Category
             <select id="category" name="category" onChange={onChangeHandler}>
               <option value="">Select category for your ad</option>
-              <option value="Cars">Cars</option>
-              <option value="Electronics">Electronics</option>
-              <option value="Mobiles">Mobiles</option>
-              <option value="Furnitures">Furnitures</option>
-              <option value="Fashion">Fashion</option>
-              <option value="Jobs">Jobs</option>
-              <option value="Apartment">Apartment</option>
-              <option value="Animals">Animals</option>
-              <option value="Laptop or Pc">Laptop or Pc</option>
-              <option value="Services">Services</option>
-              <option value="Personals">Personals</option>
+              <option value="cars">Cars</option>
+              <option value="electronics">Electronics</option>
+              <option value="mobiles">Mobiles</option>
+              <option value="furnitures">Furnitures</option>
+              <option value="fashion">Fashion</option>
+              <option value="jobs">Jobs</option>
+              <option value="apartment">Apartment</option>
+              <option value="animals">Animals</option>
+              <option value="computer">Computer</option>
+              <option value="services">Services</option>
+              <option value="personals">Personals</option>
             </select>
           </label>
 

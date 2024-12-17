@@ -2,11 +2,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0px 15px;
 
   h1 {
     margin: 30px auto;
     color: #002140;
-    font-size: 32px;
+    font-size: 30px;
+  }
+
+  .emptyBookmark{
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 4px;
+    color: rgb(152, 8, 8);
+    background-color: white;
+    border: 1px solid rgb(152, 8, 8);
+    margin-left: auto;
+    margin-right: 10px;
+
+    .iconEmpty{
+      font-size: 18px;
+    }
+  }
+
+  .emptyBookmark:hover{
+    border: 1px solid white;
+    color: white;
+    background-color: rgb(152, 8, 8);
   }
 
   .bookmarkDisplay {
@@ -36,6 +60,22 @@
         background-color: #002140;
         color: white;
         border-radius: 4px;
+      }
+    }
+  }
+
+  .noBookmarks{
+    margin: 60px auto;
+
+    h3{
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 22px;
+      color: #002140;
+
+      .noBook{
+        font-size: 25px;
       }
     }
   }

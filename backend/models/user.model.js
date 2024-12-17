@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import AdModel from "./ad.model.js";
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -27,8 +28,7 @@ const userSchema = new mongoose.Schema({
         required: false,
     },
     phoneNumber: {
-        type: Number,
-        unique: false,
+        type: String,
         required: false,
     },
     country: {
@@ -39,6 +39,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    bookmarkedAds: {
+        type: Array,
+        default: [AdModel]
+    }
     
 },{timestamps: true});
 

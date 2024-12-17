@@ -169,3 +169,90 @@ export const updateMe = async (req, res) => {
     res.status(404).json({ success: false, message: "Something went wrong", error });
   }
 };
+
+
+//add ad To Bookmark
+export const addToBookmark = async (req, res) => {
+  const userId = req.fields.userId; 
+  const bookmarkedAd = req?.fields?.bookmarkedAd;
+
+  const adId = JSON.parse(bookmarkedAd)
+  
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    };
+
+    if (!user.bookmarkedAds.includes(adId)) {
+      user.bookmarkedAds.push(adId); // Add ad ID to bookmarkedAds
+      await user.save(); // Save the updated user
+    };
+  
+    res.status(201).json({ success: true, message: "Added to Bookmark", bookmarkedAds: user.bookmarkedAds });
+    
+  } catch (error) {
+    console.log(error, "Error in addToBookmark Controller");
+    res.status(404).json({ success: false, message: "Something went wrong", error });
+  }
+   
+}
+
+//remove ad from Bookmark
+export const removeFromBookmark = async (req, res) => {
+  const userId = req.fields.userId;
+  const bookmarkedAd = req?.fields?.bookmarkedAd;
+
+  const adId = JSON.parse(bookmarkedAd);
+
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    };
+
+    user.bookmarkedAds = user.bookmarkedAds.filter(ad => ad?._id !== adId._id);
+    await user.save();
+  
+    res.status(201).json({ success: true, message: "Removed from Bookmark", bookmarkedAds: user.bookmarkedAds });
+  } catch (error) {
+    console.log(error, "Error in removeFromBookmark Controller");
+    res.status(404).json({ success: false, message: "Something went wrong", error });
+  }
+}
+
+
+//get my Bookmark ad ids
+export const getBookmarks = async (req, res) => {
+  const userId = req.params.id; 
+
+  try {
+    let user = await UserModel.findById(userId);
+    let bookmarkedAds = await user.bookmarkedAds;
+
+    res.status(201).json({success: true, bookmarkedAds});
+  } catch (error) {
+    console.log(error, "Error in getBookmarks Controller");
+    res.status(404).json({ success: false, message: "Something went wrong", error });
+  };
+};
+
+//empty bookmark
+export const emptyBookmark = async (req, res) => {
+  const userId = req.params.id; 
+  
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    };
+
+    await UserModel.updateOne({ _id: userId }, { $set: { bookmarkedAds: [] } });
+    res.status(200).json('All bookmarks deleted');
+  } catch (error) {
+    console.log(error, "Error in emptyBookmark Controller");
+    res.status(404).json({ success: false, message: "Something went wrong", error });
+  };
+};
+
+

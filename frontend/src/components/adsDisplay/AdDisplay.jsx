@@ -11,17 +11,14 @@ import { FiSend } from "react-icons/fi";
 import ErrorImg from '/error.png';
 import Item from "antd/es/list/Item";
 
-const AdDisplay = () => {
+const AdDisplay = ({adList, setAdList}) => {
   const { url, category } = useContext(StoreContext);
-  const [adList, setAdList] = useState([]);
-  
   const [loading, setLoading] = useState(false);
   const [newsLetter, setNewsLetter] = useState('');  
 
   const fetchAdList = async () => {
     try {
       setLoading(true);
-    
       const res = await axios.get(`${url}/api/ads/list`);
       setAdList(res.data.data);
     } catch (error) {
@@ -35,20 +32,47 @@ const AdDisplay = () => {
     e.preventDefault();
     toast.success(`${newsLetter} subscribed to 247market Newsletter`);
     setNewsLetter('')
-  }
+  };
 
   useEffect(() => {
     fetchAdList();
+
   }, [category]);
 
   const filteredAds = category === "All" ? adList : adList.filter(item => item.category === category);
-  const displayedAds = filteredAds.slice(0, 8);
+  const displayedAds = filteredAds.slice(0, 16);
+
+  //pagination start************************
+  const [currentPage, setCurrentPage] = useState(1);
+  const displayAdsPerPage = 8;
+  const lastIndex = currentPage * displayAdsPerPage;
+  const firstIndex = lastIndex - displayAdsPerPage;
+  const display = displayedAds.slice(firstIndex, lastIndex);
+  const numberOfPages = Math.ceil(displayedAds.length / displayAdsPerPage);
+  const numbers = [...Array(numberOfPages + 1).keys()].slice(1);
+
+  const prevPage = () => {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const nextPage = () => {
+    if (currentPage !== numberOfPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const changePage = (id) => {
+    setCurrentPage(id);
+  };
+  //end ************************
 
 
   return (
     <div className="ad-display" id="ad-display">
       <div className="top">
-        <h2>Top ads near you</h2>
+        <h2>Recent ads for you</h2>
 
         <Link className="view-all" to={"/categories"}>
           View All <FaExpand className="icon" />
@@ -57,11 +81,11 @@ const AdDisplay = () => {
 
       {/* *****************ad display list ***************** */}
       <div className="ad-display-list">
-        {displayedAds.map((item, index) => {
+        {display.map((item, index) => {
             return (
               <AdItem
                 key={index}
-                id={item._id}
+                id={item?._id}
                 title={item.title}
                 description={item.description}
                 price={item?.price}
@@ -76,13 +100,31 @@ const AdDisplay = () => {
       </div>
 
       {
-          (!loading && displayedAds.length === 0) && (
-            <div className="displayError">
-              <img src={ErrorImg} alt="" />
-              <h3>Oops! Something went wrong. <br /> Make sure you are connectedto the internet or try again later.</h3>
-            </div>
-          )
-        }
+        (!loading && display.length === 0) && (
+          <div className="displayError">
+            <img src={ErrorImg} alt="" />
+            <h3>Oops! Something went wrong. <br /> Make sure you are connected to the internet or try again later.</h3>
+          </div>
+        )
+      }
+
+      {/* ************ display list pagaination *********** */}
+      <nav>
+        <ul className="pagination">
+          <li>
+            <p onClick={prevPage}>prev</p>
+          </li>
+          {numbers.map((n, i) => (
+            <li className={currentPage === n ? "pagi-active" : ""} key={i}>
+              <p onClick={() => changePage(n)}>{n}</p>
+            </li>
+          ))}
+
+          <li>
+            <p onClick={nextPage}>next</p>
+          </li>
+        </ul>
+      </nav>
 
       {loading && <div className="loaderCont">
         <span className="ballLoader"></span>

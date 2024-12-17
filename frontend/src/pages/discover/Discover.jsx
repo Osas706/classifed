@@ -104,6 +104,9 @@ const Discover = () => {
               price={item?.price}
               adImage={item.adImage}
               state={item.state}
+              condition={item?.condition}
+              terms={item?.terms}
+              item={item}
             />
           );
         })}

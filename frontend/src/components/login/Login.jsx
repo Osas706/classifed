@@ -69,7 +69,7 @@ const Login = ({ setShowLogin }) => {
         setUser(res.data.user);
         toast.success("Welcome, Now create your ad");
         localStorage.setItem("user", res.data?.userInfo?._id);
-        localStorage.setItem("token", res.data?.token);
+        // localStorage.setItem("token", res.data?.token);
         setShowLogin(false);
       }
     } catch (error) {
