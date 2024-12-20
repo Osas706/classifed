@@ -58,14 +58,6 @@ const Bookmarked = () => {
             />
           );
         })}
-
-        {/* {!loading && search.length === 0 && (
-          <div className="noAd">
-            <h3>There are currently no results for this search <TbMoodCry /></h3>
-            <p>You can click on the button below to create a new ad</p>
-            <Link className="toCreateAd" to={'/create-ad'}>Post an Ad</Link>
-          </div>
-        )} */}
       </div>
 
       {bookmarks.length === 0 && (

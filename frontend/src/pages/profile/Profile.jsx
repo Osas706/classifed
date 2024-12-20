@@ -10,7 +10,7 @@ import AdItem from "../../components/adItem/AdItem";
 import { FaTrash } from "react-icons/fa";
 import { GiSandsOfTime } from "react-icons/gi";
 import { TbMoodCry } from "react-icons/tb";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const displayImageRef = useRef(null);
@@ -28,14 +28,12 @@ const Profile = () => {
     // newPassword: null,
     userId: user,
   });
-  console.log(userData);
   
   const [myAdList, setMyAdList] = useState([]);
   
   const [displayImage, setDisplayImage] = useState(null);
   const [joinedSinceDate, setJoinedSinceDate] = useState(null);
   const [updatedSinceDate, setUpdatedSinceDate] = useState(null);
-  console.log(updatedSinceDate);
   
 
   //on change handler
@@ -63,8 +61,6 @@ const Profile = () => {
   //fetch current user details
   const fetchUser = async () => {
     const res = await axios.get(`${url}/api/user/${user}`);
-    console.log(res);
-    
 
     setUserData(res?.data);
     setDisplayImage(res?.data?.displayImage);

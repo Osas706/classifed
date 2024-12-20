@@ -70,7 +70,10 @@ const Ad = () => {
 
               <p>Term: {ad.terms}</p>
 
-              <p className="pricee">₦{ad?.price?.toLocaleString()}</p>
+              <p className="pricee">
+                {(ad?.price === 0 || '') ? '' : '₦'}
+                {(ad?.price === 0 || '') ? 'Price on inquiry' : ad?.price?.toLocaleString()}
+              </p>
 
               <span>
                 <p>{ad.state}</p>

@@ -22,8 +22,6 @@ const Categories = ({adList}) => {
     return acc;
   }, {});
   
-  console.log(categoryCounts);
-  
   return (
     <div className="explore-ad" id="explore-ad">
       <h1>Ads By Category</h1>

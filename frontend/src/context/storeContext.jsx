@@ -6,22 +6,22 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
   const url = "http://localhost:8000";
   const [user, setUser] = useState("");
-  // const [token, setToken] = useState("");
   const [category, setCategory] = useState("All");
   const [bookmarks, setBookmarks] = useState([]);
 
   const fetchBookmarks = async() => {
     try {
-      const res = await axios.get(`${url}/api/user/get-bookmarks/${user}`);      
-      // setBookmarks(res?.data?.bookmarkedAds);
-      console.log(res);
+      if(user){
+        const res = await axios.get(`${url}/api/user/get-bookmarks/${user}`);      
+        // setBookmarks(res?.data?.bookmarkedAds);
 
-      setBookmarks(prev => {
-        if (JSON.stringify(prev) !== JSON.stringify(res?.data?.bookmarkedAds)) {
-          return res?.data?.bookmarkedAds;
-        }
-        return prev;
-      });
+        setBookmarks(prev => {
+          if (JSON.stringify(prev) !== JSON.stringify(res?.data?.bookmarkedAds)) {
+            return res?.data?.bookmarkedAds;
+          }
+          return prev;
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -31,7 +31,6 @@ const StoreContextProvider = (props) => {
   useEffect(() => {
     if (localStorage.getItem("user")) {
       setUser(localStorage.getItem("user"));
-      // setToken(localStorage?.getItem("token"));
     }
 
     fetchBookmarks();

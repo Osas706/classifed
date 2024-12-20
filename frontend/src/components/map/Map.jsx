@@ -9,7 +9,7 @@ const Map = ({ lat, long, title }) => {
       {lat && (
         <MapContainer
           center={lat ? [lat, long] : [52.4797, -1.90269]}
-          zoom={12}
+          zoom={13}
           scrollWheelZoom={false}
           className="map"
           

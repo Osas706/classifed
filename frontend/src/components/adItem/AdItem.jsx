@@ -105,7 +105,10 @@ const AdItem = ({item, adImage, title, price, description, id, state, condition,
         <p className='state'><CiShoppingTag />{condition  || "------" }</p>
     
         <div className="price">
-          <p className="ad-item-price">₦{price === 0 ? 'Price on inquiry' : price?.toLocaleString()}</p>
+          <p className="ad-item-price">
+            {(price === 0 || '') ? '' : '₦'}
+            {(price === 0 || '') ? 'Price on inquiry' : price?.toLocaleString()}
+          </p>
 
           <Link className='view-btn' to={`/ad/${id}`}>view</Link>
         </div>

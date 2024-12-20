@@ -108,6 +108,10 @@ const AdDisplay = ({adList, setAdList}) => {
         )
       }
 
+      {loading && <div className="loaderCont">
+        <span className="ballLoader"></span>
+      </div>}
+
       {/* ************ display list pagaination *********** */}
       <nav>
         <ul className="pagination">
@@ -125,10 +129,6 @@ const AdDisplay = ({adList, setAdList}) => {
           </li>
         </ul>
       </nav>
-
-      {loading && <div className="loaderCont">
-        <span className="ballLoader"></span>
-      </div>}
 
       <div className="lineStroke"></div>
 

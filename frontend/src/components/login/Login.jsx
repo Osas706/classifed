@@ -64,12 +64,12 @@ const Login = ({ setShowLogin }) => {
       }
 
       const res = await axios.post(newUrl, formData);
-
+      console.log(res);
+      
       if (res.data.success) {
         setUser(res.data.user);
         toast.success("Welcome, Now create your ad");
         localStorage.setItem("user", res.data?.userInfo?._id);
-        // localStorage.setItem("token", res.data?.token);
         setShowLogin(false);
       }
     } catch (error) {
