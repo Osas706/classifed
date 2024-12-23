@@ -7,6 +7,7 @@ import 'dotenv/config';
 import cookieParser from 'cookie-parser'; 
 import { v2 as cloudinary } from 'cloudinary';
 import formidable from 'express-formidable';
+// import bodyParser from "body-parser";
  
 
 //app config
@@ -28,6 +29,10 @@ app.use(express.urlencoded({extended: true }));
 app.use(express.text())
 app.use(formidable());
 
+// app.use(bodyParser.json());
+// Middleware to parse URL-encoded data
+// app.use(bodyParser.urlencoded({ extended: true }));
+
 
 //db connection
 connectDB();
@@ -35,6 +40,9 @@ connectDB();
 //api endpoint
 app.use("/api/ads", adsRouter);
 app.use("/api/user", userRouter);
+
+// app.use("/adImages", express.static('AdUploads'));
+// app.use("/displayImages", express.static('DisplayUploads'));
 
 
 //test api

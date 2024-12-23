@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import './Slider.css';
 import Img1 from "/bic.jpg";
 import Img2 from "/car.png";
-import Img3 from "/dog.png";
-import Img4 from "/hoodie.png";
+import Img3 from "/keke.png";
+import Img4 from "/fash.png";
+import Img5 from "/ps.png";
 
 
 const Slider = () => {
@@ -21,7 +22,7 @@ const Slider = () => {
       slides[slideIndex].style.display = "block";
     };
 
-    const interval = setInterval(showSlides, 3500); // Change slide every 3.5 seconds (2000ms)
+    const interval = setInterval(showSlides, 4000); // Change slide every 3.5 seconds (2000ms)
 
     return () => clearInterval(interval);
   }, [slideIndex]);
@@ -34,15 +35,19 @@ const Slider = () => {
         </div>
 
         <div className={`slide ${slideIndex === 1 ? "active" : ""}`}>
-          <img className="slideImg" src={Img2} alt="Image 2" />
+          <img className="slideImg" src={Img5} alt="Image 2" />
         </div>
 
         <div className={`slide ${slideIndex === 2 ? "active" : ""}`}>
-          <img className="slideImg" src={Img3} alt="Image 3" />
+          <img className="slideImg" src={Img2} alt="Image 3" />
         </div>
 
         <div className={`slide ${slideIndex === 3 ? "active" : ""}`}>
-          <img className="slideImg" src={Img4} alt="Image 4" />
+          <img className="slideImg" src={Img3} alt="Image 4" />
+        </div>
+
+        <div className={`slide ${slideIndex === 4 ? "active" : ""}`}>
+          <img className="slideImg" src={Img4} alt="Image 5" />
         </div>
       </div>
     </div>

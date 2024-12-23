@@ -9,6 +9,7 @@ import { StoreContext } from "../../context/storeContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Map from "../../components/map/Map";
+import { useNavigate } from "react-router-dom";
 
 const CreateAd = () => {
   const { url, user } = useContext(StoreContext);
@@ -33,6 +34,7 @@ const CreateAd = () => {
   });
   const [countriesList, setCountriesList] = useState([]);
   const [stateList, setStateList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     GetCountries().then((result) => {
@@ -109,8 +111,8 @@ const CreateAd = () => {
         // setAdData({
         //   title: "",
         //   description: "",
-        //   category: "Select Category",
-        //   condition: "Select Condition",
+        //   category: "",
+        //   condition: "",
         //   price: 0,
         //   terms: "negotiable",
         //   adImage: "",
@@ -123,6 +125,8 @@ const CreateAd = () => {
         //   country: "",
         //   state: "",
         // });
+
+        navigate(`/profile/${user}`)
 
         toast.success(res.data.message);
       }

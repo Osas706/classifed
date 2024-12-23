@@ -25,53 +25,23 @@ export const addAd = async (req, res) => {
   let adImage = req?.files?.adImage?.path;
   let displayImage = req?.files?.displayImage?.path;
 
-  // if (adImage) {
-  // await Jimp?.read(adImage)
-  //     .then(async (image) => {
-  //         const watermark = (await Jimp.read('../mark.png'));
-
-  //         image.composite(watermark, 0, 0, {
-  //         mode: Jimp.BLEND_SOURCE_OVER,
-  //         opacitySource: 0.5,
-  //         opacityDest: 1
-  //       });
-  //       return image;
-  //     })
-  //     .then((watermarkedImage) => {
-  //         // Save the watermarked image
-          
-  //         return watermarkedImage.write(adImage);
-  //     })
-  //     .then(() => {
-  //         // Upload the watermarked image to Cloudinary
-  //         return cloudinary.uploader.upload(adImage);
-  //     })
-  //     .then((adUploadedResponse) => {
-  //         adImage = adUploadedResponse.secure_url;
-  //         console.log("Image successfully watermarked and uploaded to Cloudinary");
-  //     })
-  //     .catch((err) => {
-  //         console.error(err);
-  //     });
-  // }
-
   if (adImage) {
     const options = {
-      ratio: 0.2, // Scale of watermark relative to the image
-      opacity: 0.5, // Opacity of the watermark
-     // dstPath: "./output-with-watermark.jpg"  Destination path for watermarked image
+      ratio: 0.45, // Scale of watermark relative to the image
+      opacity: 0.7, // Opacity of the watermark
+     dstPath: "./output-with-watermark.jpg"  // Destination path for watermarked image
     };
 
-    Jimp.addWatermark(adImage, "../mark.png", options)
+    Jimp.addWatermark(adImage, "mark.png", options)
       .then((data) => {
-        console.log(data);
+        // console.log(data);
       })
       .catch((err) => {
         console.log(err);
       });
 
     const adUploadedResponse = await cloudinary.uploader
-      .upload(adImage)
+      .upload("output-with-watermark.jpg")
       .catch((error) => {
         console.log(error);
       });

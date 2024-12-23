@@ -127,7 +127,6 @@ const Profile = () => {
         );   
 
         toast.success(res?.data?.message)
-        console.log(data.message);
       };
 
     } catch (error) {

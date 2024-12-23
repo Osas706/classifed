@@ -35,6 +35,7 @@
 
 .explore-ad-list-item{
   position: relative;
+  cursor: pointer;
   /* background-color: red; */
 
   .number{
@@ -59,7 +60,7 @@
    background-color: #bfe2d0;
    padding: 30px;
    border-radius: 40px;
-   cursor: pointer;
+
    transition:  0.2s;
 }
 

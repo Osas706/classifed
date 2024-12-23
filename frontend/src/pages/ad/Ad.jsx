@@ -25,7 +25,6 @@ const Ad = () => {
     try {
       setLoading(true);
       const res = await axios.get(`${url}/api/ads/${params.id}`);
-      console.log(res);
       
       setAd(res?.data?.ad);
       setLat(res?.data?.ad?.lat);
