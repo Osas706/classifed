@@ -12,9 +12,9 @@ import { FaStore } from "react-icons/fa6";
 import { RiCompassDiscoverLine } from "react-icons/ri";
 import { MdOutlineBookmarks } from "react-icons/md";
 
-const Navbar = ({ setShowLogin }) => {
+const Navbar = () => {
   const [menu, setMenu] = useState("home");
-  const { user, setUser, bookmarks } = useContext(StoreContext);
+  const { user, setUser, bookmarks, setShowLogin, } = useContext(StoreContext);
   const navigate = useNavigate();
 
   const logout = () => {

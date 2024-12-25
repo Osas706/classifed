@@ -5,6 +5,7 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   const url = "http://localhost:8000";
+  const [showLogin, setShowLogin] = useState(false);
   const [user, setUser] = useState("");
   const [category, setCategory] = useState("All");
   const [bookmarks, setBookmarks] = useState([]);
@@ -37,6 +38,7 @@ const StoreContextProvider = (props) => {
 
   //   //store values
   const contextValue = {
+    showLogin, setShowLogin,
     url,
     user,
     setUser,

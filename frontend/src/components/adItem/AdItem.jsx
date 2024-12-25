@@ -12,7 +12,7 @@ import { StoreContext } from '../../context/storeContext';
 import axios from 'axios';
 
 const AdItem = ({item, adImage, title, price, description, id, state, condition, terms}) => {
-  const { url, user, bookmarks, setBookmarks, fetchBookmarks } = useContext(StoreContext);
+  const { setShowLogin, url, user, bookmarks, setBookmarks, fetchBookmarks } = useContext(StoreContext);
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   useEffect(() => {
@@ -29,8 +29,10 @@ const AdItem = ({item, adImage, title, price, description, id, state, condition,
     e.preventDefault();
 
     if(!user){
-      return toast.info('You need to be logged in to boomark an ad!');
-    }
+      setShowLogin(true)
+      toast.info('You need to be logged in to boomark an ad!');
+      return ;
+    };
 
     try {
       const formData = new FormData();
@@ -57,7 +59,9 @@ const AdItem = ({item, adImage, title, price, description, id, state, condition,
     e.preventDefault();
 
     if(!user){
-      return toast.info('You need to be logged in to boomark an ad!');
+      setShowLogin(true)
+      toast.info('You need to be logged in to remove boomark!');
+      return 
     };
 
     try {

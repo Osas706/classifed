@@ -16,8 +16,7 @@ import Discover from "./pages/discover/Discover";
 import Bookmarked from "./pages/bookmarked/Bookmarked";
 
 const App = () => {
-  const [showLogin, setShowLogin] = useState(false);
-  const { user } = useContext(StoreContext);
+  const { user ,  showLogin, setShowLogin,} = useContext(StoreContext);
 
   return (
     <>
@@ -25,7 +24,7 @@ const App = () => {
 
       <div className="app">
         <ToastContainer />
-        <Navbar  setShowLogin={setShowLogin} />
+        <Navbar/>
 
         <Routes>
           <Route path="/" element={<Home />} />
