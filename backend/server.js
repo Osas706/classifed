@@ -3,11 +3,12 @@ import cors from "cors";
 import { connectDB } from "./config/db.js";
 import adsRouter from "./routes/ads.route.js";
 import userRouter from "./routes/user.route.js";
-import 'dotenv/config';
+import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser'; 
 import { v2 as cloudinary } from 'cloudinary';
 import formidable from 'express-formidable';
-// import bodyParser from "body-parser";
+
+dotenv.config();
  
 
 //app config
@@ -15,9 +16,9 @@ const app = express();
 const port = 8000;
 
 cloudinary.config({ 
-    cloud_name: 'dmpddds7y', 
-    api_key: '559493991877522', 
-    api_secret: '_orIYNQVmM3VdNPZAjIrY8bK7vE' // Click 'View API Keys' above to copy your API secret
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.API_KEY, 
+    api_secret: process.env.API_SECRET
 });
 
 
@@ -29,20 +30,12 @@ app.use(express.urlencoded({extended: true }));
 app.use(express.text())
 app.use(formidable());
 
-// app.use(bodyParser.json());
-// Middleware to parse URL-encoded data
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-
 //db connection
 connectDB();
 
 //api endpoint
 app.use("/api/ads", adsRouter);
 app.use("/api/user", userRouter);
-
-// app.use("/adImages", express.static('AdUploads'));
-// app.use("/displayImages", express.static('DisplayUploads'));
 
 
 //test api

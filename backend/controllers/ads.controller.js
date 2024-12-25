@@ -29,7 +29,7 @@ export const addAd = async (req, res) => {
     const options = {
       ratio: 0.45, // Scale of watermark relative to the image
       opacity: 0.7, // Opacity of the watermark
-     dstPath: "./output-with-watermark.jpg"  // Destination path for watermarked image
+      dstPath: "./output-with-watermark.jpg"  // Destination path for watermarked image
     };
 
     Jimp.addWatermark(adImage, "mark.png", options)
@@ -39,6 +39,9 @@ export const addAd = async (req, res) => {
       .catch((err) => {
         console.log(err);
       });
+
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    await delay(1000); // Delay for 1 second
 
     const adUploadedResponse = await cloudinary.uploader
       .upload("output-with-watermark.jpg")

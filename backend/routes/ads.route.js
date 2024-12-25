@@ -1,6 +1,5 @@
 import express from 'express';
 import { addAd , deleteAd, getAd, getDiscoverAds, getMyAds, listAds, searchedAds} from '../controllers/ads.controller.js';
-import { authMiddleware } from '../middleware/auth.js';
 
 const router = express.Router();
 

@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import './AdItem.css';
 import {Link} from 'react-router-dom';
 // import { Watermark} from 'antd';
+import { toast } from "react-toastify";
 import { RiMapPinLine } from "react-icons/ri";
 import { CiShoppingTag } from "react-icons/ci";
 import { IoBookmark } from "react-icons/io5";
-import { IoBookmarkOutline } from "react-icons/io5";
 import bookmarkImg from '/bookmark.svg'
 
 import { StoreContext } from '../../context/storeContext';
@@ -27,6 +27,10 @@ const AdItem = ({item, adImage, title, price, description, id, state, condition,
 
   const addToBookmark = async (e) => {
     e.preventDefault();
+
+    if(!user){
+      return toast.info('You need to be logged in to boomark an ad!');
+    }
 
     try {
       const formData = new FormData();
@@ -51,6 +55,10 @@ const AdItem = ({item, adImage, title, price, description, id, state, condition,
 
   const removeFromBookmark = async (e) => {
     e.preventDefault();
+
+    if(!user){
+      return toast.info('You need to be logged in to boomark an ad!');
+    };
 
     try {
       const formData = new FormData();

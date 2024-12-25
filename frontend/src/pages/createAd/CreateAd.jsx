@@ -108,25 +108,25 @@ const CreateAd = () => {
     try {
       const res = await axios.post(`${url}/api/ads/add`, formData);
       if (res.data.success) {
-        // setAdData({
-        //   title: "",
-        //   description: "",
-        //   category: "",
-        //   condition: "",
-        //   price: 0,
-        //   terms: "negotiable",
-        //   adImage: "",
+        setAdData({
+          title: "",
+          description: "",
+          category: "",
+          condition: "",
+          price: 0,
+          terms: "negotiable",
+          adImage: "",
 
-        //   firstName: "",
-        //   lastName: "",
-        //   email: "",
-        //   phoneNumber: "",
-        //   displayImage: "",
-        //   country: "",
-        //   state: "",
-        // });
+          firstName: "",
+          lastName: "",
+          email: "",
+          phoneNumber: "",
+          displayImage: "",
+          country: "",
+          state: "",
+        });
 
-        navigate(`/profile/${user}`)
+        // navigate(`/profile/${user}`);
 
         toast.success(res.data.message);
       }

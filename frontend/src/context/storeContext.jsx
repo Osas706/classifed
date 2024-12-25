@@ -13,7 +13,6 @@ const StoreContextProvider = (props) => {
     try {
       if(user){
         const res = await axios.get(`${url}/api/user/get-bookmarks/${user}`);      
-        // setBookmarks(res?.data?.bookmarkedAds);
 
         setBookmarks(prev => {
           if (JSON.stringify(prev) !== JSON.stringify(res?.data?.bookmarkedAds)) {
@@ -24,14 +23,14 @@ const StoreContextProvider = (props) => {
       }
     } catch (error) {
       console.log(error);
-    }
+    };
   };
 
 
   useEffect(() => {
     if (localStorage.getItem("user")) {
       setUser(localStorage.getItem("user"));
-    }
+    };
 
     fetchBookmarks();
   }, [bookmarks, user, ]);

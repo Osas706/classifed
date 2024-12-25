@@ -8,8 +8,8 @@ const Map = ({ lat, long, title }) => {
     <>
       {lat && (
         <MapContainer
-          center={lat ? [lat, long] : [52.4797, -1.90269]}
-          zoom={13}
+          center={[9.0820, 8.6753]}
+          zoom={5}
           scrollWheelZoom={false}
           className="map"
           
@@ -18,7 +18,7 @@ const Map = ({ lat, long, title }) => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Circle center={[lat, long]} radius={2200}/>
+          <Circle center={[lat, long]} radius={5200}/>
           {/* <Marker position={[lat, long]}>
             <Popup>{title}</Popup>
           </Marker> */}

@@ -7,7 +7,7 @@ import { RxCross2 } from "react-icons/rx";
 import { toast } from "react-toastify";
 
 const Login = ({ setShowLogin }) => {
-  const { url, setUser } = useContext(StoreContext);
+  const { url, setUser, setUserDetails } = useContext(StoreContext);
   const [currentState, setCurrentState] = useState("Login");
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
@@ -64,12 +64,12 @@ const Login = ({ setShowLogin }) => {
       }
 
       const res = await axios.post(newUrl, formData);
-      console.log(res);
       
       if (res.data.success) {
         setUser(res.data.user);
         toast.success("Welcome, Now create your ad");
-        localStorage.setItem("user", res.data?.userInfo?._id);
+        localStorage.setItem("user", res?.data?.userInfo?._id);
+        setUserDetails(res?.data?.userInfo);
         setShowLogin(false);
       }
     } catch (error) {
@@ -165,11 +165,11 @@ const Login = ({ setShowLogin }) => {
         </div>
 
         {currentState === "Sign Up" ? (
-          <button type="submit">
+          <button disabled={loading} type="submit">
             {loading ? "Creating Account..." : "Create Account"}
           </button>
         ) : (
-          <button type="submit">{loading ? "Loading..." : "Login"}</button>
+          <button  disabled={loading} type="submit">{loading ? "Loading..." : "Login"}</button>
         )}
 
         {currentState === "Login" ? (
