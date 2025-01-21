@@ -4,7 +4,7 @@ import { createContext, useEffect, useState } from "react";
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-  const url = "http://localhost:8000";
+  const url = "https://classifed-247market.onrender.com";
   const [showLogin, setShowLogin] = useState(false);
   const [user, setUser] = useState("");
   const [category, setCategory] = useState("All");
