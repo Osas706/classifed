@@ -1,4 +1,4 @@
-.loadingCont{
+.loadingCont {
   width: 200px;
   height: 50px;
   margin: 180px auto;
@@ -13,7 +13,7 @@
     100% {
       transform: rotate(360deg);
     }
-  } 
+  }
 
   .loading {
     width: 58px;
@@ -27,18 +27,18 @@
   }
 }
 
-.adItem{
+.adItem {
   margin-top: 60px;
   display: flex;
   gap: 20px;
 
-  .ad{
+  .ad {
     display: flex;
     gap: 20px;
     /* border: 1px solid #DDE0BD;
     padding: 20px; */
 
-    img{
+    img {
       max-width: 400px;
       height: auto;
       border-radius: 14px;
@@ -49,38 +49,38 @@
       align-self: flex-start;
     }
 
-    .adDetails{
+    .adDetails {
       display: flex;
       flex-direction: column;
       gap: 5px;
       color: #002140;
 
-      h1{
+      h1 {
         font-size: 45px;
-        text-transform:capitalize ;
+        text-transform: capitalize;
       }
 
-      .adDdesc{
+      .adDdesc {
         margin-bottom: 30px;
       }
 
-      span{
+      span {
         display: flex;
         gap: 20px;
 
-        p{
+        p {
           text-transform: capitalize;
         }
       }
 
-      .pricee{
+      .pricee {
         font-size: 23px;
         font-weight: 700;
       }
     }
   }
 
-  .adAdvertizer{
+  .adAdvertizer {
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -93,7 +93,7 @@
     height: max-content;
     align-items: center;
 
-    .top{
+    .top {
       display: flex;
       align-items: center;
       gap: 4px;
@@ -103,32 +103,32 @@
       border-radius: 3px;
       width: max-content;
       cursor: pointer;
-    } 
+    }
 
-    .body{
+    .body {
       display: flex;
       flex-direction: column;
       align-items: center;
       width: max-content;
 
-      h3{
+      h3 {
         color: white;
       }
-  
-      img{
+
+      img {
         width: 80px;
         height: 80px;
         border-radius: 50%;
         border: 1px solid white;
       }
-  
-      .adAdvertizerDetails{
+
+      .adAdvertizerDetails {
         color: white;
         display: flex;
         flex-direction: column;
         align-items: center;
-  
-        span{
+
+        span {
           display: flex;
           gap: 4px;
           text-transform: capitalize;
@@ -136,20 +136,19 @@
       }
     }
 
-    .warning{
-     display: flex;
-     width: 120px;
-     font-size: 12px;
-     border: 1px solid white;
-     padding: 4px 7px;
-     margin-top: 20px;
-     color: white;
+    .warning {
+      display: flex;
+      width: 120px;
+      font-size: 12px;
+      border: 1px solid white;
+      padding: 4px 7px;
+      margin-top: 20px;
+      color: white;
     }
-
   }
 }
 
-.mapCont{
+.mapCont {
   margin-top: 80px;
   width: 100%;
   height: 400px;
@@ -168,7 +167,7 @@
   border-radius: 10px;
 }
 
-.relatedAds{
+.relatedAds {
   /* From https://css.glass */
   background: rgba(255, 255, 255, 0.42);
   border-radius: 16px;
@@ -177,7 +176,7 @@
   -webkit-backdrop-filter: blur(10.4px);
   border: 1px solid rgba(255, 255, 255, 0.61);
   border: 3px solid #002140;
-     
+
   border-radius: 20px;
   padding: 50px 10px;
   margin-top: 40px;
@@ -185,7 +184,7 @@
   flex-direction: column;
   align-items: center;
 
-  h2{
+  h2 {
     color: #002140;
     font-size: 30px;
     text-decoration: underline;
@@ -194,7 +193,7 @@
     opacity: 0.8;
   }
 
-  .relatedAdsDisplay{
+  .relatedAdsDisplay {
     width: 80%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -205,75 +204,116 @@
     margin-right: auto;
   }
 
-  .loaderCont{
+  .loaderCont {
     background-color: transparent;
     margin: auto;
     width: 50vw;
     height: 50vh;
     position: relative;
   }
-  
-  .noAd{
+
+  .noAd {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 40px auto;
     gap: 10px;
-  
-    h3{
+
+    h3 {
       display: flex;
       align-items: center;
       justify-self: center;
-      
+
       color: #002140;
       gap: 5px;
     }
-  
   }
 }
 
 @media (max-width: 1050px) {
-  .adItem{
+  .adItem {
     flex-direction: column;
+    margin-top: 30px; /* Reduced margin */
 
-    .ad{
+    .ad {
       flex-direction: column;
 
-      img{
+      img {
         margin: 0px auto;
-        max-width: 300px;
+        max-width: 100%; /* Ensure image doesn't overflow */
+        width: 100%;
+        height: auto;
       }
 
-      .adDetails{
+      .adDetails {
         align-items: center;
+        text-align: center; /* Center text for better mobile look */
+
+        h1 {
+          font-size: 32px; /* Smaller font size */
+        }
       }
     }
 
-    .adAdvertizer{
+    .adAdvertizer {
       align-items: center;
-      margin: 6px auto;
+      margin: 20px auto;
+      width: 100%; /* Full width */
+      max-width: 400px; /* But constrained */
+      box-sizing: border-box; /* Prevent padding from adding to width */
 
-      .body{
+      .body {
         display: flex;
-        flex-direction: row;
+        flex-direction: column; /* Stack on mobile usually looks better, but keeping row if it fits */
         gap: 20px;
+        align-items: center;
+
+        @media (min-width: 600px) {
+          flex-direction: row;
+        }
       }
 
-      .warning{
+      .warning {
         display: flex;
-        width: 320px;
+        width: 100%; /* Fluid width */
+        max-width: 320px;
         text-align: center;
-       }
-   
+        justify-content: center;
+      }
     }
   }
 
-  .mapCont{
-    height: 100%;
+  .mapCont {
+    height: 300px; /* Smaller map on mobile */
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 768px) {
+  .relatedAds {
+    padding: 30px 10px;
 
+    .relatedAdsDisplay {
+      width: 95%;
+      grid-template-columns: repeat(
+        auto-fill,
+        minmax(100%, 1fr)
+      ); /* 1 column on small screens */
+      gap: 20px;
+    }
+
+    h2 {
+      font-size: 24px;
+      align-self: center !important; /* Center title */
+    }
+  }
+}
+
+@media (min-width: 500px) and (max-width: 768px) {
+  .relatedAds .relatedAdsDisplay {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(200px, 1fr)
+    ); /* 2 columns on tablets */
+  }
 }
