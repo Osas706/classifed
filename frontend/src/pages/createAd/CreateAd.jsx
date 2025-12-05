@@ -126,7 +126,7 @@ const CreateAd = () => {
           state: "",
         });
 
-        // navigate(`/profile/${user}`);
+        navigate(`/ad/${res.data.ad?._id}`);
 
         toast.success(res.data.message);
       }
