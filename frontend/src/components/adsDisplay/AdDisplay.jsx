@@ -9,7 +9,6 @@ import { FaExpand } from "react-icons/fa";
 import { BiMailSend } from "react-icons/bi";
 import { FiSend } from "react-icons/fi";
 import ErrorImg from '/error.png';
-import Item from "antd/es/list/Item";
 
 const AdDisplay = ({adList, setAdList}) => {
   const { url, category } = useContext(StoreContext);
@@ -20,7 +19,8 @@ const AdDisplay = ({adList, setAdList}) => {
     try {
       setLoading(true);
       const res = await axios.get(`${url}/api/ads/list`);
-      setAdList(res.data.data);
+      
+      setAdList(res?.data?.data);
     } catch (error) {
       console.log(error);
     }finally{

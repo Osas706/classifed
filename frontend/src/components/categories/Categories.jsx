@@ -33,7 +33,7 @@ const Categories = ({adList}) => {
           className="explore-ad-list-item"
         >
           <IoCarSportOutline className={category === "cars" ? "icon active " : "icon" }/>
-          <div className="number">{categoryCounts?.cars}</div>
+          <div className="number">{categoryCounts?.cars ?? 0}</div>
           <p className={category === "cars" ? "p" : "" }>cars</p>
         </div>
 
@@ -42,7 +42,7 @@ const Categories = ({adList}) => {
           className="explore-ad-list-item"
         >
           <FaTv className={category === "electronics" ? "icon active " : "icon" }/>
-          <div className="number">{categoryCounts?.electronics}</div>
+          <div className="number">{categoryCounts?.electronics ?? 0}</div>
           <p className={category === "electronics" ? "p" : "" }>Electronics</p>
         </div>
 
@@ -51,7 +51,7 @@ const Categories = ({adList}) => {
           className="explore-ad-list-item"
         >
           <HiDevicePhoneMobile className={category === "mobiles" ? "icon active " : "icon" }/>
-          <div className="number">{categoryCounts?.mobiles}</div>
+          <div className="number">{categoryCounts?.mobiles ?? 0}</div>
           <p className={category === "mobiles" ? "p" : "" }>Mobiles</p>
         </div>
 
@@ -60,7 +60,7 @@ const Categories = ({adList}) => {
           className="explore-ad-list-item"
         >
           <MdOutlineChair className={category === "furnitures" ? "icon active " : "icon" }/>
-          <div className="number">{categoryCounts?.furnitures}</div>
+          <div className="number">{categoryCounts?.furnitures ?? 0}</div>
           <p className={category === "furnitures" ? "p" : "" }>Furnitures</p>
         </div>
 
@@ -69,7 +69,7 @@ const Categories = ({adList}) => {
           className="explore-ad-list-item"
         >
           <LuShirt className={category === "fashion" ? "icon active " : "icon" }/>
-          <div className="number">{categoryCounts?.fashion}</div>
+          <div className="number">{categoryCounts?.fashion ?? 0}</div>
           <p className={category === "fashion" ? "p" : "" }>Fashion</p>
         </div>
 
@@ -78,7 +78,7 @@ const Categories = ({adList}) => {
           className="explore-ad-list-item"
         >
           <IoBriefcaseOutline className={category === "jobs" ? "icon active " : "icon" }/>
-          <div className="number">{categoryCounts?.jobs}</div>
+          <div className="number">{categoryCounts?.jobs ?? 0}</div>
           <p className={category === "jobs" ? "p" : "" }>Jobs</p>
         </div>
 
@@ -87,7 +87,7 @@ const Categories = ({adList}) => {
           className="explore-ad-list-item"
         >
           <BsHouse className={category === "apartment" ? "icon active " : "icon" }/>
-          <div className="number">{categoryCounts?.apartment}</div>
+          <div className="number">{categoryCounts?.apartment ?? 0}</div>
           <p className={category === "apartment" ? "p" : "" }>Apartment</p>
         </div>
 
@@ -96,7 +96,7 @@ const Categories = ({adList}) => {
           className="explore-ad-list-item"
         >
           <PiDog className={category === "animals" ? "icon active " : "icon" }/>
-          <div className="number">{categoryCounts?.animals}</div>
+          <div className="number">{categoryCounts?.animals ?? 0}</div>
           <p className={category === "animals" ? "p" : "" }>Animals</p>
         </div>
 
@@ -105,7 +105,7 @@ const Categories = ({adList}) => {
           className="explore-ad-list-item"
         >
           <FaLaptop className={category === "computer" ? "icon active " : "icon" }/>
-          <div className="number">{categoryCounts?.computer}</div>
+          <div className="number">{categoryCounts?.computer ?? 0}</div>
           <p className={category === "computer" ? "p" : "" }>Computer</p>
         </div>
 
@@ -114,7 +114,7 @@ const Categories = ({adList}) => {
           className="explore-ad-list-item"
         >
           <GiPaintRoller className={category === "services" ? "icon active " : "icon" }/>
-          <div className="number">{categoryCounts?.services}</div>
+          <div className="number">{categoryCounts?.services ?? 0}</div>
           <p className={category === "services" ? "p" : "" }>Services</p>
         </div>
 
@@ -123,7 +123,7 @@ const Categories = ({adList}) => {
           className="explore-ad-list-item"
         >
           <FaRegHeart className={category === "personals" ? "icon active " : "icon" }/>
-          <div className="number">{categoryCounts?.personals}</div>
+          <div className="number">{categoryCounts?.personals ?? 0}</div>
           <p className={category === "personals" ? "p" : "" }>Personals</p>
         </div>
       </div>
