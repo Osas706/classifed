@@ -1,178 +1,198 @@
-.navbar{
-    padding: 20px 10px;
+.navbar {
+  padding: 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  border-bottom: 2px solid #002140;
+  z-index: 10;
+}
+
+.navbar .logo {
+  font-size: 20px !important;
+  color: #0f447a;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+
+  span {
+    color: #0a1128;
+    margin-left: 1px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    position: sticky;
-    top: 0;
-    background-color: white;
-    border-bottom: 2px solid #002140;
-    z-index: 10;
+    gap: 2px;
+  }
 }
 
-.navbar .logo{
-    font-size: 20px !important;
-    color: #0f447a;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-
-    span{
-        color: #0A1128;
-        margin-left: 1px;
-        display: flex;
-        align-items: center;
-        gap: 2px;
-    }
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  color: #0a1128;
+  font-size: 18px;
 }
 
-.navbar-menu{
-    display: flex;
-    list-style: none;
-    gap: 20px;
-    color: #0A1128;
-    font-size: 18px;
-}
+.navbar-right {
+  display: flex;
+  align-items: center !important;
+  gap: 10px !important;
 
-.navbar-right{
-    display: flex;
-    align-items: center !important;
-    gap: 10px !important;
-
-    .bookmarkList{
-        font-size: 23px;
-        color: #002140;
-        cursor: pointer;
-    }
-
-    .bookmarkList:hover{
-        opacity: 0.8;
-    }
-}
-
-.navbar button{
-    background: #002140;
-    font-size: 16px;
-    color: white;
-    border: transparent;
-    padding: 10px 10px ;
-    border-radius: 2px;
+  .bookmarkList {
+    font-size: 23px;
+    color: #002140;
     cursor: pointer;
-    transition: 0.3s;
+  }
+
+  .bookmarkList:hover {
+    opacity: 0.8;
+  }
 }
 
-.navbar .active{
-    padding-bottom: 2px;
-    border-bottom: 2px solid #0A1128;
+.navbar button {
+  background: #002140;
+  font-size: 16px;
+  color: white;
+  border: transparent;
+  padding: 10px 10px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.navbar li{
+.navbar .active {
+  padding-bottom: 2px;
+  border-bottom: 2px solid #0a1128;
+}
+
+.navbar li {
+  cursor: pointer;
+}
+
+.navbar-profile,
+.navbar-profile div {
+  position: relative;
+
+  .icon {
+    font-size: 25px;
+    color: #002140;
     cursor: pointer;
-}
+  }
 
-.navbar-profile, .navbar-profile div{
-    position: relative;
+  .icon:hover {
+    opacity: 0.8;
+  }
 
-    .icon{
-        font-size: 25px;
-        color: #002140;
-        cursor: pointer;
-    }
-
-    .icon:hover{
-        opacity: 0.8;
-    }
-
-    span{
-        position: absolute;
-        top: -4px;
-        right: 0px;
-        background-color: red;
-        color: white;
-        font-size: 10px;
-        border-radius: 50%;
-        padding: 1px 4px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
-
-.nav-profile-dropdown{
+  span {
     position: absolute;
-    display: none;
-    right: 0;
-    z-index: 1;
-}
-
-.navbar-profile:hover .nav-profile-dropdown{
+    top: -4px;
+    right: 0px;
+    background-color: red;
+    color: white;
+    font-size: 10px;
+    border-radius: 50%;
+    padding: 1px 4px;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: #bfe2d0;
-    padding: 15px 30px;
-    border-radius: 4px;
-    border: 2px solid #002140;
-    list-style: none;
-}
-
-.nav-profile-dropdown li{
-    display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    width: 100px;
+  }
 }
 
-.nav-profile-dropdown li .icon{
+.nav-profile-dropdown {
+  position: absolute;
+  display: none;
+  right: 0;
+  z-index: 1;
+}
+
+.navbar-profile:hover .nav-profile-dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #bfe2d0;
+  padding: 15px 30px;
+  border-radius: 4px;
+  border: 2px solid #002140;
+  list-style: none;
+}
+
+.nav-profile-dropdown li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  width: 100px;
+}
+
+.nav-profile-dropdown li .icon {
+  font-size: 20px;
+  color: #0a1128;
+}
+
+@media (max-width: 1050px) {
+  .navbar .logo {
     font-size: 20px;
-    color:  #0A1128;
+  }
+
+  .navbar-menu {
+    font-size: 15px;
+    gap: 15px;
+  }
+
+  .navbar-right {
+    gap: 30px;
+  }
+
+  .navbar-right img {
+    width: 22px;
+  }
+
+  .navbar-right button {
+    padding: 8px 25px;
+  }
 }
 
+@media (max-width: 900px) {
+  .navbar .logo {
+    font-size: 20px;
+  }
 
-@media (max-width: 1050px){
-    .navbar .logo{
-        font-size: 20px;
-    }
+  .navbar-menu {
+    font-size: 15px;
+    gap: 15px;
+  }
 
-    .navbar-menu{
-        font-size: 15px;
-        gap: 15px;
-    }
-
-    .navbar-right{
-        gap: 30px;
-    }
-
-    .navbar-right img{
-        width: 22px;
-    }
-
-    .navbar-right button {
-        padding: 8px 25px;
-    }
+  .navbar-right button {
+    padding: 7px 20px;
+    font-size: 15px;
+  }
 }
 
+@media (max-width: 750px) {
+  .navbar {
+    padding: 12px 15px;
+  }
 
-@media (max-width: 900px){
-    .navbar .logo{
-        font-size: 20px;
-    }
+  .navbar-menu {
+    display: none;
+  }
 
-    .navbar-menu{
-        font-size: 15px;
-        gap: 15px;
-    }
+  .navbar .logo {
+    font-size: 18px !important;
+  }
 
-    .navbar-right button {
-        padding: 7px 20px;
-        font-size: 15px;
-    }
+  .navbar-right {
+    gap: 15px !important;
+  }
+
+  .navbar-right button {
+    padding: 6px 14px;
+    font-size: 13px;
+  }
+
+  .navbar-profile .icon,
+  .navbar-right .bookmarkList {
+    font-size: 22px;
+  }
 }
-
-@media (max-width: 750px){
-    .navbar-menu{
-        display: none;
-    }
-}
-
