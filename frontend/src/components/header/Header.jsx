@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./Header.css";
 import { useNavigate } from "react-router-dom";
 import Slider from "../slider/Slider";
 
@@ -17,7 +16,7 @@ const Header = () => {
     urlParams.set('searchCategory', searchCategory);
 
     const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`);
+    navigate(`/app/search?${searchQuery}`);
   };
 
   useEffect(() => {
@@ -34,29 +33,30 @@ const Header = () => {
   }, [location.search]);
 
   return (
-    <div className="head">
-      <div className="header">
+    <div className="relative mx-auto my-[30px] h-[34vw] max-h-[420px] min-h-[220px] max-sm:h-[60vw] rounded-2xl">
+      <div>
 
         <Slider />
 
-        <div className="header-content">
-          <h2>Welcome to Nigeria's Largest Marketplace</h2>
-          <p>
+        <div className="absolute bottom-[30%] max-lg:bottom-[50%] max-sm:bottom-[55%] left-[6vw] flex max-w-[50%] max-lg:max-w-[45%] max-sm:max-w-[65%] flex-col items-start gap-[1.5vw] animate-[fadeIn_3s]">
+          <h2 className="text-[58px] max-lg:text-[28px] font-medium text-white [text-shadow:4px_2px_black] max-lg:[text-shadow:2px_2px_black]">Welcome to Nigeria's Largest Marketplace</h2>
+          <p className="max-sm:hidden text-[1vw] text-white [text-shadow:2px_2px_black]">
             Buy and sell everything from used cars to mobile phones and
             computers, or search for property, jobs and more.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="search">
+        <form onSubmit={handleSubmit} className="absolute bottom-[10%] max-sm:bottom-[4%] left-[6vw] flex w-4/5 flex-row max-sm:flex-col items-center">
           <input
             type="text"
             placeholder="What are you looking for ?"
             name="search"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            className="flex-1 max-sm:w-full rounded-none border border-navy p-[15px] max-sm:p-[5px] font-medium max-sm:font-normal text-navy-ink outline-none placeholder:font-light placeholder:text-navy-ink hover:border-[#eaf5ff]"
           />
 
-          <select id="location" name="location" onChange={(e) => setSearchLocation(e.target.value)}>
+          <select id="location" name="location" onChange={(e) => setSearchLocation(e.target.value)} className="flex-1 max-sm:w-full rounded-none border border-navy p-[14px] max-sm:p-[5px] font-medium max-sm:font-normal text-navy-ink outline-none hover:border-[#eaf5ff]">
             <option value="">Select Available Location</option>
             <option value="lagos">Lagos</option>
             <option value="abuja">Abuja</option>
@@ -65,7 +65,7 @@ const Header = () => {
             <option value="ogun">Ogun</option>
           </select>
 
-          <select id="category" name="category" onChange={(e) => setSearchCategory(e.target.value)}>
+          <select id="category" name="category" onChange={(e) => setSearchCategory(e.target.value)} className="flex-1 max-sm:w-full rounded-none border border-navy p-[14px] max-sm:p-[5px] font-medium max-sm:font-normal text-navy-ink outline-none hover:border-[#eaf5ff]">
             <option value=""> Select Category</option>
             <option value="cars">Cars</option>
             <option value="electronics">Electronics</option>
@@ -80,7 +80,7 @@ const Header = () => {
             <option value="personals">Personals</option>
           </select>
 
-          <button>Search Now</button>
+          <button className="border border-navy bg-navy p-[15px_12px] max-sm:w-full max-sm:p-[5px] font-extrabold max-sm:font-normal text-white hover:border-[#eaf5ff]">Search Now</button>
         </form>
       </div>
     </div>

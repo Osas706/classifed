@@ -1,17 +1,16 @@
+import 'dotenv/config';
 import express from "express";
 import path from "path";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
 import adsRouter from "./routes/ads.route.js";
 import userRouter from "./routes/user.route.js";
-import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser'; 
+import adminRouter from "./routes/admin.route.js";
+import cookieParser from 'cookie-parser';
 import { v2 as cloudinary } from 'cloudinary';
 import formidable from 'express-formidable';
 import { fileURLToPath } from 'url';
 
-dotenv.config();
- 
 
 //app config
 const app = express();
@@ -38,6 +37,7 @@ connectDB();
 //api endpoint
 app.use("/api/ads", adsRouter);
 app.use("/api/user", userRouter);
+app.use("/api/admin", adminRouter);
 
 // Mimic __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);

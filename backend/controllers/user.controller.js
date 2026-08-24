@@ -3,6 +3,8 @@ import Jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import validator from "validator";
 import { v2 as cloudinary } from 'cloudinary';
+import crypto from "crypto";
+import { sendWelcomeEmail, sendPasswordResetEmail } from "../utils/mailer.js";
 
 //login user
 export const loginUser = async (req, res) => {
@@ -78,6 +80,9 @@ export const registerUser = async (req, res) => {
 
     const user = await newUser.save();
 
+    // fire-and-forget: don't block signup on email delivery
+    sendWelcomeEmail({ to: user.email, firstName: user.firstName });
+
     //generate token
     const token = Jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "15d",
@@ -91,6 +96,93 @@ export const registerUser = async (req, res) => {
   } catch (error) {
     console.log(error, "Error in registerUser controller");
     res.status(404).json({ success: false, message: "Error", error });
+  }
+};
+
+//request a password reset link
+export const forgotPassword = async (req, res) => {
+  const { email } = req.fields;
+
+  try {
+    const user = await UserModel.findOne({ email });
+
+    // always respond success so we don't leak which emails are registered
+    if (!user) {
+      return res.status(200).json({ success: true, message: "If that email exists, a reset link has been sent" });
+    }
+
+    const rawToken = crypto.randomBytes(32).toString("hex");
+    user.resetPasswordToken = crypto.createHash("sha256").update(rawToken).digest("hex");
+    user.resetPasswordExpires = Date.now() + 60 * 60 * 1000; // 1 hour
+    await user.save();
+
+    const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${rawToken}`;
+    await sendPasswordResetEmail({ to: user.email, firstName: user.firstName, resetUrl });
+
+    res.status(200).json({ success: true, message: "If that email exists, a reset link has been sent" });
+  } catch (error) {
+    console.log(error, "Error in forgotPassword Controller");
+    res.status(500).json({ success: false, message: "Something went wrong", error });
+  }
+};
+
+//reset password using token from email
+export const resetPassword = async (req, res) => {
+  const { token, password } = req.fields;
+
+  try {
+    if (!password || password.length < 6) {
+      return res.status(400).json({ success: false, message: "Please enter a strong password" });
+    }
+
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
+    const user = await UserModel.findOne({
+      resetPasswordToken: hashedToken,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({ success: false, message: "Reset link is invalid or has expired" });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, parseInt(salt));
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    res.status(200).json({ success: true, message: "Password reset successfully, please login" });
+  } catch (error) {
+    console.log(error, "Error in resetPassword Controller");
+    res.status(500).json({ success: false, message: "Something went wrong", error });
+  }
+};
+
+//permanently delete own account
+export const deleteAccount = async (req, res) => {
+  const userId = req.params.id;
+  const { password } = req.fields;
+
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ success: false, message: "Incorrect password" });
+    }
+
+    await UserModel.findByIdAndDelete(userId);
+
+    res.status(200)
+      .clearCookie("token")
+      .json({ success: true, message: "Account deleted" });
+  } catch (error) {
+    console.log(error, "Error in deleteAccount Controller");
+    res.status(500).json({ success: false, message: "Something went wrong", error });
   }
 };
 

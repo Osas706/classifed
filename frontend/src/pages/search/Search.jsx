@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
-import "./Search.css";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AdItem from "../../components/adItem/AdItem";
 import Background from '../../components/Background'
-import { StoreContext } from "../../context/storeContext";
+import useStore from "../../store/useStore";
 import { TbMoodCry } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
 const Search = () => {
-  const { url, user } = useContext(StoreContext);
+  const { url, user } = useStore();
   const [searchTerm, setSearchTerm] = useState('');
   const [searchLocation, setSearchLocation] = useState('');
   const [searchCategory, setSearchCategory] = useState('');
@@ -40,7 +39,7 @@ const Search = () => {
     setCurrentPage(id);
   };
   //end ************************
-  
+
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -50,7 +49,7 @@ const Search = () => {
 
     if(searchTermFromUrl || searchLocationFromUrl || searchCategoryFromUrl){
       setSearchTerm(searchTermFromUrl)
-      setSearchLocation(searchLocationFromUrl)  
+      setSearchLocation(searchLocationFromUrl)
       setSearchCategory(searchCategoryFromUrl)
     };
 
@@ -89,20 +88,26 @@ const Search = () => {
 
 
   return (
-    <div className="searchPage">
+    <div className="flex flex-col items-center">
       <Background />
-      <h1>Search result for "{searchTerm || searchLocation || searchCategory}" </h1>
+      <h1 className="mt-[30px]">Search result for "{searchTerm || searchLocation || searchCategory}" </h1>
 
-      <form onSubmit={handleSubmit} className="searchForm">
+      <form onSubmit={handleSubmit} className="mx-auto mt-5 mb-0 flex flex-wrap items-center gap-[5px]">
         <input
           type="text"
           placeholder="What are you looking for ?"
           name="search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          className="flex p-[10px]"
         />
 
-        <select id="location" name="location" onChange={(e) => setSearchLocation(e.target.value)}>
+        <select
+          id="location"
+          name="location"
+          onChange={(e) => setSearchLocation(e.target.value)}
+          className="flex p-[10px]"
+        >
           <option value="">Select Available Location</option>
           <option value="lagos">Lagos</option>
           <option value="abuja">Abuja</option>
@@ -111,7 +116,12 @@ const Search = () => {
           <option value="ogun">Ogun</option>
         </select>
 
-        <select id="category" name="category" onChange={(e) => setSearchCategory(e.target.value)}>
+        <select
+          id="category"
+          name="category"
+          onChange={(e) => setSearchCategory(e.target.value)}
+          className="flex p-[10px]"
+        >
           <option value=""> Select Category</option>
           <option value="cars">Cars</option>
           <option value="electronics">Electronics</option>
@@ -126,16 +136,16 @@ const Search = () => {
           <option value="personals">Personals</option>
         </select>
 
-        <button type="submit">Search Now</button>
+        <button type="submit" className="bg-navy p-[10px] text-white">Search Now</button>
       </form>
 
       {loading && (
-        <div className="loadingCont">
+        <div className="mx-auto my-[50px] flex w-[40%] items-center justify-center rounded-[20px] px-5 py-0">
           <div className="ballLoader"></div>
         </div>
       )}
 
-      <div className="searchDisplay">
+      <div className="mt-5 grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-[30px] gap-y-[50px] rounded-2xl">
         {search.map((item, index) => {
           return (
             <AdItem
@@ -154,26 +164,31 @@ const Search = () => {
         })}
 
         {!loading && search.length === 0 && (
-          <div className="noAd">
-            <h3>There are currently no results for this search <TbMoodCry /></h3>
+          <div className="mx-auto my-10 flex flex-col items-center gap-[10px]">
+            <h3 className="flex items-center text-navy">There are currently no results for this search <TbMoodCry /></h3>
             <p>You can click on the button below to create a new ad</p>
-            <Link className="toCreateAd" to={'/create-ad'}>Post an Ad</Link>
+            <Link className="rounded bg-navy px-[15px] py-[10px] text-white" to={'/app/create-ad'}>Post an Ad</Link>
           </div>
         )}
       </div>
 
-      <nav>
-        <ul className="pagination">
-          <li>
+      <nav className="mx-auto mt-[50px]">
+        <ul className="flex items-center gap-[10px]">
+          <li className="cursor-pointer rounded-[10px] border border-navy bg-navy px-2 py-1 text-white">
             <p onClick={prevPage}>prev</p>
           </li>
           {numbers.map((n, i) => (
-            <li className={currentPage === n ? "pagi-active" : ""} key={i}>
+            <li
+              className={`cursor-pointer rounded-[10px] border border-navy px-2 py-1 ${
+                currentPage === n ? "bg-white text-navy" : "bg-navy text-white"
+              }`}
+              key={i}
+            >
               <p onClick={() => changePage(n)}>{n}</p>
             </li>
           ))}
 
-          <li>
+          <li className="cursor-pointer rounded-[10px] border border-navy bg-navy px-2 py-1 text-white">
             <p onClick={nextPage}>next</p>
           </li>
         </ul>

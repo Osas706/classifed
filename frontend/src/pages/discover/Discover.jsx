@@ -1,46 +1,26 @@
-import React, { useContext, useEffect, useState } from "react";
-import "./Discover.css";
-import Background from "../../components/Background";
+import React, { useEffect, useState } from "react";
 import AdItem from "../../components/adItem/AdItem";
 import { Link } from "react-router-dom";
 import { TbMoodCry } from "react-icons/tb";
-import { StoreContext } from "../../context/storeContext";
+import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi2";
+import { RiCompassDiscoverLine } from "react-icons/ri";
+import useStore from "../../store/useStore";
 import axios from "axios";
 
+const DISCOVER_PER_PAGE = 9;
+
 const Discover = () => {
-  const { url, user } = useContext(StoreContext);
+  const { url, user } = useStore();
   const [loading, setLoading] = useState(false);
-  const [dicoverAds, setDiscoverAds] = useState([]);
-  const [discoverState, setDiscoverState] = useState('');
-  const [discoverCountry, setDiscoverCountry] = useState('');
-
-  //pagination start************************
+  const [discoverAds, setDiscoverAds] = useState([]);
+  const [discoverState, setDiscoverState] = useState("");
+  const [discoverCountry, setDiscoverCountry] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const discoverPerPage = 8;
-  const lastIndex = currentPage * discoverPerPage;
-  const firstIndex = lastIndex - discoverPerPage;
-  const discover = dicoverAds.slice(firstIndex, lastIndex);
-  const numberOfPages = Math.ceil(dicoverAds.length / discoverPerPage);
-  const numbers = [...Array(numberOfPages + 1).keys()].slice(1);
 
-  const prevPage = () => {
-    if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+  const numberOfPages = Math.max(1, Math.ceil(discoverAds.length / DISCOVER_PER_PAGE));
+  const pageAds = discoverAds.slice((currentPage - 1) * DISCOVER_PER_PAGE, currentPage * DISCOVER_PER_PAGE);
+  const pageNumbers = Array.from({ length: numberOfPages }, (_, i) => i + 1);
 
-  const nextPage = () => {
-    if (currentPage !== numberOfPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const changePage = (id) => {
-    setCurrentPage(id);
-  };
-  //end ************************
-
-  //fetch current user details
   const fetchUser = async () => {
     try {
       const res = await axios.get(`${url}/api/user/${user}`);
@@ -51,29 +31,26 @@ const Discover = () => {
     }
   };
 
-  //fetch discover ads
   const fetchDiscoverAds = async () => {
     const urlParams = new URLSearchParams(location.search);
     const discoverStateUrl = urlParams.get("discoverState");
     const discoverCountryUrl = urlParams.get("discoverCountry");
 
-    if(discoverStateUrl || discoverCountryUrl){
+    if (discoverStateUrl || discoverCountryUrl) {
       setDiscoverState(discoverStateUrl);
       setDiscoverCountry(discoverCountryUrl);
-    };
+    }
 
     try {
       setLoading(true);
       const searchQuery = urlParams.toString();
       const res = await axios.get(`${url}/api/ads/discover?${searchQuery}`);
-      setDiscoverAds(res.data?.data);
-      
+      setDiscoverAds(res.data?.data || []);
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
     }
-  
   };
 
   useEffect(() => {
@@ -81,66 +58,100 @@ const Discover = () => {
     fetchDiscoverAds();
   }, []);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [discoverAds.length]);
+
   return (
-    <div className="discoverCont">
-      <Background />
-      <h1>Explore Local Deals and Hidden Gems in Your Area !</h1>
-      <h4>Discover ads in {discoverState}, {discoverCountry}</h4>
+    <div className="flex flex-col gap-6 p-2.5">
+      <div className="flex items-center gap-3">
+        <div className="w-11 h-11 rounded-xl bg-accent-soft dark:bg-white/10 text-accent flex items-center justify-center text-xl shrink-0">
+          <RiCompassDiscoverLine />
+        </div>
 
-      {loading && (
-          <div className="loadingCont">
-            <div className="ballLoader"></div>
-          </div>
-        )}
-
-      <div className="discoverDisplay">
-        {discover.map((item, index) => {
-          return (
-            <AdItem
-              key={index}
-              id={item._id}
-              title={item.title}
-              description={item.description}
-              price={item?.price}
-              adImage={item.adImage}
-              state={item.state}
-              condition={item?.condition}
-              terms={item?.terms}
-              item={item}
-            />
-          );
-        })}
-
-        {!loading && dicoverAds.length === 0 && (
-          <div className="noAd">
-            <h3>
-              There are currently no ads in your region <TbMoodCry />
-            </h3>
-            <p>You can click on the button below to create a new ad</p>
-            <Link className="toCreateAd" to={"/create-ad"}>
-              Post an Ad
-            </Link>
-          </div>
-        )}
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-navy dark:text-white">
+            Explore local deals and hidden gems
+          </h1>
+          <p className="text-muted dark:text-white/60 text-sm mt-0.5">
+            {discoverState || discoverCountry
+              ? `Showing ads in ${[discoverState, discoverCountry].filter(Boolean).join(", ")}`
+              : "Showing ads near you"}
+          </p>
+        </div>
       </div>
 
-      <nav>
-        <ul className="pagination">
-          <li>
-            <p onClick={prevPage}>prev</p>
-          </li>
+      {loading && (
+        <div className="flex justify-center py-20">
+          <div className="ballLoader" />
+        </div>
+      )}
 
-          {numbers.map((n, i) => (
-            <li className={currentPage === n ? "pagi-active" : ""} key={i}>
-              <p onClick={() => changePage(n)}>{n}</p>
-            </li>
+      {!loading && discoverAds.length === 0 && (
+        <div className="flex flex-col items-center gap-2 py-20 text-center">
+          <h3 className="flex items-center gap-2 text-navy dark:text-white text-lg">
+            There are currently no ads in your region <TbMoodCry />
+          </h3>
+          <p className="text-muted dark:text-white/60 text-sm">You can click below to create the first one</p>
+          <Link
+            className="mt-2 rounded-lg bg-navy px-4 py-2.5 text-white text-sm font-semibold hover:bg-navy-deep transition"
+            to={"/app/create-ad"}
+          >
+            Post an Ad
+          </Link>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        {pageAds.map((item) => (
+          <AdItem
+            key={item._id}
+            id={item._id}
+            title={item.title}
+            description={item.description}
+            price={item?.price}
+            adImage={item.adImage}
+            state={item.state}
+            condition={item?.condition}
+            terms={item?.terms}
+            item={item}
+          />
+        ))}
+      </div>
+
+      {!loading && numberOfPages > 1 && (
+        <nav className="flex items-center justify-center gap-2 mt-4">
+          <button
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+            className="flex items-center gap-1 rounded-lg border border-navy dark:border-white/20 px-3 py-1.5 text-sm text-navy dark:text-white disabled:opacity-40"
+          >
+            <HiOutlineArrowLeft /> Prev
+          </button>
+
+          {pageNumbers.map((n) => (
+            <button
+              key={n}
+              onClick={() => setCurrentPage(n)}
+              className={`rounded-lg px-3 py-1.5 text-sm border ${
+                currentPage === n
+                  ? "bg-navy text-white border-navy dark:bg-accent dark:text-navy-deep dark:border-accent"
+                  : "border-navy/30 dark:border-white/20 text-navy dark:text-white"
+              }`}
+            >
+              {n}
+            </button>
           ))}
 
-          <li>
-            <p onClick={nextPage}>next</p>
-          </li>
-        </ul>
-      </nav>
+          <button
+            onClick={() => setCurrentPage((p) => Math.min(numberOfPages, p + 1))}
+            disabled={currentPage === numberOfPages}
+            className="flex items-center gap-1 rounded-lg border border-navy dark:border-white/20 px-3 py-1.5 text-sm text-navy dark:text-white disabled:opacity-40"
+          >
+            Next <HiOutlineArrowRight />
+          </button>
+        </nav>
+      )}
     </div>
   );
 };

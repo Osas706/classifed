@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const adSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "UserModel",
+        ref: "user",
         required: true,
     },
     title: {

@@ -1,0 +1,156 @@
+[
+  {
+    "slug": "nigeria",
+    "name": "Nigeria",
+    "flag": "🇳🇬",
+    "currency": "NGN (₦)",
+    "listings": "12,400+",
+    "tagline": "Africa's biggest marketplace hub",
+    "description": "Nigeria is 247Market's largest community, with buyers and sellers trading daily across Lagos, Abuja, Port Harcourt and Ibadan. From Lekki apartments to Alaba electronics, it's the fastest-moving marketplace on the platform.",
+    "cities": ["Lagos", "Abuja", "Port Harcourt", "Ibadan"],
+    "popularCategories": ["Cars", "Phones & Electronics", "Apartments"]
+  },
+  {
+    "slug": "ghana",
+    "name": "Ghana",
+    "flag": "🇬🇭",
+    "currency": "GHS (₵)",
+    "listings": "5,300+",
+    "tagline": "Accra's home for fair, direct deals",
+    "description": "In Ghana, 247Market connects traders across Accra, Kumasi and Takoradi. Whether it's a plot of land in East Legon or a shop's worth of textiles, sellers list directly and buyers deal with real, verified people.",
+    "cities": ["Accra", "Kumasi", "Takoradi"],
+    "popularCategories": ["Land & Property", "Fashion", "Vehicles"]
+  },
+  {
+    "slug": "kenya",
+    "name": "Kenya",
+    "flag": "🇰🇪",
+    "currency": "KES (KSh)",
+    "listings": "4,800+",
+    "tagline": "Nairobi's marketplace for everything",
+    "description": "Kenya's 247Market community trades from Nairobi's Westlands to Mombasa's coastline — matatus, smartphones, farm equipment and rentals all find buyers here, with M-Pesa-friendly sellers across the board.",
+    "cities": ["Nairobi", "Mombasa", "Kisumu"],
+    "popularCategories": ["Motorbikes", "Electronics", "Rentals"]
+  },
+  {
+    "slug": "south-africa",
+    "name": "South Africa",
+    "flag": "🇿🇦",
+    "currency": "ZAR (R)",
+    "listings": "6,100+",
+    "tagline": "Trusted trading from Cape Town to Joburg",
+    "description": "South Africa brings a wide mix of listings — bakkies in Pretoria, furniture in Cape Town, and tech gear out of Johannesburg. 247Market's verification badges help buyers shop with confidence in every province.",
+    "cities": ["Johannesburg", "Cape Town", "Durban", "Pretoria"],
+    "popularCategories": ["Vehicles", "Furniture", "Jobs"]
+  },
+  {
+    "slug": "egypt",
+    "name": "Egypt",
+    "flag": "🇪🇬",
+    "currency": "EGP (E£)",
+    "listings": "3,700+",
+    "tagline": "Cairo's marketplace for the modern trader",
+    "description": "247Market Egypt serves buyers and sellers from Cairo, Alexandria and Giza — apartments near the Nile, imported electronics and family cars are among the most searched listings on the platform.",
+    "cities": ["Cairo", "Alexandria", "Giza"],
+    "popularCategories": ["Apartments", "Electronics", "Cars"]
+  },
+  {
+    "slug": "morocco",
+    "name": "Morocco",
+    "flag": "🇲🇦",
+    "currency": "MAD (DH)",
+    "listings": "2,900+",
+    "tagline": "From Casablanca souks to online listings",
+    "description": "Morocco's traders bring the energy of the souk online — Casablanca's tech resellers, Marrakech's craft sellers and Rabat's property listings all trade through 247Market's verified profiles.",
+    "cities": ["Casablanca", "Marrakech", "Rabat"],
+    "popularCategories": ["Handmade Goods", "Property", "Electronics"]
+  },
+  {
+    "slug": "ethiopia",
+    "name": "Ethiopia",
+    "flag": "🇪🇹",
+    "currency": "ETB (Br)",
+    "listings": "1,850+",
+    "tagline": "Addis Ababa's growing digital marketplace",
+    "description": "Ethiopia's marketplace is centered around Addis Ababa, where sellers list everything from imported vehicles to home appliances, giving buyers across the region a single place to compare offers.",
+    "cities": ["Addis Ababa", "Dire Dawa", "Bahir Dar"],
+    "popularCategories": ["Vehicles", "Home Appliances", "Jobs"]
+  },
+  {
+    "slug": "tanzania",
+    "name": "Tanzania",
+    "flag": "🇹🇿",
+    "currency": "TZS (TSh)",
+    "listings": "1,600+",
+    "tagline": "Dar es Salaam's trusted trading post",
+    "description": "Tanzania's 247Market users trade out of Dar es Salaam, Arusha and Zanzibar — from safari-ready vehicles to beachfront rentals, with every listing tied to a verified local seller.",
+    "cities": ["Dar es Salaam", "Arusha", "Zanzibar City"],
+    "popularCategories": ["Vehicles", "Rentals", "Electronics"]
+  },
+  {
+    "slug": "uganda",
+    "name": "Uganda",
+    "flag": "🇺🇬",
+    "currency": "UGX (USh)",
+    "listings": "1,250+",
+    "tagline": "Kampala's marketplace, always open",
+    "description": "Ugandan sellers list motorcycles, land and electronics from Kampala, Entebbe and Jinja, giving buyers across East Africa a direct line to trusted, verified traders around the clock.",
+    "cities": ["Kampala", "Entebbe", "Jinja"],
+    "popularCategories": ["Motorcycles", "Land", "Electronics"]
+  },
+  {
+    "slug": "senegal",
+    "name": "Senegal",
+    "flag": "🇸🇳",
+    "currency": "XOF (CFA)",
+    "listings": "980+",
+    "tagline": "Dakar's marketplace for francophone West Africa",
+    "description": "Senegal's community trades from Dakar and Thiès, listing everything from fishing boats to city apartments — 247Market gives francophone West Africa a familiar, trusted place to buy and sell.",
+    "cities": ["Dakar", "Thiès", "Saint-Louis"],
+    "popularCategories": ["Apartments", "Boats & Marine", "Fashion"]
+  },
+  {
+    "slug": "cote-divoire",
+    "name": "Côte d'Ivoire",
+    "flag": "🇨🇮",
+    "currency": "XOF (CFA)",
+    "listings": "870+",
+    "tagline": "Abidjan's fast-growing trade hub",
+    "description": "Abidjan anchors Côte d'Ivoire's 247Market activity, with cocoa-belt entrepreneurs and city sellers listing vehicles, electronics and commercial space to a steadily growing buyer base.",
+    "cities": ["Abidjan", "Bouaké", "Yamoussoukro"],
+    "popularCategories": ["Commercial Space", "Vehicles", "Electronics"]
+  },
+  {
+    "slug": "rwanda",
+    "name": "Rwanda",
+    "flag": "🇷🇼",
+    "currency": "RWF (FRw)",
+    "listings": "610+",
+    "tagline": "Kigali's clean, verified marketplace",
+    "description": "Rwanda's listings reflect Kigali's fast-modernizing economy — tech gear, serviced apartments and small business equipment, all posted by verified sellers in one of Africa's cleanest marketplaces.",
+    "cities": ["Kigali", "Butare", "Gisenyi"],
+    "popularCategories": ["Apartments", "Electronics", "Business Equipment"]
+  },
+  {
+    "slug": "cameroon",
+    "name": "Cameroon",
+    "flag": "🇨🇲",
+    "currency": "XAF (FCFA)",
+    "listings": "740+",
+    "tagline": "Douala and Yaoundé's marketplace",
+    "description": "Cameroon's traders operate mainly out of Douala and Yaoundé, listing vehicles, land and imported goods for a bilingual buyer base spanning both the coast and the capital.",
+    "cities": ["Douala", "Yaoundé", "Bamenda"],
+    "popularCategories": ["Vehicles", "Land", "Imported Goods"]
+  },
+  {
+    "slug": "zambia",
+    "name": "Zambia",
+    "flag": "🇿🇲",
+    "currency": "ZMW (K)",
+    "listings": "520+",
+    "tagline": "Lusaka's growing online market",
+    "description": "Zambia's 247Market community is centered in Lusaka, where sellers list farm equipment, vehicles and household goods for buyers across the Copperbelt and beyond.",
+    "cities": ["Lusaka", "Ndola", "Kitwe"],
+    "popularCategories": ["Farm Equipment", "Vehicles", "Household Goods"]
+  }
+]

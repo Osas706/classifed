@@ -1,5 +1,4 @@
 import React from "react";
-import "./Map.css";
 import { Circle, MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -11,7 +10,7 @@ const Map = ({ lat, long, title }) => {
           center={[9.0820, 8.6753]}
           zoom={5}
           scrollWheelZoom={false}
-          className="map"
+          className="w-full h-full rounded-[10px] z-0 max-lg:h-[200px]"
           
         >
           <TileLayer
