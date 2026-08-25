@@ -3,12 +3,16 @@ import { Link } from "react-router-dom";
 import api from "../../api";
 import { toast } from "react-toastify";
 import { FaTrash } from "react-icons/fa";
+import Pagination from "../../components/Pagination";
+
+const SELLERS_PER_PAGE = 10;
 
 const Sellers = () => {
   const [sellers, setSellers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [deletingId, setDeletingId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const fetchSellers = async () => {
     try {
@@ -24,6 +28,10 @@ const Sellers = () => {
   useEffect(() => {
     fetchSellers();
   }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
 
   const handleDelete = async (e, id, name) => {
     e.preventDefault();
@@ -46,6 +54,9 @@ const Sellers = () => {
   const filtered = sellers.filter((s) =>
     `${s.firstName} ${s.lastName} ${s.email}`.toLowerCase().includes(search.toLowerCase())
   );
+
+  const numberOfPages = Math.max(1, Math.ceil(filtered.length / SELLERS_PER_PAGE));
+  const pageSellers = filtered.slice((currentPage - 1) * SELLERS_PER_PAGE, currentPage * SELLERS_PER_PAGE);
 
   return (
     <div className="flex flex-col gap-6">
@@ -93,7 +104,7 @@ const Sellers = () => {
               </tr>
             )}
 
-            {filtered.map((seller) => (
+            {pageSellers.map((seller) => (
               <tr key={seller._id} className="border-t border-slate-100 hover:bg-slate-50 transition">
                 <td className="px-5 py-3">
                   <Link to={`/sellers/${seller._id}`} className="font-medium text-navy hover:text-accent">
@@ -122,6 +133,8 @@ const Sellers = () => {
           </tbody>
         </table>
       </div>
+
+      <Pagination currentPage={currentPage} numberOfPages={numberOfPages} onChange={setCurrentPage} />
     </div>
   );
 };
