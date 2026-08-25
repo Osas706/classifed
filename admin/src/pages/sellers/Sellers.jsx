@@ -70,12 +70,12 @@ const Sellers = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search by name or email..."
-          className="border border-slate-300 rounded-lg px-4 py-2.5 w-72 outline-none focus:border-accent"
+          className="border border-slate-300 rounded-lg px-4 py-2.5 w-full sm:w-72 outline-none focus:border-accent"
         />
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
-        <table className="w-full text-sm">
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-x-auto">
+        <table className="w-full text-sm min-w-[640px]">
           <thead className="bg-slate-50 text-slate-500 text-left">
             <tr>
               <th className="px-5 py-3 font-medium">Name</th>

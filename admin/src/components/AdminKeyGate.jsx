@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import { API_URL } from "../api";
 
 const validateKey = async (key) => {
@@ -36,6 +37,7 @@ const AdminKeyGate = ({ children }) => {
   const [checking, setChecking] = useState(true);
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [showKey, setShowKey] = useState(false);
 
   useEffect(() => {
     const storedKey = localStorage.getItem("admin_key");
@@ -79,29 +81,40 @@ const AdminKeyGate = ({ children }) => {
   if (unlocked) return children;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-sand">
+    <div className="min-h-screen flex items-center justify-center bg-sand px-4">
       <form
         onSubmit={handleSubmit}
-        className="w-[380px] max-w-[90vw] bg-white rounded-2xl shadow-xl p-8 flex flex-col gap-4"
+        className="w-[380px] max-w-full bg-white rounded-2xl shadow-xl p-6 sm:p-8 flex flex-col gap-4"
       >
         <h1 className="text-xl font-bold text-navy">Admin Access</h1>
         <p className="text-sm text-slate-500">
           Enter the admin key configured in the backend's <code>ADMIN_SECRET</code> env var.
         </p>
 
-        <input
-          type="password"
-          required
-          value={key}
-          onChange={(e) => {
-            setKey(e.target.value);
-            setError("");
-          }}
-          placeholder="Admin key"
-          className={`border rounded-lg px-4 py-3 outline-none focus:border-accent ${
-            error ? "border-red-400" : "border-slate-300"
-          }`}
-        />
+        <div className="relative">
+          <input
+            type={showKey ? "text" : "password"}
+            required
+            value={key}
+            onChange={(e) => {
+              setKey(e.target.value);
+              setError("");
+            }}
+            placeholder="Admin key"
+            className={`w-full border rounded-lg px-4 py-3 pr-11 outline-none focus:border-accent ${
+              error ? "border-red-400" : "border-slate-300"
+            }`}
+          />
+
+          <button
+            type="button"
+            onClick={() => setShowKey((v) => !v)}
+            aria-label={showKey ? "Hide admin key" : "Show admin key"}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+          >
+            {showKey ? <FiEyeOff /> : <FiEye />}
+          </button>
+        </div>
 
         {error && <p className="text-sm text-red-500 -mt-2">{error}</p>}
 

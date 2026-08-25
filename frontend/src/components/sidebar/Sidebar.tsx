@@ -124,7 +124,10 @@ const Sidebar = () => {
             </button>
           ) : (
             <button
-              onClick={() => setShowLogin(true)}
+              onClick={() => {
+                setOpen(false);
+                setShowLogin(true);
+              }}
               className="w-full bg-navy text-white text-sm font-semibold px-4 py-3 rounded-lg transition hover:bg-navy-deep"
             >
               Post an Ad
