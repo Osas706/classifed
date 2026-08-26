@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 import useStore from "../../store/useStore";
+import CurrencySelector, { useDisplayCurrency } from "../currencySelector/CurrencySelector";
 
 const capitalize = (str: string) => (str ? str.charAt(0).toUpperCase() + str.slice(1) : str);
 
@@ -26,6 +27,7 @@ const GUEST_MESSAGES = [
 const DashboardHeader = () => {
   const { theme, toggleTheme, url, user } = useStore();
   const [firstName, setFirstName] = useState("");
+  const [displayCurrency, setDisplayCurrency] = useDisplayCurrency();
 
   const [messageIndex, setMessageIndex] = useState(0);
   const [guestMessageIndex, setGuestMessageIndex] = useState(0);
@@ -64,13 +66,21 @@ const DashboardHeader = () => {
           {welcomeText}
         </p>
 
-        <button
-          onClick={toggleTheme}
-          aria-label="Toggle dark mode"
-          className="w-9 h-9 flex items-center justify-center rounded-lg border border-[#e7e2d8] dark:border-white/15 bg-white dark:bg-navy text-navy-ink dark:text-white hover:bg-accent-soft dark:hover:bg-white/10 transition shrink-0"
-        >
-          {theme === "light" ? <MdOutlineDarkMode className="text-lg" /> : <MdOutlineLightMode className="text-lg" />}
-        </button>
+        <div className="flex items-center gap-3 shrink-0">
+          <CurrencySelector
+            value={displayCurrency}
+            onChange={setDisplayCurrency}
+            className="dark:bg-navy dark:border-white/15 dark:text-white"
+          />
+
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle dark mode"
+            className="w-9 h-9 flex items-center justify-center rounded-lg border border-[#e7e2d8] dark:border-white/15 bg-white dark:bg-navy text-navy-ink dark:text-white hover:bg-accent-soft dark:hover:bg-white/10 transition shrink-0"
+          >
+            {theme === "light" ? <MdOutlineDarkMode className="text-lg" /> : <MdOutlineLightMode className="text-lg" />}
+          </button>
+        </div>
       </div>
     </div>
   );
