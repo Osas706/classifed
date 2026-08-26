@@ -5,6 +5,7 @@ import { FaStore } from "react-icons/fa6";
 import { HiOutlineArrowRight } from "react-icons/hi2";
 import { RiMapPinLine, RiPriceTag3Line } from "react-icons/ri";
 import countries from "../../../src/data/africanCountriesAds.json";
+import CountryCurrencyWidget from "./CountryCurrencyWidget";
 
 interface CountryData {
   slug: string;
@@ -78,8 +79,8 @@ export default function CountryAdsPage({ params }: { params: { country: string }
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
-      <header className="w-[90%] max-w-[1100px] mx-auto px-5 py-6 flex justify-between items-center">
-        <Link href="/" className="font-sora text-[22px] font-extrabold text-navy flex items-center">
+      <header className="w-[90%] max-w-[1100px] mx-auto px-5 py-4 sm:py-6 flex flex-wrap sm:flex-nowrap justify-between items-center gap-3">
+        <Link href="/" className="font-sora text-lg sm:text-[22px] font-extrabold text-navy flex items-center shrink-0">
           247
           <span className="text-navy-ink ml-px flex items-center gap-1">
             Market <FaStore />
@@ -88,7 +89,7 @@ export default function CountryAdsPage({ params }: { params: { country: string }
 
         <Link
           href="/app"
-          className="bg-navy text-white px-[22px] py-3 rounded-full font-semibold text-[15px] flex items-center gap-2 transition-[0.25s] hover:bg-navy-deep"
+          className="w-full sm:w-auto justify-center bg-navy text-white px-4 sm:px-[22px] py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-[15px] flex items-center gap-2 transition-[0.25s] hover:bg-navy-deep"
         >
           Go to Marketplace <HiOutlineArrowRight />
         </Link>
@@ -125,6 +126,10 @@ export default function CountryAdsPage({ params }: { params: { country: string }
         >
           Browse {data.name} listings <HiOutlineArrowRight />
         </Link>
+
+        <div className="mt-8 max-w-[520px] mx-auto">
+          <CountryCurrencyWidget countryCurrencyCode={data.currency.split(" ")[0]} />
+        </div>
       </section>
 
       <section className="w-[90%] max-w-[900px] mx-auto grid grid-cols-2 gap-6 pb-[70px] max-md:grid-cols-1">

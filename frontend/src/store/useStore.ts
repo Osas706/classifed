@@ -17,6 +17,8 @@ interface StoreState {
   setCategory: (v: string) => void;
   theme: "light" | "dark";
   toggleTheme: () => void;
+  displayCurrency: string;
+  setDisplayCurrency: (v: string) => void;
   bookmarks: any[];
   setBookmarks: (v: any[]) => void;
   fetchBookmarks: () => Promise<void>;
@@ -45,6 +47,14 @@ const useStore = create<StoreState>((set, get) => ({
       document.documentElement.classList.toggle("dark", next === "dark");
     }
     set({ theme: next });
+  },
+
+  // UI-display-only preference: converts how ad prices are shown, never affects stored data
+  // (ads are always created/stored in NGN). Persisted client-side so it survives page loads.
+  displayCurrency: (isBrowser ? localStorage.getItem("displayCurrency") : null) || "NGN",
+  setDisplayCurrency: (displayCurrency) => {
+    if (isBrowser) localStorage.setItem("displayCurrency", displayCurrency);
+    set({ displayCurrency });
   },
 
   bookmarks: [],

@@ -32,14 +32,26 @@ const STEPS = [
   },
 ];
 
-const STATS = [
-  { value: "10K+", label: "Active listings" },
-  { value: "30+", label: "Cities covered" },
-  { value: "24/7", label: "Always open" },
-  { value: "0%", label: "Listing fees to start" },
-];
-
 const INITIAL_COUNTRIES_SHOWN = 8;
+
+export interface MarketplaceStats {
+  totalAds: number;
+  totalCountries: number;
+  totalSellers: number;
+}
+
+const formatCount = (value: number) => {
+  if (!value || value <= 0) return "0";
+  if (value >= 1000) {
+    return `${(value / 1000).toFixed(value % 1000 === 0 ? 0 : 1)}K+`;
+  }
+  if (value >= 100) return `${value}+`;
+  return `${value}`;
+};
+
+interface HomeProps {
+  stats?: MarketplaceStats | null;
+}
 
 const eyebrow = "inline-block text-[13px] font-bold tracking-[0.06em] uppercase text-accent mb-3.5";
 const btnPrimary =
@@ -49,10 +61,17 @@ const btnSecondary =
 const sectionHeading = "text-center max-w-[620px] mx-auto mb-10 lg:mb-[50px]";
 const sectionHeadingH2 = "text-2xl lg:text-[32px] text-navy font-extrabold";
 
-const Home = () => {
+const Home = ({ stats }: HomeProps) => {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [showAllCountries, setShowAllCountries] = useState(false);
+
+  const displayStats = [
+    { value: stats ? formatCount(stats.totalAds) : "—", label: "Active listings" },
+    { value: stats ? formatCount(stats.totalCountries) : "—", label: "Countries covered" },
+    { value: "24/7", label: "Always open" },
+    { value: "0%", label: "Listing fees to start" },
+  ];
 
   const visibleCountries = showAllCountries ? countries : countries.slice(0, INITIAL_COUNTRIES_SHOWN);
 
@@ -106,7 +125,7 @@ const Home = () => {
           </div>
 
           <div className="flex gap-[22px] lg:gap-9 flex-wrap">
-            {STATS.map((s) => (
+            {displayStats.map((s) => (
               <div className="flex flex-col" key={s.label}>
                 <strong className="font-sora text-[26px] font-extrabold text-navy">{s.value}</strong>
                 <span className="text-[13px] text-muted">{s.label}</span>

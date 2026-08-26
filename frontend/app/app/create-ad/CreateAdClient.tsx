@@ -159,19 +159,19 @@ const CreateAdClient = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mx-auto my-[30px] mb-20 flex w-[92%] sm:w-[92%] max-w-[720px] flex-col gap-[30px]">
+    <form onSubmit={handleSubmit} className="mx-auto my-6 sm:my-[30px] mb-20 flex w-full sm:w-[92%] max-w-[720px] flex-col gap-6 sm:gap-[30px] px-4 sm:px-0">
       <Background />
 
       <div className="text-center">
-        <h1 className="mb-1 text-[36px] sm:text-[26px] text-navy-ink">Create Your Ad</h1>
-        <p className="mb-[26px] text-base text-muted">What can we advertise for you today?</p>
+        <h1 className="mb-1 text-2xl sm:text-[28px] md:text-[36px] text-navy-ink">Create Your Ad</h1>
+        <p className="mb-5 sm:mb-[26px] text-sm sm:text-base text-muted">What can we advertise for you today?</p>
 
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center overflow-x-auto">
           {STEPS.map((s, index) => (
-            <div key={s.id} className="flex items-center">
-              <div className="flex min-w-[90px] flex-col items-center gap-1.5">
+            <div key={s.id} className="flex items-center shrink-0">
+              <div className="flex min-w-[56px] sm:min-w-[90px] flex-col items-center gap-1.5">
                 <span
-                  className={`flex h-[34px] w-[34px] items-center justify-center rounded-full border-2 text-sm font-bold transition-[0.25s] ${
+                  className={`flex h-8 w-8 sm:h-[34px] sm:w-[34px] items-center justify-center rounded-full border-2 text-sm font-bold transition-[0.25s] ${
                     step > s.id
                       ? "border-accent bg-accent text-white"
                       : step === s.id
@@ -182,7 +182,7 @@ const CreateAdClient = () => {
                   {step > s.id ? "✓" : s.id}
                 </span>
                 <span
-                  className={`max-[750px]:hidden whitespace-nowrap text-xs font-semibold ${
+                  className={`max-[420px]:hidden whitespace-nowrap text-[11px] sm:text-xs font-semibold ${
                     step === s.id ? "text-navy" : "text-[#808080]"
                   }`}
                 >
@@ -191,14 +191,14 @@ const CreateAdClient = () => {
               </div>
 
               {index < STEPS.length - 1 && (
-                <span className="mb-5 h-0.5 w-10 max-[750px]:w-[22px] bg-[#d9d9d9]" />
+                <span className="mb-5 h-0.5 w-6 sm:w-10 max-[750px]:w-[22px] bg-[#d9d9d9] shrink-0" />
               )}
             </div>
           ))}
         </div>
       </div>
 
-      <div className="rounded-[18px] border border-navy/10 bg-white/75 p-[34px_30px] max-[750px]:p-[24px_18px] shadow-[0_20px_40px_-24px_rgba(7,19,40,0.3)] backdrop-blur-[8px]">
+      <div className="rounded-[18px] border border-navy/10 bg-white/75 p-5 sm:p-[24px_18px] md:p-[34px_30px] shadow-[0_20px_40px_-24px_rgba(7,19,40,0.3)] backdrop-blur-[8px]">
         {step === 1 && (
           <div className="flex animate-[fadeIn_0.3s] flex-col gap-[18px]">
             <label htmlFor="title" className="flex flex-col gap-1.5 text-sm font-semibold text-navy-ink">
@@ -487,12 +487,12 @@ const CreateAdClient = () => {
         )}
       </div>
 
-      <div className="flex justify-between gap-4">
+      <div className="flex flex-col-reverse sm:flex-row justify-between gap-3 sm:gap-4">
         {step > 1 && (
           <button
             type="button"
             onClick={goBack}
-            className="flex items-center justify-center gap-2 rounded-full border-2 border-[#d7d7d7] bg-white p-[14px_26px] text-base font-bold text-navy-ink transition-[0.25s] hover:bg-[#f2f2f2]"
+            className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border-2 border-[#d7d7d7] bg-white p-3.5 sm:p-[14px_26px] text-base font-bold text-navy-ink transition-[0.25s] hover:bg-[#f2f2f2]"
           >
             <HiOutlineArrowLeft /> Back
           </button>
@@ -502,7 +502,7 @@ const CreateAdClient = () => {
           <button
             type="button"
             onClick={goNext}
-            className="ml-auto flex items-center justify-center gap-2 rounded-full border-none bg-navy p-[14px_26px] text-base font-bold text-white transition-[0.25s] hover:bg-navy-deep"
+            className="flex w-full sm:w-auto sm:ml-auto items-center justify-center gap-2 rounded-full border-none bg-navy p-3.5 sm:p-[14px_26px] text-base font-bold text-white transition-[0.25s] hover:bg-navy-deep"
           >
             Next <HiOutlineArrowRight />
           </button>
@@ -510,7 +510,7 @@ const CreateAdClient = () => {
           <button
             disabled={loading}
             type="submit"
-            className="ml-auto flex items-center justify-center gap-2 rounded-full border-none bg-navy p-[14px_26px] text-base font-bold text-white transition-[0.25s] hover:bg-navy-deep"
+            className="flex w-full sm:w-auto sm:ml-auto items-center justify-center gap-2 rounded-full border-none bg-navy p-3.5 sm:p-[14px_26px] text-base font-bold text-white transition-[0.25s] hover:bg-navy-deep"
           >
             {loading ? "Posting Ad..." : "Post Ad"} <FiSend className="text-lg" />
           </button>

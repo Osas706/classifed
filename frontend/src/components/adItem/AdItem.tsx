@@ -10,6 +10,8 @@ import { HiOutlineArrowRight } from "react-icons/hi2";
 
 import useStore from "../../store/useStore";
 import axios from "axios";
+import { useDisplayCurrency } from "../currencySelector/CurrencySelector";
+import { formatConvertedPrice } from "../../utils/currency";
 
 interface AdItemProps {
   item: any;
@@ -26,6 +28,7 @@ interface AdItemProps {
 const AdItem = ({ item, adImage, title, price, description, id, state, condition, terms }: AdItemProps) => {
   const { setShowLogin, url, user, bookmarks, setBookmarks, fetchBookmarks } = useStore();
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [displayCurrency] = useDisplayCurrency();
 
   useEffect(() => {
     setIsBookmarked(false);
@@ -146,8 +149,9 @@ const AdItem = ({ item, adImage, title, price, description, id, state, condition
 
         <div className="flex justify-between items-center border-t border-navy/10 dark:border-white/10 pt-3 mt-3">
           <p className="text-navy dark:text-white text-lg font-bold">
-            {price === 0 ? "" : "₦"}
-            {price === 0 ? "On inquiry" : price?.toLocaleString()}
+            {price === 0 || price === undefined
+              ? "On inquiry"
+              : formatConvertedPrice(price, displayCurrency)}
           </p>
 
           <Link

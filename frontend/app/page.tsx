@@ -1,5 +1,19 @@
 import type { Metadata } from "next";
-import Home from "./Home";
+import Home, { type MarketplaceStats } from "./Home";
+
+const API_URL = "https://classifed-247market.onrender.com";
+
+async function getMarketplaceStats(): Promise<MarketplaceStats | null> {
+  try {
+    const res = await fetch(`${API_URL}/api/ads/stats`, { next: { revalidate: 300 } });
+    if (!res.ok) return null;
+    const json = await res.json();
+    return json?.data || null;
+  } catch (error) {
+    console.log("Failed to fetch marketplace stats", error);
+    return null;
+  }
+}
 
 export const metadata: Metadata = {
   title: "247Market — Nigeria's Marketplace, Open Around the Clock",
@@ -29,12 +43,14 @@ const websiteJsonLd = {
   },
 };
 
-export default function Page() {
+export default async function Page() {
+  const stats = await getMarketplaceStats();
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
-      <Home />
+      <Home stats={stats} />
     </>
   );
 }

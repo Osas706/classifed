@@ -154,6 +154,29 @@ export const searchedAds = async (req: any, res: Response) => {
   }
 };
 
+// public marketplace stats (no admin key required)
+export const getAdStats = async (req: any, res: Response) => {
+  try {
+    const totalAds = await AdModel.countDocuments({});
+    const distinctCountries = await AdModel.distinct("country");
+    const distinctSellers = await AdModel.distinct("user");
+
+    const cleanedCountries = distinctCountries.filter((c: any) => !!c && String(c).trim() !== "");
+
+    res.status(200).json({
+      success: true,
+      data: {
+        totalAds,
+        totalCountries: cleanedCountries.length,
+        totalSellers: distinctSellers.length,
+      },
+    });
+  } catch (error) {
+    console.log(error, "Error in getAdStats controller");
+    res.status(500).json({ success: false, message: "Something went wrong", error });
+  }
+};
+
 //get an ad
 export const getAd = async (req: any, res: Response) => {
   try {

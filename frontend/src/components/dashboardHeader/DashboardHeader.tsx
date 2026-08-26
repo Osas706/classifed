@@ -58,7 +58,7 @@ const DashboardHeader = () => {
     : GUEST_MESSAGES[guestMessageIndex];
 
   return (
-    <div className="sticky top-0 z-20 w-full bg-white dark:bg-navy-deep border-b border-[#e7e2d8] dark:border-white/10">
+    <div className="hidden lg:block sticky top-0 z-20 w-full bg-white dark:bg-navy-deep border-b border-[#e7e2d8] dark:border-white/10">
       <div className="w-[92%] max-w-[1400px] mx-auto flex items-center justify-between gap-3 py-5">
         <p className="text-base sm:text-lg font-bold text-navy-ink dark:text-white truncate">
           {welcomeText}

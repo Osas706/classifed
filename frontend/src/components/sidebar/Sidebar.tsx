@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { FaStore } from "react-icons/fa6";
-import { MdOutlineHome, MdAdd, MdOutlineBookmarks, MdMenu, MdClose, MdLogout } from "react-icons/md";
+import { MdOutlineHome, MdAdd, MdOutlineBookmarks, MdMenu, MdClose, MdLogout, MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 import { TbCategory } from "react-icons/tb";
 import { RiCompassDiscoverLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
@@ -13,7 +13,7 @@ import useStore from "../../store/useStore";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
-  const { user, setUser, bookmarks, setShowLogin } = useStore();
+  const { user, setUser, bookmarks, setShowLogin, theme, toggleTheme } = useStore();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -58,9 +58,19 @@ const Sidebar = () => {
           </span>
         </div>
 
-        <button onClick={() => setOpen(true)} aria-label="Open menu" className="text-2xl p-1 text-navy-ink dark:text-white">
-          <MdMenu />
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle dark mode"
+            className="w-9 h-9 flex items-center justify-center rounded-lg border border-[#e7e2d8] dark:border-white/15 bg-white dark:bg-navy text-navy-ink dark:text-white hover:bg-accent-soft dark:hover:bg-white/10 transition shrink-0"
+          >
+            {theme === "light" ? <MdOutlineDarkMode className="text-lg" /> : <MdOutlineLightMode className="text-lg" />}
+          </button>
+
+          <button onClick={() => setOpen(true)} aria-label="Open menu" className="text-2xl p-1 text-navy-ink dark:text-white">
+            <MdMenu />
+          </button>
+        </div>
       </div>
 
       {open && <div onClick={() => setOpen(false)} className="lg:hidden fixed inset-0 bg-black/50 z-40" />}

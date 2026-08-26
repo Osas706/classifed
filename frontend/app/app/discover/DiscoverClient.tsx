@@ -72,7 +72,7 @@ const DiscoverClient = () => {
         </div>
 
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-navy dark:text-white">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-navy dark:text-white leading-tight">
             Explore local deals and hidden gems
           </h1>
           <p className="text-muted dark:text-white/60 text-sm mt-0.5">

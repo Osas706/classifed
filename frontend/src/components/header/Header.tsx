@@ -34,15 +34,19 @@ const Header = () => {
   }, [searchParams]);
 
   return (
-    <div className="relative mx-auto my-[30px] h-[34vw] max-h-[420px] min-h-[220px] max-sm:h-[60vw] rounded-2xl">
+    <div className="relative mx-auto my-[30px] h-[34vw] max-h-[420px] min-h-[220px] max-sm:h-[60vw] rounded-2xl overflow-hidden shadow-[0_24px_50px_-20px_rgba(7,19,40,0.5)] ring-1 ring-black/5">
       <div>
         <Slider />
 
+        {/* Gradient overlay for legibility + polish over the sliding photos */}
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(7,19,40,0.75)_0%,rgba(7,19,40,0.35)_45%,rgba(7,19,40,0.05)_75%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+
         <div className="absolute bottom-[30%] max-lg:bottom-[50%] max-sm:bottom-[55%] left-[6vw] flex max-w-[50%] max-lg:max-w-[45%] max-sm:max-w-[65%] flex-col items-start gap-[1.5vw] animate-[fadeIn_3s]">
-          <h2 className="text-[58px] max-lg:text-[28px] font-medium text-white [text-shadow:4px_2px_black] max-lg:[text-shadow:2px_2px_black]">
+          <h2 className="text-[58px] max-lg:text-[28px] font-medium text-white drop-shadow-[2px_3px_6px_rgba(0,0,0,0.65)]">
             Welcome to Nigeria&apos;s Largest Marketplace
           </h2>
-          <p className="max-sm:hidden text-[1vw] text-white [text-shadow:2px_2px_black]">
+          <p className="max-sm:hidden text-[1vw] text-white drop-shadow-[1px_2px_4px_rgba(0,0,0,0.6)]">
             Buy and sell everything from used cars to mobile phones and
             computers, or search for property, jobs and more.
           </p>

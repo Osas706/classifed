@@ -165,10 +165,10 @@ const ProfileClient = () => {
   }, [myAdList.length]);
 
   return (
-    <div className="mt-5 flex w-full flex-col items-center justify-center">
-      <h1 className="text-[45px] max-[750px]:text-[30px] text-navy-ink dark:text-white">Profile</h1>
+    <div className="mt-5 flex w-full flex-col items-center justify-center px-4 sm:px-0">
+      <h1 className="text-3xl sm:text-4xl md:text-[45px] text-navy-ink dark:text-white">Profile</h1>
 
-      <form onSubmit={handleUpdate} className="mt-[30px] flex flex-col gap-5">
+      <form onSubmit={handleUpdate} className="mt-[30px] flex w-full max-w-[500px] flex-col gap-5 sm:w-auto">
         <input
           onChange={(e) => handleImgChange(e, "displayImage")}
           type="file"
@@ -191,7 +191,7 @@ const ProfileClient = () => {
           {parseInt(joinedSinceDate || "") || updatedSinceDate}
         </span>
 
-        <div className="flex items-center gap-5">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5">
           <input
             type="text"
             placeholder="First Name"
@@ -199,7 +199,7 @@ const ProfileClient = () => {
             name="firstName"
             value={userData?.firstName}
             onChange={onChangeHandler}
-            className="h-[45px] rounded-lg border border-navy dark:border-white/20 bg-accent-soft dark:bg-white/10 p-0 px-5 text-base text-navy-ink dark:text-white outline-none"
+            className="h-[45px] w-full rounded-lg border border-navy dark:border-white/20 bg-accent-soft dark:bg-white/10 p-0 px-5 text-base text-navy-ink dark:text-white outline-none"
           />
 
           <input
@@ -209,7 +209,7 @@ const ProfileClient = () => {
             name="lastName"
             value={userData?.lastName}
             onChange={onChangeHandler}
-            className="h-[45px] rounded-lg border border-navy dark:border-white/20 bg-accent-soft dark:bg-white/10 p-0 px-5 text-base text-navy-ink dark:text-white outline-none"
+            className="h-[45px] w-full rounded-lg border border-navy dark:border-white/20 bg-accent-soft dark:bg-white/10 p-0 px-5 text-base text-navy-ink dark:text-white outline-none"
           />
         </div>
 
@@ -220,7 +220,7 @@ const ProfileClient = () => {
           name="email"
           value={userData?.email}
           onChange={onChangeHandler}
-          className="h-[45px] rounded-lg border border-navy dark:border-white/20 bg-accent-soft dark:bg-white/10 p-0 px-5 text-base text-navy-ink dark:text-white outline-none"
+          className="h-[45px] w-full rounded-lg border border-navy dark:border-white/20 bg-accent-soft dark:bg-white/10 p-0 px-5 text-base text-navy-ink dark:text-white outline-none"
         />
 
         <input
@@ -231,10 +231,10 @@ const ProfileClient = () => {
           value={userData?.phoneNumber}
           onChange={onChangeHandler}
           required
-          className="h-[45px] rounded-lg border border-navy dark:border-white/20 bg-accent-soft dark:bg-white/10 p-0 px-5 text-base text-navy-ink dark:text-white outline-none"
+          className="h-[45px] w-full rounded-lg border border-navy dark:border-white/20 bg-accent-soft dark:bg-white/10 p-0 px-5 text-base text-navy-ink dark:text-white outline-none"
         />
 
-        <div className="flex items-center gap-5">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5">
           <input
             type="text"
             placeholder="Country"
@@ -243,7 +243,7 @@ const ProfileClient = () => {
             value={userData?.country}
             onChange={onChangeHandler}
             required
-            className="h-[45px] rounded-lg border border-navy dark:border-white/20 bg-accent-soft dark:bg-white/10 p-0 px-5 text-base text-navy-ink dark:text-white outline-none"
+            className="h-[45px] w-full rounded-lg border border-navy dark:border-white/20 bg-accent-soft dark:bg-white/10 p-0 px-5 text-base text-navy-ink dark:text-white outline-none"
           />
 
           <input
@@ -253,7 +253,7 @@ const ProfileClient = () => {
             name="state"
             value={userData?.state}
             onChange={onChangeHandler}
-            className="h-[45px] rounded-lg border border-navy dark:border-white/20 bg-accent-soft dark:bg-white/10 p-0 px-5 text-base text-navy-ink dark:text-white outline-none"
+            className="h-[45px] w-full rounded-lg border border-navy dark:border-white/20 bg-accent-soft dark:bg-white/10 p-0 px-5 text-base text-navy-ink dark:text-white outline-none"
           />
         </div>
 
@@ -265,8 +265,8 @@ const ProfileClient = () => {
       <h2 className="mt-[50px] text-navy-ink dark:text-white">My Ads</h2>
       <p className="text-muted dark:text-white/60">All ads created by you...</p>
 
-      <div className="mt-5 w-[92vw] max-w-[1100px] rounded-2xl border border-white/[0.61] dark:border-white/10 bg-white/[0.42] dark:bg-white/[0.03] p-5 shadow-[0_2px_10px_rgba(0,0,0,0.1)] backdrop-blur-[10.4px]">
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+      <div className="mt-5 w-full sm:w-[92vw] max-w-[1100px] rounded-2xl border border-white/[0.61] dark:border-white/10 bg-white/[0.42] dark:bg-white/[0.03] p-3 sm:p-5 shadow-[0_2px_10px_rgba(0,0,0,0.1)] backdrop-blur-[10.4px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
           {pageAds.map((item) => (
             <div key={item._id} className="relative">
               <AdItem
@@ -281,11 +281,16 @@ const ProfileClient = () => {
                 item={item}
               />
 
-              <button disabled={delLoading} onClick={() => deleteAd(item?._id)}>
+              <button
+                disabled={delLoading}
+                onClick={() => deleteAd(item?._id)}
+                aria-label="Delete ad"
+                className="absolute right-2.5 top-2.5 z-10 flex h-9 w-9 min-h-[32px] min-w-[32px] items-center justify-center rounded-full border-2 border-navy bg-white text-navy shadow-md transition hover:border-white hover:bg-navy hover:text-white disabled:opacity-60"
+              >
                 {delLoading ? (
-                  <GiSandsOfTime className="absolute right-3 top-3 cursor-pointer rounded-full border-2 border-navy bg-white p-2 text-2xl text-navy hover:border-white hover:bg-navy hover:text-white" />
+                  <GiSandsOfTime className="text-lg" />
                 ) : (
-                  <FaTrash className="absolute right-3 top-3 cursor-pointer rounded-full border-2 border-navy bg-white p-2 text-2xl text-navy hover:border-white hover:bg-navy hover:text-white" />
+                  <FaTrash className="text-base" />
                 )}
               </button>
             </div>
