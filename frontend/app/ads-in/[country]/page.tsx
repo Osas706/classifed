@@ -5,7 +5,29 @@ import { FaStore } from "react-icons/fa6";
 import { HiOutlineArrowRight } from "react-icons/hi2";
 import { RiMapPinLine, RiPriceTag3Line } from "react-icons/ri";
 import countries from "../../../src/data/africanCountriesAds.json";
-import CountryCurrencyWidget from "./CountryCurrencyWidget";
+
+const API_URL = "https://classifed-247market.onrender.com";
+
+const normalizeCountryName = (name: string) =>
+  name.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+
+async function getListingCount(countryName: string): Promise<number> {
+  try {
+    const res = await fetch(`${API_URL}/api/ads/stats`, { next: { revalidate: 300 } });
+    if (!res.ok) return 0;
+    const json = await res.json();
+    const countryCounts: Record<string, number> = json?.data?.countryCounts || {};
+
+    const match = Object.entries(countryCounts).find(
+      ([country]) => normalizeCountryName(country) === normalizeCountryName(countryName)
+    );
+
+    return match ? match[1] : 0;
+  } catch (error) {
+    console.log("Failed to fetch country listing count", error);
+    return 0;
+  }
+}
 
 interface CountryData {
   slug: string;
@@ -50,12 +72,13 @@ export async function generateMetadata({
   };
 }
 
-export default function CountryAdsPage({ params }: { params: { country: string } }) {
+export default async function CountryAdsPage({ params }: { params: { country: string } }) {
   const data = (countries as CountryData[]).find((c) => c.slug === params.country);
 
   if (!data) return notFound();
 
   const otherCountries = (countries as CountryData[]).filter((c) => c.slug !== data.slug).slice(0, 4);
+  const listingCount = await getListingCount(data.name);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -107,7 +130,7 @@ export default function CountryAdsPage({ params }: { params: { country: string }
 
         <div className="flex justify-center gap-10 mb-[34px] flex-wrap">
           <div className="flex flex-col">
-            <strong className="font-sora text-xl font-extrabold text-navy">{data.listings}</strong>
+            <strong className="font-sora text-xl font-extrabold text-navy">{listingCount}</strong>
             <span className="text-xs text-muted">Active listings</span>
           </div>
           <div className="flex flex-col">
@@ -126,10 +149,6 @@ export default function CountryAdsPage({ params }: { params: { country: string }
         >
           Browse {data.name} listings <HiOutlineArrowRight />
         </Link>
-
-        <div className="mt-8 max-w-[520px] mx-auto">
-          <CountryCurrencyWidget countryCurrencyCode={data.currency.split(" ")[0]} />
-        </div>
       </section>
 
       <section className="w-[90%] max-w-[900px] mx-auto grid grid-cols-2 gap-6 pb-[70px] max-md:grid-cols-1">

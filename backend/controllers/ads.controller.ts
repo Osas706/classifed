@@ -163,12 +163,23 @@ export const getAdStats = async (req: any, res: Response) => {
 
     const cleanedCountries = distinctCountries.filter((c: any) => !!c && String(c).trim() !== "");
 
+    const countryCountsRaw = await AdModel.aggregate([
+      { $match: { country: { $exists: true, $nin: [null, ""] } } },
+      { $group: { _id: "$country", count: { $sum: 1 } } },
+    ]);
+
+    const countryCounts: Record<string, number> = {};
+    countryCountsRaw.forEach((row: any) => {
+      countryCounts[row._id] = row.count;
+    });
+
     res.status(200).json({
       success: true,
       data: {
         totalAds,
         totalCountries: cleanedCountries.length,
         totalSellers: distinctSellers.length,
+        countryCounts,
       },
     });
   } catch (error) {

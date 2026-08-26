@@ -39,7 +39,11 @@ export interface MarketplaceStats {
   totalAds: number;
   totalCountries: number;
   totalSellers: number;
+  countryCounts?: Record<string, number>;
 }
+
+const normalizeCountryName = (name: string) =>
+  name.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
 
 const formatCount = (value: number) => {
   if (!value || value <= 0) return "0";
@@ -75,6 +79,11 @@ const Home = ({ stats }: HomeProps) => {
   ];
 
   const visibleCountries = showAllCountries ? countries : countries.slice(0, INITIAL_COUNTRIES_SHOWN);
+
+  const countryCounts: Record<string, number> = {};
+  Object.entries(stats?.countryCounts || {}).forEach(([country, count]) => {
+    countryCounts[normalizeCountryName(country)] = count;
+  });
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -198,7 +207,12 @@ const Home = ({ stats }: HomeProps) => {
             >
               <span className="text-[38px]">{c.flag}</span>
               <h3 className="text-navy text-base font-bold">{c.name}</h3>
-              <span className="text-xs text-muted">{c.listings} listings</span>
+              <span className="text-xs text-muted">
+                {(() => {
+                  const count = countryCounts[normalizeCountryName(c.name)] || 0;
+                  return `${count} listing${count === 1 ? "" : "s"}`;
+                })()}
+              </span>
             </Link>
           ))}
         </div>
