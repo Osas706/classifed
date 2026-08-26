@@ -27,7 +27,6 @@ const SearchClient = () => {
 
   const prevPage = () => currentPage !== 1 && setCurrentPage(currentPage - 1);
   const nextPage = () => currentPage !== numberOfPages && setCurrentPage(currentPage + 1);
-  const changePage = (id: number) => setCurrentPage(id);
 
   useEffect(() => {
     const searchTermFromUrl = searchParams.get("searchTerm");
@@ -157,16 +156,11 @@ const SearchClient = () => {
           <li className="cursor-pointer rounded-[10px] border border-navy bg-navy px-2 py-1 text-white">
             <p onClick={prevPage}>prev</p>
           </li>
-          {numbers.map((n) => (
-            <li
-              className={`cursor-pointer rounded-[10px] border border-navy px-2 py-1 ${
-                currentPage === n ? "bg-white text-navy" : "bg-navy text-white"
-              }`}
-              key={n}
-            >
-              <p onClick={() => changePage(n)}>{n}</p>
-            </li>
-          ))}
+          <li className="rounded-[10px] border border-navy bg-navy text-white px-2 py-1">
+            <p>
+              Page {currentPage} of {numbers.length}
+            </p>
+          </li>
 
           <li className="cursor-pointer rounded-[10px] border border-navy bg-navy px-2 py-1 text-white">
             <p onClick={nextPage}>next</p>

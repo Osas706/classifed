@@ -17,7 +17,7 @@ const Map = ({ lat, long }: MapProps) => {
           center={[9.082, 8.6753]}
           zoom={5}
           scrollWheelZoom={false}
-          className="w-full h-full rounded-[10px] z-0 max-lg:h-[200px]"
+          className="w-full h-full rounded-[10px] z-0"
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

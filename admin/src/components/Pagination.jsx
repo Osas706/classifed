@@ -4,8 +4,6 @@ import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi2";
 const Pagination = ({ currentPage, numberOfPages, onChange }) => {
   if (numberOfPages <= 1) return null;
 
-  const pageNumbers = Array.from({ length: numberOfPages }, (_, i) => i + 1);
-
   return (
     <nav className="flex items-center justify-center gap-2 mt-2">
       <button
@@ -16,19 +14,9 @@ const Pagination = ({ currentPage, numberOfPages, onChange }) => {
         <HiOutlineArrowLeft /> Prev
       </button>
 
-      {pageNumbers.map((n) => (
-        <button
-          key={n}
-          onClick={() => onChange(n)}
-          className={`rounded-lg px-3 py-1.5 text-sm border ${
-            currentPage === n
-              ? "bg-navy text-white border-navy"
-              : "border-slate-300 text-navy hover:bg-slate-50"
-          }`}
-        >
-          {n}
-        </button>
-      ))}
+      <span className="rounded-lg px-3 py-1.5 text-sm border border-slate-300 text-navy font-medium">
+        Page {currentPage} of {numberOfPages}
+      </span>
 
       <button
         onClick={() => onChange(Math.min(numberOfPages, currentPage + 1))}

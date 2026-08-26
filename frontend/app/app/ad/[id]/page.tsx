@@ -134,8 +134,13 @@ export default async function AdPage({ params }: { params: { id: string } }) {
           </div>
 
           {(ad.lat || ad.long) && (
-            <div className="bg-white dark:bg-surface-dark border border-navy/15 dark:border-white/10 rounded-2xl overflow-hidden h-[300px]">
-              <MapClient lat={ad.lat} long={ad.long} title={ad?.title} />
+            <div>
+              <h3 className="flex items-center gap-1.5 text-sm font-semibold text-navy dark:text-white mb-2">
+                <RiMapPinLine className="text-accent" /> Location on map
+              </h3>
+              <div className="bg-white dark:bg-surface-dark border border-navy/15 dark:border-white/10 rounded-2xl overflow-hidden h-[220px] sm:h-[280px] lg:h-[300px]">
+                <MapClient lat={ad.lat} long={ad.long} title={ad?.title} />
+              </div>
             </div>
           )}
         </div>

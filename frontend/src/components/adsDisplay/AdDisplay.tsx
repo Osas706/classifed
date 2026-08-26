@@ -41,11 +41,9 @@ const AdDisplay = ({ adList, setAdList }: AdDisplayProps) => {
   const firstIndex = lastIndex - displayAdsPerPage;
   const display = displayedAds.slice(firstIndex, lastIndex);
   const numberOfPages = Math.ceil(displayedAds.length / displayAdsPerPage);
-  const numbers = Array.from({ length: numberOfPages }, (_, i) => i + 1);
 
   const prevPage = () => currentPage !== 1 && setCurrentPage(currentPage - 1);
   const nextPage = () => currentPage !== numberOfPages && setCurrentPage(currentPage + 1);
-  const changePage = (id: number) => setCurrentPage(id);
 
   return (
     <div className="mt-[30px]" id="ad-display">
@@ -103,19 +101,9 @@ const AdDisplay = ({ adList, setAdList }: AdDisplayProps) => {
             <HiOutlineArrowLeft /> Prev
           </button>
 
-          {numbers.map((n) => (
-            <button
-              key={n}
-              onClick={() => changePage(n)}
-              className={`rounded-lg px-3 py-1.5 text-sm border ${
-                currentPage === n
-                  ? "bg-navy text-white border-navy dark:bg-accent dark:text-navy-deep dark:border-accent"
-                  : "border-navy/30 dark:border-white/20 text-navy dark:text-white"
-              }`}
-            >
-              {n}
-            </button>
-          ))}
+          <span className="rounded-lg px-3 py-1.5 text-sm border border-navy/30 dark:border-white/20 text-navy dark:text-white font-medium">
+            Page {currentPage} of {numberOfPages}
+          </span>
 
           <button
             onClick={nextPage}

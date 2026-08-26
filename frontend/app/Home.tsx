@@ -10,6 +10,7 @@ import {
   RiShieldCheckLine,
   RiWallet3Line,
   RiChat3Line,
+  RiMapPinLine,
 } from "react-icons/ri";
 import { MdOutlineSpeed } from "react-icons/md";
 import { HiOutlineArrowRight } from "react-icons/hi2";
@@ -234,7 +235,7 @@ const Home = ({ stats }: HomeProps) => {
           <h2 className={sectionHeadingH2}>Everything you need to trade with confidence</h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           <div className="bg-white border border-[#e7e2d8] rounded-2xl px-6 py-[30px] text-left transition-[0.25s] hover:-translate-y-1 hover:shadow-[0_20px_34px_-18px_rgba(7,19,40,0.25)] hover:border-transparent">
             <RiCompassDiscoverLine className="text-[30px] text-accent mb-4 bg-accent-soft p-2.5 rounded-xl box-content" />
             <h3 className="text-lg mb-2 text-navy font-bold">Discover Easily</h3>
@@ -263,6 +264,14 @@ const Home = ({ stats }: HomeProps) => {
             <MdOutlineSpeed className="text-[30px] text-accent mb-4 bg-accent-soft p-2.5 rounded-xl box-content" />
             <h3 className="text-lg mb-2 text-navy font-bold">Fast &amp; Simple</h3>
             <p className="text-sm text-muted leading-[1.6]">Post an ad or find a deal in minutes, not hours.</p>
+          </div>
+
+          <div className="bg-white border border-[#e7e2d8] rounded-2xl px-6 py-[30px] text-left transition-[0.25s] hover:-translate-y-1 hover:shadow-[0_20px_34px_-18px_rgba(7,19,40,0.25)] hover:border-transparent">
+            <RiMapPinLine className="text-[30px] text-accent mb-4 bg-accent-soft p-2.5 rounded-xl box-content" />
+            <h3 className="text-lg mb-2 text-navy font-bold">Map Location</h3>
+            <p className="text-sm text-muted leading-[1.6]">
+              See exactly where a listing is on an interactive map before you reach out.
+            </p>
           </div>
         </div>
       </section>

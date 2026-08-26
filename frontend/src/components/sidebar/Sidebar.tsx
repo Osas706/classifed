@@ -10,10 +10,12 @@ import { RiCompassDiscoverLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { toast } from "react-toastify";
 import useStore from "../../store/useStore";
+import CurrencySelector, { useDisplayCurrency } from "../currencySelector/CurrencySelector";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
   const { user, setUser, bookmarks, setShowLogin, theme, toggleTheme } = useStore();
+  const [displayCurrency, setDisplayCurrency] = useDisplayCurrency();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -59,6 +61,8 @@ const Sidebar = () => {
         </div>
 
         <div className="flex items-center gap-2">
+          <CurrencySelector value={displayCurrency} onChange={setDisplayCurrency} compact />
+
           <button
             onClick={toggleTheme}
             aria-label="Toggle dark mode"

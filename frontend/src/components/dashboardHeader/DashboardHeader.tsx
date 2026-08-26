@@ -67,11 +67,7 @@ const DashboardHeader = () => {
         </p>
 
         <div className="flex items-center gap-3 shrink-0">
-          <CurrencySelector
-            value={displayCurrency}
-            onChange={setDisplayCurrency}
-            className="dark:bg-navy dark:border-white/15 dark:text-white"
-          />
+          <CurrencySelector value={displayCurrency} onChange={setDisplayCurrency} />
 
           <button
             onClick={toggleTheme}

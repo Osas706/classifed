@@ -321,19 +321,9 @@ const ProfileClient = () => {
               <HiOutlineArrowLeft /> Prev
             </button>
 
-            {pageNumbers.map((n) => (
-              <button
-                key={n}
-                onClick={() => setCurrentPage(n)}
-                className={`rounded-lg px-3 py-1.5 text-sm border ${
-                  currentPage === n
-                    ? "bg-navy text-white border-navy dark:bg-accent dark:text-navy-deep dark:border-accent"
-                    : "border-navy/30 dark:border-white/20 text-navy dark:text-white"
-                }`}
-              >
-                {n}
-              </button>
-            ))}
+            <span className="rounded-lg px-3 py-1.5 text-sm border border-navy/30 dark:border-white/20 text-navy dark:text-white font-medium">
+              Page {currentPage} of {pageNumbers.length}
+            </span>
 
             <button
               onClick={() => setCurrentPage((p) => Math.min(numberOfPages, p + 1))}
