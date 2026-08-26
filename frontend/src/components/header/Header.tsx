@@ -34,7 +34,7 @@ const Header = () => {
   }, [searchParams]);
 
   return (
-    <div className="mx-auto my-[30px]">
+    <div className="relative mx-auto my-[30px]">
       <div className="relative h-[60vw] max-h-[280px] min-h-[190px] sm:h-[34vw] sm:max-h-[420px] sm:min-h-[220px] rounded-2xl overflow-hidden shadow-[0_24px_50px_-20px_rgba(7,19,40,0.5)] ring-1 ring-black/5">
         <Slider />
 
@@ -55,7 +55,7 @@ const Header = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="relative z-10 -mt-8 mx-4 sm:mx-auto sm:absolute sm:-mt-0 sm:bottom-[8%] sm:left-[6vw] sm:w-[88%] max-w-[900px] flex flex-col sm:flex-row gap-2 bg-white dark:bg-navy-deep sm:bg-white/95 sm:dark:bg-navy-deep/95 backdrop-blur-sm rounded-xl sm:rounded-full p-2 shadow-[0_16px_30px_-14px_rgba(7,19,40,0.4)]"
+        className="relative z-10 -mt-8 mx-4 sm:mx-0 sm:mt-0 sm:absolute sm:bottom-[8%] sm:left-[6vw] sm:w-[88%] max-w-[900px] flex flex-col sm:flex-row gap-2 bg-white dark:bg-navy-deep sm:bg-white/95 sm:dark:bg-navy-deep/95 backdrop-blur-sm rounded-xl sm:rounded-full p-2 shadow-[0_16px_30px_-14px_rgba(7,19,40,0.4)]"
       >
         <input
           type="text"
