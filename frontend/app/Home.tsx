@@ -137,10 +137,10 @@ const Home = ({ stats }: HomeProps) => {
         </div>
 
         <div
-          className="lg:flex-1 relative min-h-[260px] lg:min-h-[380px] rounded-[24px] bg-[radial-gradient(circle_at_30%_20%,#1a3b66_0%,#0d2140_45%,#071328_100%)] shadow-[0_30px_60px_-20px_rgba(7,19,40,0.45)] w-full overflow-hidden"
+          className="lg:flex-1 relative min-h-[260px] lg:min-h-[380px] rounded-[24px] bg-[linear-gradient(155deg,#ffffff_0%,#f4f1ea_100%)] shadow-[0_30px_60px_-20px_rgba(7,19,40,0.25)] w-full overflow-hidden"
         >
           <Image
-            src="/hero-illustration.png"
+            src="/hero-illustration.jpeg"
             alt="Illustration of buyers and sellers trading securely on 247Market across mobile, laptop and desktop"
             fill
             priority
