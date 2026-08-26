@@ -28,7 +28,7 @@ const AdContactCard = ({ displayImage, firstName, lastName, email, phoneNumber }
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={displayImage}
-            alt=""
+            alt={`${firstName} ${lastName}`.trim() || "Seller profile photo"}
             className="h-20 w-20 rounded-full border-2 border-white object-cover bg-white/10"
           />
 

@@ -3,9 +3,10 @@
   "configurations": [
     {
       "name": "frontend-dev",
-      "runtimeExecutable": "frontend/node_modules/.bin/vite",
-      "runtimeArgs": ["--port", "5173"],
-      "port": 5173
+      "runtimeExecutable": "frontend/node_modules/.bin/next",
+      "runtimeArgs": ["dev", "-p", "5173"],
+      "port": 5173,
+      "url": "http://localhost:5173"
     }
   ]
 }

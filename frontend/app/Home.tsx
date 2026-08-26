@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { toast } from "react-toastify";
 import { FaStore } from "react-icons/fa6";
 import {
@@ -96,9 +97,10 @@ const Home = ({ stats }: HomeProps) => {
 
         <Link
           href="/app"
-          className="bg-navy text-white px-4 py-[9px] text-[13px] lg:px-[22px] lg:py-3 lg:text-[15px] rounded-full font-semibold flex items-center gap-2 transition-[0.25s] hover:bg-navy-deep hover:-translate-y-px"
+          className="bg-navy text-white px-3 py-[9px] text-[12px] whitespace-nowrap sm:px-4 sm:text-[13px] lg:px-[22px] lg:py-3 lg:text-[15px] rounded-full font-semibold flex items-center gap-1.5 sm:gap-2 shrink-0 transition-[0.25s] hover:bg-navy-deep hover:-translate-y-px"
         >
-          Go to Marketplace <HiOutlineArrowRight />
+          <span className="hidden sm:inline">Go to Marketplace</span>
+          <span className="sm:hidden">Marketplace</span> <HiOutlineArrowRight />
         </Link>
       </header>
 
@@ -135,24 +137,16 @@ const Home = ({ stats }: HomeProps) => {
         </div>
 
         <div
-          className="lg:flex-1 relative min-h-[260px] lg:min-h-[380px] rounded-[24px] bg-[radial-gradient(circle_at_30%_20%,#1a3b66_0%,#0d2140_45%,#071328_100%)] shadow-[0_30px_60px_-20px_rgba(7,19,40,0.45)] w-full"
-          aria-hidden="true"
+          className="lg:flex-1 relative min-h-[260px] lg:min-h-[380px] rounded-[24px] bg-[radial-gradient(circle_at_30%_20%,#1a3b66_0%,#0d2140_45%,#071328_100%)] shadow-[0_30px_60px_-20px_rgba(7,19,40,0.45)] w-full overflow-hidden"
         >
-          <div className="hidden sm:flex absolute top-[30px] -left-6 bg-white rounded-[14px] px-[18px] py-3.5 items-center gap-3 shadow-[0_16px_30px_-12px_rgba(7,19,40,0.35)] text-sm [&>svg]:text-2xl [&>svg]:text-accent [&>svg]:shrink-0">
-            <RiShieldCheckLine />
-            <div>
-              <strong className="block text-navy text-sm">Verified sellers</strong>
-              <span className="text-muted text-xs">Trade with confidence</span>
-            </div>
-          </div>
-
-          <div className="hidden sm:flex absolute bottom-[30px] -right-6 bg-white rounded-[14px] px-[18px] py-3.5 items-center gap-3 shadow-[0_16px_30px_-12px_rgba(7,19,40,0.35)] text-sm [&>svg]:text-2xl [&>svg]:text-accent [&>svg]:shrink-0">
-            <RiWallet3Line />
-            <div>
-              <strong className="block text-navy text-sm">Wallet balance</strong>
-              <span className="text-muted text-xs">₦24,500.00</span>
-            </div>
-          </div>
+          <Image
+            src="/hero-illustration.png"
+            alt="Illustration of buyers and sellers trading securely on 247Market across mobile, laptop and desktop"
+            fill
+            priority
+            sizes="(max-width: 1024px) 90vw, 45vw"
+            className="object-contain p-4 sm:p-6"
+          />
         </div>
       </section>
 
