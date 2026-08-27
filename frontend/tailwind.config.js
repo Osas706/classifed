@@ -21,8 +21,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        sora: ["Sora", "sans-serif"],
-        outfit: ["Outfit", "sans-serif"],
+        sora: ["var(--font-sora)", "sans-serif"],
+        outfit: ["var(--font-outfit)", "sans-serif"],
       },
     },
   },

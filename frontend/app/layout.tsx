@@ -1,6 +1,20 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Sora, Outfit } from "next/font/google";
 import "./globals.css";
+
+const sora = Sora({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800"],
+  variable: "--font-sora",
+  display: "swap",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
 
 const SITE_URL = "https://247market.org";
 
@@ -33,7 +47,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${sora.variable} ${outfit.variable}`}>
       <head>
         <meta name="theme-color" content="#0d2140" />
       </head>
