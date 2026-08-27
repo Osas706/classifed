@@ -5,6 +5,7 @@ import { FaStore } from "react-icons/fa6";
 import { HiOutlineArrowRight } from "react-icons/hi2";
 import { RiMapPinLine, RiPriceTag3Line } from "react-icons/ri";
 import countries from "../../../src/data/africanCountriesAds.json";
+import Footer from "../../../src/components/footer/Footer";
 
 const API_URL = "https://classifed-247market.onrender.com";
 
@@ -189,9 +190,7 @@ export default async function CountryAdsPage({ params }: { params: { country: st
         </div>
       </section>
 
-      <footer id="footer" className="text-center p-6 text-[13px] text-muted border-t border-[#e7e2d8]">
-        <p>&copy; {new Date().getFullYear()} 247Market. All rights reserved.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

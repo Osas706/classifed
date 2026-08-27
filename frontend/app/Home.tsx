@@ -15,6 +15,7 @@ import {
 import { MdOutlineSpeed } from "react-icons/md";
 import { HiOutlineArrowRight } from "react-icons/hi2";
 import countries from "../src/data/africanCountriesAds.json";
+import Footer from "../src/components/footer/Footer";
 
 const STEPS = [
   {
@@ -338,41 +339,7 @@ const Home = ({ stats }: HomeProps) => {
         </Link>
       </section>
 
-      <footer id="footer" className="bg-navy-deep text-white/85 px-4 lg:px-5 pt-[50px] lg:pt-[70px] pb-[30px]">
-        <div className="w-[90%] max-w-[1240px] mx-auto flex flex-col lg:flex-row justify-between gap-9 lg:gap-[60px] pb-[50px] flex-wrap">
-          <div>
-            <h2 className="text-white text-[22px] font-extrabold flex items-center mb-3">
-              247
-              <span className="text-accent-soft ml-px flex items-center gap-1">
-                Market <FaStore />
-              </span>
-            </h2>
-            <p className="text-white/55 text-sm max-w-[260px]">Nigeria&apos;s marketplace, open around the clock.</p>
-          </div>
-
-          <div className="flex gap-9 sm:gap-[70px] flex-wrap">
-            <div className="flex flex-col gap-2.5">
-              <h4 className="text-sm mb-4 text-white font-bold">Marketplace</h4>
-              <Link href="/app" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Home</Link>
-              <Link href="/app/discover" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Discover</Link>
-              <Link href="/app/categories" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Categories</Link>
-              <Link href="/app/create-ad" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Post an Ad</Link>
-            </div>
-
-            <div className="flex flex-col gap-2.5">
-              <h4 className="text-sm mb-4 text-white font-bold">Company</h4>
-              <a href="#footer" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">About Us</a>
-              <a href="#footer" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Contact</a>
-              <a href="#footer" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Terms of Use</a>
-              <a href="#footer" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Privacy Policy</a>
-            </div>
-          </div>
-        </div>
-
-        <div className="w-[90%] max-w-[1240px] mx-auto border-t border-white/10 pt-[22px] text-center text-[13px] text-white/45">
-          <p>&copy; {new Date().getFullYear()} 247Market. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
