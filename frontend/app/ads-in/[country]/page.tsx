@@ -6,6 +6,8 @@ import { HiOutlineArrowRight } from "react-icons/hi2";
 import { RiMapPinLine, RiPriceTag3Line } from "react-icons/ri";
 import countries from "../../../src/data/africanCountriesAds.json";
 import Footer from "../../../src/components/footer/Footer";
+import FaqAccordion from "../../../src/components/faq/FaqAccordion";
+import { getCountryFaqs } from "../../../src/data/marketplaceFaqs";
 
 const API_URL = "https://classifed-247market.onrender.com";
 
@@ -117,10 +119,23 @@ export default async function CountryAdsPage({ params }: { params: { country: st
     ],
   };
 
+  const countryFaqs = getCountryFaqs(data);
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: countryFaqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+
   return (
     <div className="w-full min-h-screen bg-sand text-navy-ink font-outfit">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
       <header className="w-[90%] max-w-[1100px] mx-auto px-5 py-4 sm:py-6 flex flex-wrap sm:flex-nowrap justify-between items-center gap-3">
         <Link href="/" className="font-sora text-lg sm:text-[22px] font-extrabold text-navy flex items-center shrink-0">
@@ -207,6 +222,13 @@ export default async function CountryAdsPage({ params }: { params: { country: st
             </Link>
           ))}
         </div>
+      </section>
+
+      <section className="w-[90%] max-w-[780px] mx-auto pb-[90px]">
+        <h2 className="font-sora text-[22px] text-navy mb-6 text-center">
+          Frequently asked questions about {data.name}
+        </h2>
+        <FaqAccordion faqs={countryFaqs} />
       </section>
 
       <Footer />

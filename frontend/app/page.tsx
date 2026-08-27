@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Home, { type MarketplaceStats } from "./Home";
+import { MARKETPLACE_FAQS } from "../src/data/marketplaceFaqs";
 
 const API_URL = "https://classifed-247market.onrender.com";
 
@@ -43,6 +44,16 @@ const websiteJsonLd = {
   },
 };
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: MARKETPLACE_FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
+  })),
+};
+
 export default async function Page() {
   const stats = await getMarketplaceStats();
 
@@ -50,6 +61,7 @@ export default async function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <Home stats={stats} />
     </>
   );

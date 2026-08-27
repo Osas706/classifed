@@ -16,6 +16,8 @@ import { MdOutlineSpeed } from "react-icons/md";
 import { HiOutlineArrowRight } from "react-icons/hi2";
 import countries from "../src/data/africanCountriesAds.json";
 import Footer from "../src/components/footer/Footer";
+import FaqAccordion from "../src/components/faq/FaqAccordion";
+import { MARKETPLACE_FAQS } from "../src/data/marketplaceFaqs";
 
 const STEPS = [
   {
@@ -295,6 +297,15 @@ const Home = ({ stats }: HomeProps) => {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="w-[90%] max-w-[780px] mx-auto px-4 lg:px-5 pt-10 pb-[70px] lg:pb-[110px]">
+        <div className={sectionHeading}>
+          <span className={eyebrow}>FAQs</span>
+          <h2 className={sectionHeadingH2}>Frequently asked questions</h2>
+        </div>
+
+        <FaqAccordion faqs={MARKETPLACE_FAQS} />
       </section>
 
       <section className="w-[90%] max-w-[640px] mx-auto px-4 lg:px-5 pt-10 pb-[70px] lg:pb-[110px] text-center">
