@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { FaStore } from "react-icons/fa6";
 import { HiOutlineArrowRight } from "react-icons/hi2";
 import { RiMailLine, RiTimeLine, RiMapPinLine } from "react-icons/ri";
@@ -56,6 +57,16 @@ export default function ContactPage() {
 
       <section className="w-[90%] max-w-[900px] mx-auto pb-[100px] grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 items-start">
         <div className="flex flex-col gap-5">
+          <div className="relative w-full h-[200px] sm:h-[240px] rounded-2xl overflow-hidden bg-[#f3ecdd]">
+            <Image
+              src="/contact-us.jpeg"
+              alt="Illustration of a 247Market support agent ready to help buyers and sellers get in touch"
+              fill
+              sizes="(max-width: 1024px) 90vw, 45vw"
+              className="object-cover"
+            />
+          </div>
+
           <div className="bg-white border border-[#e7e2d8] rounded-2xl px-6 py-6 flex items-start gap-4">
             <RiMailLine className="text-[24px] text-accent bg-accent-soft p-2 rounded-[10px] box-content shrink-0" />
             <div>

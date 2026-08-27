@@ -35,7 +35,7 @@ const ContactForm = () => {
   }`;
 
   return (
-    <>
+    <div>
       <ToastContainer position="top-center" />
       <form
         onSubmit={handleSubmit}
@@ -100,7 +100,7 @@ const ContactForm = () => {
           </a>
         </p>
       </form>
-    </>
+    </div>
   );
 };
 

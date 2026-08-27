@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { FaStore } from "react-icons/fa6";
 import { HiOutlineArrowRight } from "react-icons/hi2";
 import {
@@ -78,7 +79,7 @@ export default function AboutPage() {
         </Link>
       </header>
 
-      <section className="w-[90%] max-w-[780px] mx-auto text-center px-5 pt-5 pb-[60px]">
+      <section className="w-[90%] max-w-[780px] mx-auto text-center px-5 pt-5 pb-[40px]">
         <span className="inline-block text-[13px] font-bold tracking-[0.06em] uppercase text-accent mb-3.5">
           About 247Market
         </span>
@@ -90,6 +91,19 @@ export default function AboutPage() {
           Whether it&apos;s a car listed at midnight or an apartment someone finds at dawn, the
           best marketplaces are the ones that are always open — for everyone, in every city.
         </p>
+      </section>
+
+      <section className="w-[90%] max-w-[1100px] mx-auto px-4 lg:px-5 pb-[70px]">
+        <div className="relative w-full h-[220px] sm:h-[320px] lg:h-[400px] rounded-[24px] overflow-hidden bg-[#f3ecdd] shadow-[0_30px_60px_-20px_rgba(7,19,40,0.25)]">
+          <Image
+            src="/about-us.jpeg"
+            alt="Illustration of the 247Market community buying and selling directly with each other, no middlemen"
+            fill
+            priority
+            sizes="(max-width: 1024px) 90vw, 1100px"
+            className="object-cover"
+          />
+        </div>
       </section>
 
       <section className="w-[90%] max-w-[900px] mx-auto pb-[70px] grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
