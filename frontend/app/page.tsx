@@ -18,7 +18,7 @@ async function getMarketplaceStats(): Promise<MarketplaceStats | null> {
 export const metadata: Metadata = {
   title: { absolute: "247Market — Nigeria's Marketplace, Open Around the Clock" },
   description:
-    "Buy, sell and discover cars, phones, apartments, jobs and more on 247Market — Nigeria's marketplace open around the clock. Post an ad in minutes or browse thousands of listings near you.",
+    "247Market is where you buy and sell in Nigeria — cars, phones, apartments, jobs and more, open around the clock. Post an ad in minutes or browse thousands of listings near you.",
   alternates: { canonical: "/" },
 };
 

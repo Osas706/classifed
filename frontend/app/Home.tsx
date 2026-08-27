@@ -124,8 +124,9 @@ const Home = ({ stats }: HomeProps) => {
           </h1>
 
           <p className="text-base lg:text-lg text-muted max-w-[520px] mb-[34px] leading-[1.6]">
-            Cars, phones, apartments, jobs and more — post an ad in minutes, or browse thousands of
-            listings near you. No middlemen, no waiting rooms, just people trading directly.
+            247Market is where you buy and sell in Nigeria — cars, phones, apartments, jobs and
+            more. Post an ad in minutes, or browse thousands of listings near you. No middlemen,
+            no waiting rooms, just people trading directly.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-[50px]">
