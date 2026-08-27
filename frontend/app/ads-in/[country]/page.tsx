@@ -59,16 +59,33 @@ export async function generateMetadata({
 
   const title = `Ads in ${data.name} — ${data.tagline}`;
   const url = `${SITE_URL}/ads-in-${data.slug}`;
+  const description = `Buy and sell in ${data.name} on 247Market. ${data.description}`;
+  const keywords = [
+    `buy and sell in ${data.name}`,
+    `ads in ${data.name}`,
+    `classifieds ${data.name}`,
+    `247Market ${data.name}`,
+    ...data.popularCategories.map((cat) => `${cat} for sale in ${data.name}`),
+  ];
 
   return {
     title,
-    description: data.description,
+    description,
+    keywords,
     alternates: { canonical: `/ads-in-${data.slug}` },
     openGraph: {
       title,
-      description: data.description,
+      description,
       url,
       type: "website",
+      siteName: "247Market",
+      images: [{ url: `${SITE_URL}/og-image.jpg`, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${SITE_URL}/og-image.jpg`],
     },
   };
 }
@@ -81,11 +98,13 @@ export default async function CountryAdsPage({ params }: { params: { country: st
   const otherCountries = (countries as CountryData[]).filter((c) => c.slug !== data.slug).slice(0, 4);
   const listingCount = await getListingCount(data.name);
 
+  const description = `Buy and sell in ${data.name} on 247Market. ${data.description}`;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Place",
     name: `247Market — ${data.name}`,
-    description: data.description,
+    description,
     url: `${SITE_URL}/ads-in-${data.slug}`,
   };
 
@@ -127,7 +146,7 @@ export default async function CountryAdsPage({ params }: { params: { country: st
         <h1 className="font-sora text-[36px] font-extrabold text-navy mb-4 leading-[1.2] max-md:text-[26px]">
           {data.tagline}
         </h1>
-        <p className="text-muted text-base leading-[1.7] mb-8">{data.description}</p>
+        <p className="text-muted text-base leading-[1.7] mb-8">{description}</p>
 
         <div className="flex justify-center gap-10 mb-[34px] flex-wrap">
           <div className="flex flex-col">
@@ -155,7 +174,7 @@ export default async function CountryAdsPage({ params }: { params: { country: st
       <section className="w-[90%] max-w-[900px] mx-auto grid grid-cols-2 gap-6 pb-[70px] max-md:grid-cols-1">
         <div className="bg-white border border-[#e7e2d8] rounded-2xl px-[26px] py-7">
           <RiMapPinLine className="text-[26px] text-accent bg-accent-soft p-2 rounded-[10px] box-content mb-3" />
-          <h3 className="font-sora text-navy mb-3 text-[17px]">Top cities</h3>
+          <h2 className="font-sora text-navy mb-3 text-[17px]">Top cities</h2>
           <ul className="list-none flex flex-col gap-2 text-muted text-sm">
             {data.cities.map((city) => (
               <li key={city}>{city}</li>
@@ -165,7 +184,7 @@ export default async function CountryAdsPage({ params }: { params: { country: st
 
         <div className="bg-white border border-[#e7e2d8] rounded-2xl px-[26px] py-7">
           <RiPriceTag3Line className="text-[26px] text-accent bg-accent-soft p-2 rounded-[10px] box-content mb-3" />
-          <h3 className="font-sora text-navy mb-3 text-[17px]">Popular categories</h3>
+          <h2 className="font-sora text-navy mb-3 text-[17px]">Popular categories</h2>
           <ul className="list-none flex flex-col gap-2 text-muted text-sm">
             {data.popularCategories.map((cat) => (
               <li key={cat}>{cat}</li>
