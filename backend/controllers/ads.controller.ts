@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import AdModel from "../models/ad.model.js";
+import UserModel from "../models/user.model.js";
 import Jimp from "jimp-watermark";
 import type { Response } from "express";
 
@@ -199,7 +200,13 @@ export const getAd = async (req: any, res: Response) => {
     const adUserId = ad.user;
     const relatedAds = await AdModel.find({ user: adUserId });
 
-    res.status(201).json({ success: true, ad, relatedAds });
+    let sellerStatus: string | undefined;
+    if (adUserId) {
+      const seller: any = await UserModel.findById(adUserId).select("status");
+      sellerStatus = seller?.status;
+    }
+
+    res.status(201).json({ success: true, ad, relatedAds, sellerStatus });
   } catch (error) {
     console.log(error, "Error in getAd controller");
     res.status(404).json({ success: false, message: "Error", error });

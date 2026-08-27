@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../api";
 import { toast } from "react-toastify";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaCheckCircle } from "react-icons/fa";
 import Pagination from "../../components/Pagination";
 
 const SELLERS_PER_PAGE = 10;
@@ -12,6 +12,7 @@ const Sellers = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [deletingId, setDeletingId] = useState(null);
+  const [verifyingId, setVerifyingId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
   const fetchSellers = async () => {
@@ -51,6 +52,22 @@ const Sellers = () => {
     }
   };
 
+  const handleVerify = async (e, id) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    try {
+      setVerifyingId(id);
+      await api.post(`/api/admin/sellers/${id}/verify`);
+      setSellers((prev) => prev.map((s) => (s._id === id ? { ...s, status: "verified" } : s)));
+      toast.success("Seller verified");
+    } catch (err) {
+      toast.error(err?.response?.data?.message || "Failed to verify seller");
+    } finally {
+      setVerifyingId(null);
+    }
+  };
+
   const filtered = sellers.filter((s) =>
     `${s.firstName} ${s.lastName} ${s.email}`.toLowerCase().includes(search.toLowerCase())
   );
@@ -82,6 +99,7 @@ const Sellers = () => {
               <th className="px-5 py-3 font-medium">Email</th>
               <th className="px-5 py-3 font-medium">Location</th>
               <th className="px-5 py-3 font-medium">Ads</th>
+              <th className="px-5 py-3 font-medium">Status</th>
               <th className="px-5 py-3 font-medium">Joined</th>
               <th className="px-5 py-3 font-medium"></th>
             </tr>
@@ -90,7 +108,7 @@ const Sellers = () => {
           <tbody>
             {loading && (
               <tr>
-                <td colSpan={6} className="px-5 py-8 text-center text-slate-400">
+                <td colSpan={7} className="px-5 py-8 text-center text-slate-400">
                   Loading sellers...
                 </td>
               </tr>
@@ -98,7 +116,7 @@ const Sellers = () => {
 
             {!loading && filtered.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-5 py-8 text-center text-slate-400">
+                <td colSpan={7} className="px-5 py-8 text-center text-slate-400">
                   No sellers found
                 </td>
               </tr>
@@ -116,10 +134,31 @@ const Sellers = () => {
                   {[seller.state, seller.country].filter(Boolean).join(", ") || "—"}
                 </td>
                 <td className="px-5 py-3 text-slate-600">{seller.adsCount}</td>
+                <td className="px-5 py-3">
+                  <span
+                    className={`px-2.5 py-1 rounded-full text-xs font-medium ${
+                      seller.status === "verified"
+                        ? "bg-green-50 text-green-600"
+                        : "bg-amber-50 text-amber-600"
+                    }`}
+                  >
+                    {seller.status === "verified" ? "Verified" : "Submitted"}
+                  </span>
+                </td>
                 <td className="px-5 py-3 text-slate-600">
                   {new Date(seller.createdAt).toLocaleDateString()}
                 </td>
-                <td className="px-5 py-3 text-right">
+                <td className="px-5 py-3 text-right flex items-center justify-end gap-3">
+                  {seller.status !== "verified" && (
+                    <button
+                      disabled={verifyingId === seller._id}
+                      onClick={(e) => handleVerify(e, seller._id)}
+                      className="text-green-600 hover:text-green-700 transition disabled:opacity-40"
+                      title="Verify seller"
+                    >
+                      <FaCheckCircle />
+                    </button>
+                  )}
                   <button
                     disabled={deletingId === seller._id}
                     onClick={(e) => handleDelete(e, seller._id, `${seller.firstName} ${seller.lastName}`)}

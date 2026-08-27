@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import countries from "../src/data/africanCountriesAds.json";
 
-const SITE_URL = "https://247market.vercel.app";
+const SITE_URL = "https://247market.org";
 const API_URL = "https://classifed-247market.onrender.com";
 
 async function getAllAdIds(): Promise<string[]> {

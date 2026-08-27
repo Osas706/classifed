@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 
-const SITE_URL = "https://247market.vercel.app";
+const SITE_URL = "https://247market.org";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

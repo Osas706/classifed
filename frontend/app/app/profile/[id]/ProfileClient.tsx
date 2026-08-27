@@ -8,6 +8,7 @@ import { formatMemberSinceDate } from "../../../../src/utils/utils";
 import AdItem from "../../../../src/components/adItem/AdItem";
 import { FaTrash } from "react-icons/fa";
 import { GiSandsOfTime } from "react-icons/gi";
+import { RiShieldCheckLine, RiTimeLine } from "react-icons/ri";
 import { TbMoodCry } from "react-icons/tb";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi2";
 import Link from "next/link";
@@ -184,11 +185,29 @@ const ProfileClient = () => {
           onClick={() => displayImageRef.current?.click()}
           src={displayImage || "/hi.png"}
           alt="profile"
-          className="h-[150px] w-[130px] self-center rounded-[60px] border-[3px] border-black bg-accent-soft object-cover cursor-pointer"
+          className="h-[110px] w-[95px] sm:h-[150px] sm:w-[130px] self-center rounded-[60px] border-[3px] border-black bg-accent-soft object-cover cursor-pointer"
         />
 
         <span className="text-center font-extrabold text-navy dark:text-accent">
           {parseInt(joinedSinceDate || "") || updatedSinceDate}
+        </span>
+
+        <span
+          className={`mx-auto flex w-fit items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
+            userData?.status === "verified"
+              ? "bg-green-100 text-green-700 dark:bg-green-500/15 dark:text-green-400"
+              : "bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-400"
+          }`}
+        >
+          {userData?.status === "verified" ? (
+            <>
+              <RiShieldCheckLine /> Verified seller
+            </>
+          ) : (
+            <>
+              <RiTimeLine /> Submitted — pending verification
+            </>
+          )}
         </span>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5">

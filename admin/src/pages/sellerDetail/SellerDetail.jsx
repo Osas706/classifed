@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import api from "../../api";
 import { toast } from "react-toastify";
 import { HiOutlineArrowLeft } from "react-icons/hi2";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaCheckCircle } from "react-icons/fa";
 
 const SellerDetail = () => {
   const { id } = useParams();
@@ -14,6 +14,7 @@ const SellerDetail = () => {
   const [loading, setLoading] = useState(true);
   const [deletingSeller, setDeletingSeller] = useState(false);
   const [deletingAdId, setDeletingAdId] = useState(null);
+  const [verifying, setVerifying] = useState(false);
 
   const fetchSeller = async () => {
     try {
@@ -43,6 +44,19 @@ const SellerDetail = () => {
       toast.error(err?.response?.data?.message || "Failed to delete seller");
     } finally {
       setDeletingSeller(false);
+    }
+  };
+
+  const handleVerify = async () => {
+    try {
+      setVerifying(true);
+      await api.post(`/api/admin/sellers/${id}/verify`);
+      setSeller((prev) => ({ ...prev, status: "verified" }));
+      toast.success("Seller verified");
+    } catch (err) {
+      toast.error(err?.response?.data?.message || "Failed to verify seller");
+    } finally {
+      setVerifying(false);
     }
   };
 
@@ -79,8 +93,17 @@ const SellerDetail = () => {
           />
 
           <div>
-            <h1 className="text-xl font-bold text-navy font-sora">
+            <h1 className="text-xl font-bold text-navy font-sora flex items-center gap-2">
               {seller.firstName} {seller.lastName}
+              <span
+                className={`px-2.5 py-1 rounded-full text-xs font-medium ${
+                  seller.status === "verified"
+                    ? "bg-green-50 text-green-600"
+                    : "bg-amber-50 text-amber-600"
+                }`}
+              >
+                {seller.status === "verified" ? "Verified" : "Submitted"}
+              </span>
             </h1>
             <p className="text-slate-500">{seller.email}</p>
             <p className="text-slate-400 text-sm">
@@ -90,13 +113,25 @@ const SellerDetail = () => {
           </div>
         </div>
 
-        <button
-          disabled={deletingSeller}
-          onClick={handleDeleteSeller}
-          className="flex items-center gap-2 bg-red-50 text-red-600 hover:bg-red-100 px-4 py-2.5 rounded-lg font-medium text-sm transition disabled:opacity-50"
-        >
-          <FaTrash /> {deletingSeller ? "Deleting..." : "Delete Seller"}
-        </button>
+        <div className="flex items-center gap-3">
+          {seller.status !== "verified" && (
+            <button
+              disabled={verifying}
+              onClick={handleVerify}
+              className="flex items-center gap-2 bg-green-50 text-green-600 hover:bg-green-100 px-4 py-2.5 rounded-lg font-medium text-sm transition disabled:opacity-50"
+            >
+              <FaCheckCircle /> {verifying ? "Verifying..." : "Verify Seller"}
+            </button>
+          )}
+
+          <button
+            disabled={deletingSeller}
+            onClick={handleDeleteSeller}
+            className="flex items-center gap-2 bg-red-50 text-red-600 hover:bg-red-100 px-4 py-2.5 rounded-lg font-medium text-sm transition disabled:opacity-50"
+          >
+            <FaTrash /> {deletingSeller ? "Deleting..." : "Delete Seller"}
+          </button>
+        </div>
       </div>
 
       <div>

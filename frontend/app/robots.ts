@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/app/create-ad", "/app/profile/", "/app/bookmark", "/reset-password/"],
       },
     ],
-    sitemap: "https://247market.vercel.app/sitemap.xml",
+    sitemap: "https://247market.org/sitemap.xml",
   };
 }

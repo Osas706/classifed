@@ -41,7 +41,7 @@ interface CountryData {
   popularCategories: string[];
 }
 
-const SITE_URL = "https://247market.vercel.app";
+const SITE_URL = "https://247market.org";
 
 export function generateStaticParams() {
   return (countries as CountryData[]).map((c) => ({ country: c.slug }));

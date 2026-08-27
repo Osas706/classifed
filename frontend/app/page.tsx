@@ -26,8 +26,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "247Market",
-  url: "https://247market.vercel.app",
-  logo: "https://247market.vercel.app/icon.svg",
+  url: "https://247market.org",
+  logo: "https://247market.org/icon.svg",
   sameAs: [],
 };
 
@@ -35,10 +35,10 @@ const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "247Market",
-  url: "https://247market.vercel.app",
+  url: "https://247market.org",
   potentialAction: {
     "@type": "SearchAction",
-    target: "https://247market.vercel.app/app/search?searchTerm={search_term_string}",
+    target: "https://247market.org/app/search?searchTerm={search_term_string}",
     "query-input": "required name=search_term_string",
   },
 };

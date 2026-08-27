@@ -4,6 +4,7 @@ import {
   listSellers,
   getSeller,
   deleteSeller,
+  verifySeller,
   listAllAdsForAdmin,
   getStats,
 } from "../controllers/admin.controller.js";
@@ -14,6 +15,7 @@ const router = express.Router();
 router.get("/sellers", adminAuth, listSellers);
 router.get("/sellers/:id", adminAuth, getSeller);
 router.delete("/sellers/:id", adminAuth, deleteSeller);
+router.post("/sellers/:id/verify", adminAuth, verifySeller);
 
 router.get("/ads", adminAuth, listAllAdsForAdmin);
 router.delete("/ads/:id", adminAuth, deleteAd);

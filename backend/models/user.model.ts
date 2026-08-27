@@ -12,6 +12,7 @@ export interface IUser extends Document {
   country?: string;
   state?: string;
   bookmarkedAds: any[];
+  status?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -29,6 +30,7 @@ const userSchema = new mongoose.Schema(
     country: { type: String, required: false },
     state: { type: String, required: false },
     bookmarkedAds: { type: Array, default: [] },
+    status: { type: String, enum: ["submitted", "verified"], default: "submitted" },
   },
   { timestamps: true }
 );

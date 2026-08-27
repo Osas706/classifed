@@ -41,6 +41,28 @@ export const getSeller = async (req: Request, res: Response) => {
   }
 };
 
+//verify a seller
+export const verifySeller = async (req: Request, res: Response) => {
+  const sellerId = req.params.id;
+
+  try {
+    const seller = await UserModel.findByIdAndUpdate(
+      sellerId,
+      { status: "verified" },
+      { new: true }
+    ).select("-password");
+
+    if (!seller) {
+      return res.status(404).json({ success: false, message: "Seller not found" });
+    }
+
+    res.status(200).json({ success: true, message: "Seller verified", seller });
+  } catch (error) {
+    console.log(error, "Error in verifySeller Controller");
+    res.status(500).json({ success: false, message: "Something went wrong", error });
+  }
+};
+
 //delete a seller and all of their ads
 export const deleteSeller = async (req: Request, res: Response) => {
   const sellerId = req.params.id;
