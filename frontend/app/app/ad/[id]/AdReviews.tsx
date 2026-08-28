@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { RiStarFill, RiChatQuoteLine } from "react-icons/ri";
+import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi2";
 import useStore from "../../../../src/store/useStore";
 import { formatAdDate } from "../../../../src/utils/utils";
 import StarRating from "./StarRating";
@@ -27,6 +28,9 @@ const AdReviews = ({ adId }: AdReviewsProps) => {
   const [averageRating, setAverageRating] = useState(0);
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const REVIEWS_PER_PAGE = 5;
 
   const [rating, setRating] = useState(0);
   const [reviewerName, setReviewerName] = useState("");
@@ -95,6 +99,7 @@ const AdReviews = ({ adId }: AdReviewsProps) => {
       toast.success(res?.data?.message || "Review added");
       setRating(0);
       setComment("");
+      setCurrentPage(1);
       fetchReviews();
     } catch (error: any) {
       toast.error(error?.response?.data?.message || "Something went wrong");
@@ -133,22 +138,52 @@ const AdReviews = ({ adId }: AdReviewsProps) => {
           )}
 
           <div className="flex flex-col gap-3">
-            {reviews.map((review) => (
-              <div
-                key={review._id}
-                className="bg-white dark:bg-surface-dark border border-navy/15 dark:border-white/10 rounded-2xl p-5"
-              >
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <p className="font-semibold text-navy dark:text-white capitalize">{review.reviewerName}</p>
-                  <span className="text-xs text-muted dark:text-white/50 shrink-0">{formatAdDate(review.createdAt)}</span>
+            {reviews
+              .slice((currentPage - 1) * REVIEWS_PER_PAGE, currentPage * REVIEWS_PER_PAGE)
+              .map((review) => (
+                <div
+                  key={review._id}
+                  className="bg-white dark:bg-surface-dark border border-navy/15 dark:border-white/10 rounded-2xl p-5"
+                >
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <p className="font-semibold text-navy dark:text-white capitalize">{review.reviewerName}</p>
+                    <span className="text-xs text-muted dark:text-white/50 shrink-0">{formatAdDate(review.createdAt)}</span>
+                  </div>
+                  <StarRating value={review.rating} readOnly size={16} />
+                  {review.comment && (
+                    <p className="text-sm text-navy-ink dark:text-white/70 leading-relaxed mt-2">{review.comment}</p>
+                  )}
                 </div>
-                <StarRating value={review.rating} readOnly size={16} />
-                {review.comment && (
-                  <p className="text-sm text-navy-ink dark:text-white/70 leading-relaxed mt-2">{review.comment}</p>
-                )}
-              </div>
-            ))}
+              ))}
           </div>
+
+          {reviews.length > REVIEWS_PER_PAGE && (
+            <nav className="flex items-center justify-center gap-2 mt-2">
+              <button
+                type="button"
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className="flex items-center gap-1 rounded-lg border border-navy/20 dark:border-white/20 px-3 py-1.5 text-sm text-navy dark:text-white disabled:opacity-40"
+              >
+                <HiOutlineArrowLeft /> Prev
+              </button>
+
+              <span className="rounded-lg px-3 py-1.5 text-sm border border-navy/20 dark:border-white/20 text-navy dark:text-white font-medium">
+                Page {currentPage} of {Math.ceil(reviews.length / REVIEWS_PER_PAGE)}
+              </span>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setCurrentPage((p) => Math.min(Math.ceil(reviews.length / REVIEWS_PER_PAGE), p + 1))
+                }
+                disabled={currentPage === Math.ceil(reviews.length / REVIEWS_PER_PAGE)}
+                className="flex items-center gap-1 rounded-lg border border-navy/20 dark:border-white/20 px-3 py-1.5 text-sm text-navy dark:text-white disabled:opacity-40"
+              >
+                Next <HiOutlineArrowRight />
+              </button>
+            </nav>
+          )}
         </div>
 
         <div className="bg-navy dark:bg-surface-dark border border-navy dark:border-white/10 rounded-2xl p-6 flex flex-col gap-4">
