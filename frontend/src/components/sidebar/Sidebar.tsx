@@ -156,7 +156,7 @@ const Sidebar = () => {
             <>
               <Link
                 href={`/app/profile/${user}`}
-                className="flex items-center gap-3 px-4 py-2.5 mb-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition"
+                className="hidden lg:flex items-center gap-3 px-4 py-2.5 mb-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition"
               >
                 <span className="w-8 h-8 flex items-center justify-center rounded-full bg-navy dark:bg-accent text-white dark:text-navy text-xs font-bold shrink-0">
                   {getInitials(firstName, lastName)}
