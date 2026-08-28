@@ -20,16 +20,22 @@ export const addAd = async (req: any, res: Response) => {
   if (adImage) {
     const dstPath = `./output-with-watermark-${crypto.randomUUID()}.jpg`;
     const options = { ratio: 0.45, opacity: 0.7, dstPath };
+    let uploadPath = adImage;
 
     try {
       await Jimp.addWatermark(adImage, "mark.png", options);
+      uploadPath = dstPath;
+    } catch (error) {
+      console.log("Watermarking failed, uploading original image instead:", error);
+    }
 
-      const adUploadedResponse: any = await cloudinary.uploader.upload(dstPath);
+    try {
+      const adUploadedResponse: any = await cloudinary.uploader.upload(uploadPath);
       adImage = adUploadedResponse?.secure_url;
     } catch (error) {
       console.log(error);
     } finally {
-      fs.unlink(dstPath, () => {});
+      if (uploadPath === dstPath) fs.unlink(dstPath, () => {});
     }
   }
 
