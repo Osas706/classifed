@@ -83,13 +83,14 @@ const AdReviews = ({ adId }: AdReviewsProps) => {
     setSubmitting(true);
 
     try {
-      const res = await axios.post(`${url}/api/reviews/add`, {
-        ad: adId,
-        rating,
-        comment,
-        reviewerName: reviewerName.trim(),
-        user: user || undefined,
-      });
+      const formData = new FormData();
+      formData.append("ad", adId);
+      formData.append("rating", String(rating));
+      formData.append("comment", comment);
+      formData.append("reviewerName", reviewerName.trim());
+      if (user) formData.append("user", user);
+
+      const res = await axios.post(`${url}/api/reviews/add`, formData);
 
       toast.success(res?.data?.message || "Review added");
       setRating(0);

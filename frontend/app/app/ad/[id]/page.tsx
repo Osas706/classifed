@@ -153,6 +153,8 @@ export default async function AdPage({ params }: { params: { id: string } }) {
         />
       </div>
 
+      <AdReviews adId={ad._id} />
+
       <div className="relative pt-8">
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-navy/15 dark:via-white/15 to-transparent" />
 
@@ -163,8 +165,6 @@ export default async function AdPage({ params }: { params: { id: string } }) {
 
         <MoreFromSeller relatedAds={relatedAds.filter((item: any) => item._id !== ad._id)} />
       </div>
-
-      <AdReviews adId={ad._id} />
     </div>
   );
 }

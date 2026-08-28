@@ -4,6 +4,8 @@ import UserModel from "../models/user.model.js";
 import Jimp from "jimp-watermark";
 import type { Response } from "express";
 import { getRatingSummary } from "./review.controller.js";
+import crypto from "crypto";
+import fs from "fs";
 
 //add ad
 export const addAd = async (req: any, res: Response) => {
@@ -16,28 +18,19 @@ export const addAd = async (req: any, res: Response) => {
   let displayImage = req?.files?.displayImage?.path;
 
   if (adImage) {
-    const options = {
-      ratio: 0.45,
-      opacity: 0.7,
-      dstPath: "./output-with-watermark.jpg",
-    };
+    const dstPath = `./output-with-watermark-${crypto.randomUUID()}.jpg`;
+    const options = { ratio: 0.45, opacity: 0.7, dstPath };
 
-    Jimp.addWatermark(adImage, "mark.png", options)
-      .then(() => {})
-      .catch((err: any) => {
-        console.log(err);
-      });
+    try {
+      await Jimp.addWatermark(adImage, "mark.png", options);
 
-    const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-    await delay(1000);
-
-    const adUploadedResponse: any = await cloudinary.uploader
-      .upload("output-with-watermark.jpg")
-      .catch((error) => {
-        console.log(error);
-      });
-
-    adImage = adUploadedResponse?.secure_url;
+      const adUploadedResponse: any = await cloudinary.uploader.upload(dstPath);
+      adImage = adUploadedResponse?.secure_url;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      fs.unlink(dstPath, () => {});
+    }
   }
 
   if (displayImage) {
