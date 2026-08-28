@@ -1,12 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import axios from "axios";
 import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 import useStore from "../../store/useStore";
 import CurrencySelector, { useDisplayCurrency } from "../currencySelector/CurrencySelector";
 
 const capitalize = (str: string) => (str ? str.charAt(0).toUpperCase() + str.slice(1) : str);
+
+export const getInitials = (firstName?: string, lastName?: string) => {
+  const first = firstName?.trim()?.charAt(0) || "";
+  const last = lastName?.trim()?.charAt(0) || "";
+  return `${first}${last}`.toUpperCase() || "?";
+};
 
 const WELCOME_MESSAGES = [
   "Hi {name}, what are we doing today?",
@@ -27,6 +34,7 @@ const GUEST_MESSAGES = [
 const DashboardHeader = () => {
   const { theme, toggleTheme, url, user } = useStore();
   const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [displayCurrency, setDisplayCurrency] = useDisplayCurrency();
 
   const [messageIndex, setMessageIndex] = useState(0);
@@ -41,12 +49,14 @@ const DashboardHeader = () => {
     const fetchName = async () => {
       if (!user) {
         setFirstName("");
+        setLastName("");
         return;
       }
 
       try {
         const res = await axios.get(`${url}/api/user/${user}`);
         setFirstName(res?.data?.firstName || "");
+        setLastName(res?.data?.lastName || "");
       } catch (error) {
         console.log(error);
       }
@@ -76,6 +86,20 @@ const DashboardHeader = () => {
           >
             {theme === "light" ? <MdOutlineDarkMode className="text-lg" /> : <MdOutlineLightMode className="text-lg" />}
           </button>
+
+          {user && (
+            <Link
+              href={`/app/profile/${user}`}
+              className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full border border-[#e7e2d8] dark:border-white/15 bg-white dark:bg-navy hover:bg-accent-soft dark:hover:bg-white/10 transition shrink-0"
+            >
+              <span className="w-7 h-7 flex items-center justify-center rounded-full bg-navy dark:bg-accent text-white dark:text-navy text-xs font-bold shrink-0">
+                {getInitials(firstName, lastName)}
+              </span>
+              <span className="text-sm font-medium text-navy-ink dark:text-white truncate max-w-[100px]">
+                {capitalize(firstName)}
+              </span>
+            </Link>
+          )}
         </div>
       </div>
     </div>

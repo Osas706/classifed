@@ -5,6 +5,7 @@ import MapClient from "../../../../src/components/map/MapClient";
 import AdContactCard from "./AdContactCard";
 import AdPrice from "./AdPrice";
 import MoreFromSeller from "./MoreFromSeller";
+import AdReviews from "./AdReviews";
 import { formatAdDate } from "../../../../src/utils/utils";
 
 const API_URL = "https://classifed-247market.onrender.com";
@@ -152,11 +153,18 @@ export default async function AdPage({ params }: { params: { id: string } }) {
         />
       </div>
 
-      <div className="bg-white dark:bg-surface-dark border border-navy/15 dark:border-white/10 rounded-2xl p-6">
-        <h2 className="text-xl font-bold text-navy dark:text-white mb-5">More Ads From This Seller</h2>
+      <div className="relative pt-8">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-navy/15 dark:via-white/15 to-transparent" />
+
+        <div className="flex items-center gap-3 mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold font-sora text-navy dark:text-white">More Ads From This Seller</h2>
+          <span className="flex-1 h-px bg-gradient-to-r from-navy/10 dark:from-white/10 to-transparent" />
+        </div>
 
         <MoreFromSeller relatedAds={relatedAds.filter((item: any) => item._id !== ad._id)} />
       </div>
+
+      <AdReviews adId={ad._id} />
     </div>
   );
 }

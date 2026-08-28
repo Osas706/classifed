@@ -26,7 +26,17 @@ export const metadata: Metadata = {
   },
   description:
     "Buy, sell and discover cars, phones, apartments, jobs and more on 247Market — Nigeria's marketplace open around the clock. Post an ad in minutes or browse thousands of listings near you.",
-  icons: { icon: "/icon.svg" },
+  icons: {
+    icon: [
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  manifest: "/manifest.json",
   openGraph: {
     type: "website",
     siteName: "247Market",

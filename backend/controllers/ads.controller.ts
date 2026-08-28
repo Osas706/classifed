@@ -3,6 +3,7 @@ import AdModel from "../models/ad.model.js";
 import UserModel from "../models/user.model.js";
 import Jimp from "jimp-watermark";
 import type { Response } from "express";
+import { getRatingSummary } from "./review.controller.js";
 
 //add ad
 export const addAd = async (req: any, res: Response) => {
@@ -206,7 +207,16 @@ export const getAd = async (req: any, res: Response) => {
       sellerStatus = seller?.status;
     }
 
-    res.status(201).json({ success: true, ad, relatedAds, sellerStatus });
+    const ratingSummary = await getRatingSummary(String(ad._id));
+
+    res.status(201).json({
+      success: true,
+      ad,
+      relatedAds,
+      sellerStatus,
+      averageRating: ratingSummary.averageRating,
+      reviewCount: ratingSummary.count,
+    });
   } catch (error) {
     console.log(error, "Error in getAd controller");
     res.status(404).json({ success: false, message: "Error", error });

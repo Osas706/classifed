@@ -250,7 +250,12 @@ const Home = ({ stats }: HomeProps) => {
 
           <div className="bg-white border border-[#e7e2d8] rounded-2xl px-6 py-[30px] text-left transition-[0.25s] hover:-translate-y-1 hover:shadow-[0_20px_34px_-18px_rgba(7,19,40,0.25)] hover:border-transparent">
             <RiWallet3Line className="text-[30px] text-accent mb-4 bg-accent-soft p-2.5 rounded-xl box-content" />
-            <h3 className="text-lg mb-2 text-navy font-bold">Wallet-Powered</h3>
+            <div className="flex items-center gap-2 mb-2">
+              <h3 className="text-lg text-navy font-bold">Wallet-Powered</h3>
+              <span className="rounded-full bg-amber-100 text-amber-700 text-[10px] font-semibold px-2 py-0.5 tracking-wide uppercase">
+                Coming Soon
+              </span>
+            </div>
             <p className="text-sm text-muted leading-[1.6]">
               Fund your wallet and pay for listings and ad boosts, all in one place.
             </p>
