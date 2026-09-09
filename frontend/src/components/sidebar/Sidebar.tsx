@@ -72,19 +72,29 @@ const Sidebar = () => {
       : []),
   ];
 
+  const isHome = pathname === "/app" || pathname === "/";
+  const currentPage = !isHome ? navItems.find((item) => item.to === pathname || (item.to !== "/app" && pathname.startsWith(item.to))) : null;
+
   return (
     <>
       <div className="lg:hidden fixed top-0 inset-x-0 h-16 bg-white/90 dark:bg-navy-deep/90 backdrop-blur-[10px] border-b border-[#e7e2d8] dark:border-white/10 flex items-center justify-between px-4 z-30">
         <div className="flex items-center">
-          <span className="text-xl font-bold text-[#0f447a] dark:text-accent flex items-center">
-            247
-            <span className="text-navy-ink dark:text-white ml-px flex items-center gap-0.5">
-              Market <FaStore />
+          {isHome || !currentPage ? (
+            <span className="text-xl font-bold text-[#0f447a] dark:text-accent flex items-center">
+              247
+              <span className="text-navy-ink dark:text-white ml-px flex items-center gap-0.5">
+                Market <FaStore />
+              </span>
             </span>
-          </span>
+          ) : (
+            <span className="text-xl font-bold flex items-center gap-1.5 text-navy-ink dark:text-white">
+              <currentPage.icon className="text-2xl" />
+              <span>{currentPage.label}</span>
+            </span>
+          )}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex gap-2 items-center">
           <CurrencySelector value={displayCurrency} onChange={setDisplayCurrency} compact />
 
           <button
@@ -95,13 +105,13 @@ const Sidebar = () => {
             {theme === "light" ? <MdOutlineDarkMode className="text-lg" /> : <MdOutlineLightMode className="text-lg" />}
           </button>
 
-          <button onClick={() => setOpen(true)} aria-label="Open menu" className="text-2xl p-1 text-navy-ink dark:text-white">
+          <button onClick={() => setOpen(true)} aria-label="Open menu" className="p-1 text-2xl text-navy-ink dark:text-white">
             <MdMenu />
           </button>
         </div>
       </div>
 
-      {open && <div onClick={() => setOpen(false)} className="lg:hidden fixed inset-0 bg-black/50 z-40" />}
+      {open && <div onClick={() => setOpen(false)} className="fixed inset-0 z-40 lg:hidden bg-black/50" />}
 
       <aside
         className={`w-64 bg-white dark:bg-navy-deep border-r border-[#e7e2d8] dark:border-white/10 flex flex-col shrink-0 fixed inset-y-0 left-0 z-50 transition-transform duration-300 ease-in-out
@@ -119,13 +129,13 @@ const Sidebar = () => {
           <button
             onClick={() => setOpen(false)}
             aria-label="Close menu"
-            className="lg:hidden text-2xl p-1 text-navy-ink/60 dark:text-white/60 hover:text-navy-ink dark:hover:text-white"
+            className="p-1 text-2xl lg:hidden text-navy-ink/60 dark:text-white/60 hover:text-navy-ink dark:hover:text-white"
           >
             <MdClose />
           </button>
         </div>
 
-        <nav className="flex-1 px-3 py-4 flex flex-col gap-1 overflow-y-auto">
+        <nav className="flex overflow-y-auto flex-col flex-1 gap-1 px-3 py-4">
           {navItems.map(({ to, label, icon: Icon, end, badge }) => {
             const isActive = end ? pathname === to : pathname === to || pathname?.startsWith(to + "/");
 
@@ -158,17 +168,17 @@ const Sidebar = () => {
                 href={`/app/profile/${user}`}
                 className="hidden lg:flex items-center gap-3 px-4 py-2.5 mb-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition"
               >
-                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-navy dark:bg-accent text-white dark:text-navy text-xs font-bold shrink-0">
+                <span className="flex justify-center items-center w-8 h-8 text-xs font-bold text-white rounded-full bg-navy dark:bg-accent dark:text-navy shrink-0">
                   {getInitials(firstName, lastName)}
                 </span>
-                <span className="text-sm font-semibold text-navy-ink dark:text-white truncate">
+                <span className="text-sm font-semibold truncate text-navy-ink dark:text-white">
                   {firstName || "Your profile"}
                 </span>
               </Link>
 
               <button
                 onClick={logout}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-navy-ink/70 dark:text-white/60 hover:text-navy-ink dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition"
+                className="flex gap-3 items-center px-4 py-3 w-full text-sm font-medium rounded-lg transition text-navy-ink/70 dark:text-white/60 hover:text-navy-ink dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
               >
                 <MdLogout className="text-lg" />
                 Logout
@@ -180,7 +190,7 @@ const Sidebar = () => {
                 setOpen(false);
                 setShowLogin(true);
               }}
-              className="w-full bg-navy text-white text-sm font-semibold px-4 py-3 rounded-lg transition hover:bg-navy-deep"
+              className="px-4 py-3 w-full text-sm font-semibold text-white rounded-lg transition bg-navy hover:bg-navy-deep"
             >
               Post an Ad
             </button>
