@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { FaPhoneSquare } from "react-icons/fa";
 import { RiShieldCheckFill, RiTimeLine } from "react-icons/ri";
+import { MdContentCopy } from "react-icons/md";
+import { toast } from "react-toastify";
 
 interface AdContactCardProps {
   displayImage?: string;
@@ -16,6 +18,12 @@ interface AdContactCardProps {
 const AdContactCard = ({ displayImage, firstName, lastName, email, phoneNumber, sellerStatus }: AdContactCardProps) => {
   const [click, setClick] = useState(false);
   const isVerified = sellerStatus === "verified";
+
+  const handleCopy = (text: string, type: string) => {
+    if (!text) return;
+    navigator.clipboard.writeText(text);
+    toast.success(`${type} copied to clipboard!`);
+  };
 
   return (
     <div className="lg:sticky lg:top-4 bg-navy dark:bg-surface-dark border border-navy dark:border-white/10 rounded-2xl p-6 flex flex-col items-center gap-4 text-center">
@@ -51,12 +59,30 @@ const AdContactCard = ({ displayImage, firstName, lastName, email, phoneNumber, 
             className="h-20 w-20 rounded-full border-2 border-white object-cover bg-white/10"
           />
 
-          <div className="flex flex-col items-center text-white">
+          <div className="flex flex-col items-center text-white gap-2">
             <p className="font-semibold capitalize">
               {firstName} {lastName}
             </p>
-            <p className="text-sm text-white/80">{email}</p>
-            <p className="text-sm text-white/80">{phoneNumber}</p>
+            {email && (
+              <button 
+                onClick={() => handleCopy(email, "Email")}
+                className="flex items-center gap-2 text-sm text-white/80 bg-white/10 px-3 py-1.5 rounded-full hover:bg-white/20 transition group"
+                title="Copy email"
+              >
+                <span>{email}</span>
+                <MdContentCopy className="text-white/60 group-hover:text-white transition" />
+              </button>
+            )}
+            {phoneNumber && (
+              <button 
+                onClick={() => handleCopy(phoneNumber, "Phone number")}
+                className="flex items-center gap-2 text-sm text-white/80 bg-white/10 px-3 py-1.5 rounded-full hover:bg-white/20 transition group"
+                title="Copy phone number"
+              >
+                <span>{phoneNumber}</span>
+                <MdContentCopy className="text-white/60 group-hover:text-white transition" />
+              </button>
+            )}
           </div>
         </div>
       )}
