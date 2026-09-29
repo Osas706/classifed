@@ -100,13 +100,18 @@ const Sidebar = () => {
           <button
             onClick={toggleTheme}
             aria-label="Toggle dark mode"
-            className="w-9 h-9 flex items-center justify-center rounded-lg border border-[#e7e2d8] dark:border-white/15 bg-white dark:bg-navy text-navy-ink dark:text-white hover:bg-accent-soft dark:hover:bg-white/10 transition shrink-0"
+            className="flex justify-center items-center w-9 h-9 bg-white rounded-lg transition dark:border-white/15 dark:bg-navy text-navy-ink dark:text-white hover:bg-accent-soft dark:hover:bg-white/10 shrink-0"
           >
             {theme === "light" ? <MdOutlineDarkMode className="text-lg" /> : <MdOutlineLightMode className="text-lg" />}
           </button>
 
-          <button onClick={() => setOpen(true)} aria-label="Open menu" className="p-1 text-2xl text-navy-ink dark:text-white">
+          <button onClick={() => setOpen(true)} aria-label="Open menu" className="relative p-1 text-2xl text-navy-ink dark:text-white">
             <MdMenu />
+            {bookmarks && bookmarks.length > 0 && (
+              <span className="absolute top-0.5 right-0.5 flex h-3 w-3 items-center justify-center rounded-full bg-red-600 text-[9px] font-semibold text-white">
+                {bookmarks.length}
+              </span>
+            )}
           </button>
         </div>
       </div>
@@ -164,18 +169,6 @@ const Sidebar = () => {
         <div className="px-3 py-4 border-t border-[#e7e2d8] dark:border-white/10">
           {user ? (
             <>
-              {/* <Link
-                href={`/app/profile/${user}`}
-                className="hidden lg:flex items-center gap-3 px-4 py-2.5 mb-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition"
-              >
-                <span className="flex justify-center items-center w-8 h-8 text-xs font-bold text-white rounded-full bg-navy dark:bg-accent dark:text-navy shrink-0">
-                  {getInitials(firstName, lastName)}
-                </span>
-                <span className="text-sm font-semibold truncate text-navy-ink dark:text-white">
-                  {firstName || "Your profile"}
-                </span>
-              </Link> */}
-
               <button
                 onClick={logout}
                 className="flex gap-3 items-center px-4 py-3 w-full text-sm font-medium rounded-lg transition text-navy-ink/70 dark:text-white/60 hover:text-navy-ink dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
