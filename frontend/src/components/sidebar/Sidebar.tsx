@@ -105,8 +105,13 @@ const Sidebar = () => {
             {theme === "light" ? <MdOutlineDarkMode className="text-lg" /> : <MdOutlineLightMode className="text-lg" />}
           </button>
 
-          <button onClick={() => setOpen(true)} aria-label="Open menu" className="p-1 text-2xl text-navy-ink dark:text-white">
+          <button onClick={() => setOpen(true)} aria-label="Open menu" className="relative p-1 text-2xl text-navy-ink dark:text-white">
             <MdMenu />
+            {bookmarks && bookmarks.length > 0 && (
+              <span className="absolute top-0.5 right-0.5 flex h-3 w-3 items-center justify-center rounded-full bg-red-600 text-[9px] font-semibold text-white">
+                {bookmarks.length}
+              </span>
+            )}
           </button>
         </div>
       </div>
