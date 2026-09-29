@@ -100,7 +100,7 @@ const Sidebar = () => {
           <button
             onClick={toggleTheme}
             aria-label="Toggle dark mode"
-            className="w-9 h-9 flex items-center justify-center rounded-lg border border-[#e7e2d8] dark:border-white/15 bg-white dark:bg-navy text-navy-ink dark:text-white hover:bg-accent-soft dark:hover:bg-white/10 transition shrink-0"
+            className="flex justify-center items-center w-9 h-9 bg-white rounded-lg transition dark:border-white/15 dark:bg-navy text-navy-ink dark:text-white hover:bg-accent-soft dark:hover:bg-white/10 shrink-0"
           >
             {theme === "light" ? <MdOutlineDarkMode className="text-lg" /> : <MdOutlineLightMode className="text-lg" />}
           </button>
