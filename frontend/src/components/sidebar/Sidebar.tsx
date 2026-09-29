@@ -164,18 +164,6 @@ const Sidebar = () => {
         <div className="px-3 py-4 border-t border-[#e7e2d8] dark:border-white/10">
           {user ? (
             <>
-              {/* <Link
-                href={`/app/profile/${user}`}
-                className="hidden lg:flex items-center gap-3 px-4 py-2.5 mb-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition"
-              >
-                <span className="flex justify-center items-center w-8 h-8 text-xs font-bold text-white rounded-full bg-navy dark:bg-accent dark:text-navy shrink-0">
-                  {getInitials(firstName, lastName)}
-                </span>
-                <span className="text-sm font-semibold truncate text-navy-ink dark:text-white">
-                  {firstName || "Your profile"}
-                </span>
-              </Link> */}
-
               <button
                 onClick={logout}
                 className="flex gap-3 items-center px-4 py-3 w-full text-sm font-medium rounded-lg transition text-navy-ink/70 dark:text-white/60 hover:text-navy-ink dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
