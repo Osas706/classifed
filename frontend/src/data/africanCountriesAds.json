@@ -152,5 +152,38 @@
     "description": "Zambia's 247Market community is centered in Lusaka, where sellers list farm equipment, vehicles and household goods for buyers across the Copperbelt and beyond.",
     "cities": ["Lusaka", "Ndola", "Kitwe"],
     "popularCategories": ["Farm Equipment", "Vehicles", "Household Goods"]
+  },
+  {
+    "slug": "angola",
+    "name": "Angola",
+    "flag": "🇦🇴",
+    "currency": "AOA (Kz)",
+    "listings": "1,100+",
+    "tagline": "Luanda's premier direct trading hub",
+    "description": "247Market connects vibrant buyers and sellers across Luanda, Benguela and Lubango. From imported vehicles and heavy machinery to city apartments and electronics, traders connect directly with verified sellers.",
+    "cities": ["Luanda", "Benguela", "Lubango"],
+    "popularCategories": ["Vehicles", "Apartments", "Heavy Machinery"]
+  },
+  {
+    "slug": "botswana",
+    "name": "Botswana",
+    "flag": "🇧🇼",
+    "currency": "BWP (P)",
+    "listings": "680+",
+    "tagline": "Gaborone's trusted direct trading marketplace",
+    "description": "In Botswana, 247Market connects traders across Gaborone, Francistown and Maun. Whether it's 4x4 vehicles, prime residential property or high-end electronics, buyers deal directly with verified local sellers.",
+    "cities": ["Gaborone", "Francistown", "Maun"],
+    "popularCategories": ["Vehicles", "Property & Land", "Electronics"]
+  },
+  {
+    "slug": "zimbabwe",
+    "name": "Zimbabwe",
+    "flag": "🇿🇼",
+    "currency": "USD ($)",
+    "listings": "890+",
+    "tagline": "Harare and Bulawayo's vibrant marketplace",
+    "description": "Zimbabwe's 247Market community spans Harare, Bulawayo and Mutare — solar and backup power equipment, smartphones, fuel-efficient cars and commercial property all trade directly with trusted local traders around the clock.",
+    "cities": ["Harare", "Bulawayo", "Mutare"],
+    "popularCategories": ["Solar & Energy", "Vehicles", "Phones & Gadgets"]
   }
 ]

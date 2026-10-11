@@ -24,6 +24,9 @@ export const CURRENCIES: CurrencyOption[] = [
   { code: "RWF", label: "Rwanda", symbol: "FRw", flag: "🇷🇼", rateFromNGN: 0.79 },
   { code: "XAF", label: "Cameroon", symbol: "FCFA", flag: "🇨🇲", rateFromNGN: 0.39 },
   { code: "ZMW", label: "Zambia", symbol: "K", flag: "🇿🇲", rateFromNGN: 0.016 },
+  { code: "AOA", label: "Angola", symbol: "Kz", flag: "🇦🇴", rateFromNGN: 0.57 },
+  { code: "BWP", label: "Botswana", symbol: "P", flag: "🇧🇼", rateFromNGN: 0.0084 },
+  { code: "ZWG", label: "Zimbabwe", symbol: "ZiG", flag: "🇿🇼", rateFromNGN: 0.016 },
   { code: "USD", label: "US Dollar", symbol: "$", flag: "🇺🇸", rateFromNGN: 0.00062 },
 ];
 

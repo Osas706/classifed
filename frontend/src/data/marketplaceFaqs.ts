@@ -58,7 +58,7 @@ export const MARKETPLACE_FAQS: Faq[] = [
   {
     question: "Which countries can I buy and sell in on 247Market?",
     answer:
-      "247Market is live across Africa, including Nigeria, Ghana, Kenya, South Africa, Egypt, Morocco, Ethiopia, Tanzania, Uganda, Senegal, Côte d'Ivoire, Rwanda, Cameroon and Zambia. Every country has its own local listings page.",
+      "247Market is live across Africa, including Nigeria, Ghana, Kenya, South Africa, Egypt, Morocco, Ethiopia, Tanzania, Uganda, Senegal, Côte d'Ivoire, Rwanda, Cameroon, Zambia, Angola, Botswana and Zimbabwe. Every country has its own local listings page.",
   },
   {
     question: "Can I see the exact location of a listing before contacting the seller?",
