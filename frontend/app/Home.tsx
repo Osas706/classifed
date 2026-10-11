@@ -99,11 +99,11 @@ const Home = ({ stats }: HomeProps) => {
   };
 
   return (
-    <div className="w-full overflow-x-hidden text-navy-ink bg-sand">
+    <div className="overflow-x-hidden w-full text-navy-ink bg-sand">
       <header className="w-[90%] max-w-[1240px] mx-auto px-4 py-[18px] lg:px-5 lg:py-6 flex justify-between items-center sticky top-0 z-20 bg-sand/85 backdrop-blur-[10px]">
         <h2 className="font-sora text-[22px] text-navy font-extrabold flex items-center">
           247
-          <span className="text-navy-ink ml-px flex items-center gap-1">
+          <span className="flex gap-1 items-center ml-px text-navy-ink">
             Market <FaStore />
           </span>
         </h2>
@@ -151,7 +151,7 @@ const Home = ({ stats }: HomeProps) => {
         </div>
 
         <div
-          className="lg:flex-1 relative min-h-[260px] lg:min-h-[380px] rounded-[24px] bg-[radial-gradient(circle_at_30%_20%,#1a3b66_0%,#0d2140_45%,#071328_100%)] shadow-[0_30px_60px_-20px_rgba(7,19,40,0.45)] w-full overflow-hidden"
+          className="lg:flex-1 relative min-h-[260px] lg:min-h-[380px] rounded-[24px] shadow-[0_30px_60px_-20px_rgba(7,19,40,0.45)] w-full overflow-hidden"
         >
           <Image
             src="/hero-illustration.jpeg"
@@ -159,7 +159,7 @@ const Home = ({ stats }: HomeProps) => {
             fill
             priority
             sizes="(max-width: 1024px) 90vw, 45vw"
-            className="object-cover rounded-[24px] p-1.5"
+            className="object-cover rounded-[24px] p-1"
           />
         </div>
       </section>
@@ -211,7 +211,7 @@ const Home = ({ stats }: HomeProps) => {
               className="bg-white border border-[#e7e2d8] rounded-[14px] px-[18px] py-[26px] flex flex-col items-center gap-2 transition-[0.25s] hover:-translate-y-1 hover:shadow-[0_18px_30px_-16px_rgba(7,19,40,0.25)] hover:border-transparent"
             >
               <span className="text-[38px]">{c.flag}</span>
-              <h3 className="text-navy text-base font-bold">{c.name}</h3>
+              <h3 className="text-base font-bold text-navy">{c.name}</h3>
               <span className="text-xs text-muted">
                 {(() => {
                   const count = countryCounts[normalizeCountryName(c.name)] || 0;
@@ -225,7 +225,7 @@ const Home = ({ stats }: HomeProps) => {
         {countries.length > INITIAL_COUNTRIES_SHOWN && (
           <button
             type="button"
-            className={`${btnSecondary} mx-auto`}
+            className={`mx-auto ${btnSecondary}`}
             onClick={() => setShowAllCountries((v) => !v)}
           >
             {showAllCountries ? "See Less" : "See More Countries"}
@@ -239,10 +239,10 @@ const Home = ({ stats }: HomeProps) => {
           <h2 className={sectionHeadingH2}>Everything you need to trade with confidence</h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
           <div className="bg-white border border-[#e7e2d8] rounded-2xl px-6 py-[30px] text-left transition-[0.25s] hover:-translate-y-1 hover:shadow-[0_20px_34px_-18px_rgba(7,19,40,0.25)] hover:border-transparent">
             <RiCompassDiscoverLine className="text-[30px] text-accent mb-4 bg-accent-soft p-2.5 rounded-xl box-content" />
-            <h3 className="text-lg mb-2 text-navy font-bold">Discover Easily</h3>
+            <h3 className="mb-2 text-lg font-bold text-navy">Discover Easily</h3>
             <p className="text-sm text-muted leading-[1.6]">
               Browse by category, location or search for exactly what you need.
             </p>
@@ -250,8 +250,8 @@ const Home = ({ stats }: HomeProps) => {
 
           <div className="bg-white border border-[#e7e2d8] rounded-2xl px-6 py-[30px] text-left transition-[0.25s] hover:-translate-y-1 hover:shadow-[0_20px_34px_-18px_rgba(7,19,40,0.25)] hover:border-transparent">
             <RiWallet3Line className="text-[30px] text-accent mb-4 bg-accent-soft p-2.5 rounded-xl box-content" />
-            <div className="flex items-center gap-2 mb-2">
-              <h3 className="text-lg text-navy font-bold">Wallet-Powered</h3>
+            <div className="flex gap-2 items-center mb-2">
+              <h3 className="text-lg font-bold text-navy">Wallet-Powered</h3>
               <span className="rounded-full bg-amber-100 text-amber-700 text-[10px] font-semibold px-2 py-0.5 tracking-wide uppercase">
                 Coming Soon
               </span>
@@ -263,7 +263,7 @@ const Home = ({ stats }: HomeProps) => {
 
           <div className="bg-white border border-[#e7e2d8] rounded-2xl px-6 py-[30px] text-left transition-[0.25s] hover:-translate-y-1 hover:shadow-[0_20px_34px_-18px_rgba(7,19,40,0.25)] hover:border-transparent">
             <RiShieldCheckLine className="text-[30px] text-accent mb-4 bg-accent-soft p-2.5 rounded-xl box-content" />
-            <h3 className="text-lg mb-2 text-navy font-bold">Trusted Sellers</h3>
+            <h3 className="mb-2 text-lg font-bold text-navy">Trusted Sellers</h3>
             <p className="text-sm text-muted leading-[1.6]">
               A community built on verified accounts and transparent listings.
             </p>
@@ -271,13 +271,13 @@ const Home = ({ stats }: HomeProps) => {
 
           <div className="bg-white border border-[#e7e2d8] rounded-2xl px-6 py-[30px] text-left transition-[0.25s] hover:-translate-y-1 hover:shadow-[0_20px_34px_-18px_rgba(7,19,40,0.25)] hover:border-transparent">
             <MdOutlineSpeed className="text-[30px] text-accent mb-4 bg-accent-soft p-2.5 rounded-xl box-content" />
-            <h3 className="text-lg mb-2 text-navy font-bold">Fast &amp; Simple</h3>
+            <h3 className="mb-2 text-lg font-bold text-navy">Fast &amp; Simple</h3>
             <p className="text-sm text-muted leading-[1.6]">Post an ad or find a deal in minutes, not hours.</p>
           </div>
 
           <div className="bg-white border border-[#e7e2d8] rounded-2xl px-6 py-[30px] text-left transition-[0.25s] hover:-translate-y-1 hover:shadow-[0_20px_34px_-18px_rgba(7,19,40,0.25)] hover:border-transparent">
             <RiMapPinLine className="text-[30px] text-accent mb-4 bg-accent-soft p-2.5 rounded-xl box-content" />
-            <h3 className="text-lg mb-2 text-navy font-bold">Map Location</h3>
+            <h3 className="mb-2 text-lg font-bold text-navy">Map Location</h3>
             <p className="text-sm text-muted leading-[1.6]">
               See exactly where a listing is on an interactive map before you reach out.
             </p>
@@ -321,7 +321,7 @@ const Home = ({ stats }: HomeProps) => {
         </p>
 
         {subscribed ? (
-          <p className="text-accent font-bold text-base">You&apos;re subscribed — thank you! 🎉</p>
+          <p className="text-base font-bold text-accent">You&apos;re subscribed — thank you! 🎉</p>
         ) : (
           <form
             className="flex flex-col sm:flex-row gap-2.5 bg-white border border-[#e7e2d8] p-2.5 sm:p-1.5 rounded-2xl sm:rounded-full shadow-[0_16px_30px_-18px_rgba(7,19,40,0.25)]"
