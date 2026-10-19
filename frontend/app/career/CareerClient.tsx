@@ -628,7 +628,7 @@ export default function CareerClient() {
 
               {/* Overview */}
               <div>
-                <h4 className="font-sora text-sm font-bold text-navy mb-2 uppercase tracking-wider text-[11px] text-accent">
+                <h4 className="font-sora text-sm font-bold text-navy mb-2 uppercase tracking-wider text-[11px]">
                   About The Role
                 </h4>
                 <p className="text-muted text-sm sm:text-[15px] leading-relaxed">
