@@ -46,6 +46,7 @@ export interface JobRole {
   isFeatured?: boolean;
 }
 
+// Jobs Data 
 const JOBS: JobRole[] = [
   {
     id: "social-media-manager",
