@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "Classifed",
+    "slug": "classifed",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "classifed",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.classifed.mobile"
+    },
+    "android": {
+      "package": "com.classifed.mobile",
+      "adaptiveIcon": {
+        "backgroundColor": "#6C5CE7",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "bundler": "metro",
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Classifed needs access to your photos to upload ad images.",
+          "cameraPermission": "Classifed needs access to your camera to take ad photos."
+        }
+      ],
+      [
+        "expo-secure-store"
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
