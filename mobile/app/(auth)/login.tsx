@@ -41,7 +41,7 @@ export default function LoginScreen() {
     >
       <View style={styles.inner}>
         <Text style={styles.title}>Welcome back</Text>
-        <Text style={styles.subtitle}>Sign in to your Classifed account</Text>
+        <Text style={styles.subtitle}>Sign in to your 247Market account</Text>
 
         <TextInput
           style={styles.input}

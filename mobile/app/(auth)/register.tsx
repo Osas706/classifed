@@ -35,7 +35,7 @@ export default function RegisterScreen() {
     <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : undefined}>
       <ScrollView contentContainerStyle={styles.inner} keyboardShouldPersistTaps="handled">
         <Text style={styles.title}>Create account</Text>
-        <Text style={styles.subtitle}>Join Classifed today</Text>
+        <Text style={styles.subtitle}>Join 247Market today</Text>
 
         {[
           { key: "firstName", placeholder: "First name" },
