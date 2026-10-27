@@ -42,7 +42,7 @@ export default function HomeScreen() {
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={[styles.logo, { color: colors.text }]}>Classifed</Text>
+        <Text style={[styles.logo, { color: colors.text }, { padding: 10 }]}>247Market</Text>
       </View>
 
       {/* Category Filter */}

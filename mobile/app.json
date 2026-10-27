@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Classifed",
-    "slug": "classifed",
+    "name": "247Market",
+    "slug": "247Market",
     "version": "1.0.0",
     "orientation": "portrait",
-    "scheme": "classifed",
-    "icon": "./assets/icon.png",
+    "scheme": "247Market",
+    "icon": "./assets/icon.svg",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
@@ -31,8 +31,8 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Classifed needs access to your photos to upload ad images.",
-          "cameraPermission": "Classifed needs access to your camera to take ad photos."
+          "photosPermission": "247Market needs access to your photos to upload ad images.",
+          "cameraPermission": "247Market needs access to your camera to take ad photos."
         }
       ],
       [
