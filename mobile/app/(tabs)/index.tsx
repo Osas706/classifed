@@ -23,8 +23,8 @@ export default function HomeScreen() {
   const fetchAds = async () => {
     try {
       const { data } = await listAds();
-      setAds(data.ads);
-      setFiltered(data.ads);
+      setAds(data.data);
+      setFiltered(data.data);
     } catch {
     } finally {
       setLoading(false);
@@ -35,7 +35,7 @@ export default function HomeScreen() {
   useEffect(() => { fetchAds(); }, []);
 
   useEffect(() => {
-    setFiltered(category === "All" ? ads : ads.filter((a) => a.category === category));
+    setFiltered(category === "All" ? ads : ads?.filter((a) => a.category === category));
   }, [category, ads]);
 
   return (

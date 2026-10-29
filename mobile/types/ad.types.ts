@@ -8,8 +8,8 @@ export interface Ad {
   category?: string;
   condition?: "New" | "Used" | "Refurbished";
   terms?: string;
-  adImage?: string;
-  displayImage?: string;
+  adImage: string;
+  // displayImage?: string;
   country?: string;
   state?: string;
   lat?: number;

@@ -18,20 +18,20 @@ import { COLORS, SPACING, FONT_SIZES, BORDER_RADIUS } from "../../constants/them
 
 export default function LoginScreen() {
   const { login, isLoading } = useAuthStore();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("zee@gmail.com");
+  const [password, setPassword] = useState("12345678");
 
   const handleLogin = async () => {
     if (!validateEmail(email)) return Toast.show({ type: "error", text1: "Invalid email address" });
     if (validateRequired(password, "Password")) return Toast.show({ type: "error", text1: "Password is required" });
 
-    // try {
-    //   await login({ email, password });
-    //   router.replace("/(tabs)");
-    // } catch (err: any) {
-    //   Toast.show({ type: "error", text1: "Login failed", text2: err.message });
-    // }
-    router.replace("/(tabs)");
+    try {
+      await login({ email, password });
+      router.replace("/(tabs)");
+    } catch (err: any) {
+      Toast.show({ type: "error", text1: "Login failed", text2: err.message });
+    }
+    // router.replace("/(tabs)");
   };
 
   return (
