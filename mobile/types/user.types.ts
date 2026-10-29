@@ -17,6 +17,7 @@ export interface User {
 export interface AuthResponse {
   token: string;
   user: User;
+  userInfo: User;
 }
 
 export interface LoginPayload {

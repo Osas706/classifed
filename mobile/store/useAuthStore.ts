@@ -41,18 +41,32 @@ const useAuthStore = create<AuthState>((set, get) => ({
   //   }
   // },
 
-  login: async (payload) => {
-    set({ isLoading: true, error: null });
-    try {
-      const { data } = await loginUser(payload);
-      await secureSet("token", data.token);
-      await secureSet("userId", data.user._id);
-      set({ user: data.user, token: data.token, userId: data.user._id, isLoading: false });
-    } catch (err: any) {
-      set({ error: err.message, isLoading: false });
-      throw err;
-    }
-  },
+login: async (payload) => {
+  set({ isLoading: true, error: null });
+
+  try {
+    const { data } = await loginUser(payload);
+
+    const { token, userInfo } = data;
+
+    await secureSet("token", token);
+    await secureSet("userId", userInfo._id);
+
+    set({
+      user: userInfo,
+      token,
+      userId: userInfo._id,
+      isLoading: false,
+    });
+  } catch (err: any) {
+    set({
+      error: err.message,
+      isLoading: false,
+    });
+
+    throw err;
+  }
+},
 
   register: async (payload) => {
     set({ isLoading: true, error: null });
