@@ -6,6 +6,11 @@
     "orientation": "portrait",
     "scheme": "247Market",
     "icon": "./assets/icon.svg",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0f172a"
+    },
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,

@@ -28,28 +28,29 @@ const useAuthStore = create<AuthState>((set, get) => ({
   isLoading: false,
   error: null,
 
-  // login: async (payload) => {
-  //   set({ isLoading: true, error: null });
-  //   try {
-  //     const { data } = await loginUser(payload);
-  //     await SecureStore.setItemAsync("token", data.token);
-  //     await SecureStore.setItemAsync("userId", data.user._id);
-  //     set({ user: data.user, token: data.token, userId: data.user._id, isLoading: false });
-  //   } catch (err: any) {
-  //     set({ error: err.message, isLoading: false });
-  //     throw err;
-  //   }
-  // },
-
   login: async (payload) => {
     set({ isLoading: true, error: null });
+
     try {
       const { data } = await loginUser(payload);
-      await secureSet("token", data.token);
-      await secureSet("userId", data.user._id);
-      set({ user: data.user, token: data.token, userId: data.user._id, isLoading: false });
+
+      const { token, userInfo } = data;
+
+      await secureSet("token", token);
+      await secureSet("userId", userInfo._id);
+
+      set({
+        user: userInfo,
+        token,
+        userId: userInfo._id,
+        isLoading: false,
+      });
     } catch (err: any) {
-      set({ error: err.message, isLoading: false });
+      set({
+        error: err.message,
+        isLoading: false,
+      });
+
       throw err;
     }
   },
@@ -60,7 +61,12 @@ const useAuthStore = create<AuthState>((set, get) => ({
       const { data } = await registerUser(payload);
       await SecureStore.setItemAsync("token", data.token);
       await SecureStore.setItemAsync("userId", data.user._id);
-      set({ user: data.user, token: data.token, userId: data.user._id, isLoading: false });
+      set({
+        user: data.user,
+        token: data.token,
+        userId: data.user._id,
+        isLoading: false,
+      });
     } catch (err: any) {
       set({ error: err.message, isLoading: false });
       throw err;

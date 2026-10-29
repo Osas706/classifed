@@ -16,7 +16,7 @@ const Footer = () => {
         <div className="max-w-[280px]">
           <Link href="/" className="text-white text-[22px] font-extrabold flex items-center mb-3">
             247
-            <span className="text-accent-soft ml-px flex items-center gap-1">
+            <span className="flex gap-1 items-center ml-px text-accent-soft">
               Market <FaStore />
             </span>
           </Link>
@@ -28,15 +28,15 @@ const Footer = () => {
 
         <div className="flex gap-9 sm:gap-[70px] flex-wrap">
           <div className="flex flex-col gap-2.5">
-            <h4 className="text-sm mb-4 text-white font-bold">Marketplace</h4>
-            <Link href="/app" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Home</Link>
-            <Link href="/app/discover" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Discover</Link>
-            <Link href="/app/categories" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Categories</Link>
-            <Link href="/app/create-ad" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Post an Ad</Link>
+            <h4 className="mb-4 text-sm font-bold text-white">Marketplace</h4>
+            <Link href="/dashboard" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Home</Link>
+            <Link href="/dashboard/discover" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Discover</Link>
+            <Link href="/dashboard/categories" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Categories</Link>
+            <Link href="/dashboard/create-ad" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Post an Ad</Link>
           </div>
 
           <div className="flex flex-col gap-2.5">
-            <h4 className="text-sm mb-4 text-white font-bold">Company</h4>
+            <h4 className="mb-4 text-sm font-bold text-white">Company</h4>
             <Link href="/about" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">About Us</Link>
             <Link href="/career" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Careers</Link>
             <Link href="/blog" className="text-white/60 text-sm transition-[0.2s] hover:text-accent-soft">Blog</Link>
@@ -44,7 +44,7 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col gap-2.5">
-            <h4 className="text-sm mb-4 text-white font-bold">Explore</h4>
+            <h4 className="mb-4 text-sm font-bold text-white">Explore</h4>
             {FEATURED_COUNTRIES.map((c) => (
               <Link
                 key={c.slug}

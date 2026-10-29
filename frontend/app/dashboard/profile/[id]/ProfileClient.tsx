@@ -166,7 +166,7 @@ const ProfileClient = () => {
   }, [myAdList.length]);
 
   return (
-    <div className="mt-5 flex w-full flex-col items-center justify-center px-4 sm:px-0">
+    <div className="flex flex-col justify-center items-center px-4 mt-5 w-full sm:px-0">
       <h1 className="text-3xl sm:text-4xl md:text-[45px] text-navy-ink dark:text-white">Profile</h1>
 
       <form onSubmit={handleUpdate} className="mt-[30px] flex w-full max-w-[500px] flex-col gap-5 sm:w-auto">
@@ -188,7 +188,7 @@ const ProfileClient = () => {
           className="h-[110px] w-[95px] sm:h-[150px] sm:w-[130px] self-center rounded-[60px] border-[3px] border-black bg-accent-soft object-cover cursor-pointer"
         />
 
-        <span className="text-center font-extrabold text-navy dark:text-accent">
+        <span className="font-extrabold text-center text-navy dark:text-accent">
           {parseInt(joinedSinceDate || "") || updatedSinceDate}
         </span>
 
@@ -210,7 +210,7 @@ const ProfileClient = () => {
           )}
         </span>
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5">
+        <div className="flex flex-col gap-3 items-stretch sm:flex-row sm:items-center sm:gap-5">
           <input
             type="text"
             placeholder="First Name"
@@ -253,7 +253,7 @@ const ProfileClient = () => {
           className="h-[45px] w-full rounded-lg border border-navy dark:border-white/20 bg-accent-soft dark:bg-white/10 p-0 px-5 text-base text-navy-ink dark:text-white outline-none"
         />
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5">
+        <div className="flex flex-col gap-3 items-stretch sm:flex-row sm:items-center sm:gap-5">
           <input
             type="text"
             placeholder="Country"
@@ -285,7 +285,7 @@ const ProfileClient = () => {
       <p className="text-muted dark:text-white/60">All ads created by you...</p>
 
       <div className="mt-5 w-full sm:w-[92vw] max-w-[1100px] rounded-2xl border border-white/[0.61] dark:border-white/10 bg-white/[0.42] dark:bg-white/[0.03] p-3 sm:p-5 shadow-[0_2px_10px_rgba(0,0,0,0.1)] backdrop-blur-[10.4px]">
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 sm:gap-6">
           {pageAds.map((item) => (
             <div key={item._id} className="relative">
               <AdItem
@@ -326,12 +326,12 @@ const ProfileClient = () => {
           <div className="mx-auto my-10 flex flex-col items-center gap-2.5">
             <h3 className="flex items-center text-navy dark:text-white">Currently, you havent created any ad.<TbMoodCry /></h3>
             <p className="text-muted dark:text-white/60">You can click on the button below to create a new ad</p>
-            <Link className="rounded bg-navy px-[15px] py-2.5 text-white" href="/app/create-ad">Post an Ad</Link>
+            <Link className="rounded bg-navy px-[15px] py-2.5 text-white" href="/dashboard/create-ad">Post an Ad</Link>
           </div>
         )}
 
         {!loading && numberOfPages > 1 && (
-          <nav className="flex items-center justify-center gap-2 mt-8">
+          <nav className="flex gap-2 justify-center items-center mt-8">
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}

@@ -37,13 +37,15 @@ export interface AdFormData {
 }
 
 export type AdCategory =
-  | "All"
-  | "Electronics"
-  | "Vehicles"
-  | "Fashion"
-  | "Home & Garden"
-  | "Sports"
-  | "Jobs"
-  | "Real Estate"
-  | "Services"
-  | "Others";
+  | "all"
+  | "electronics"
+  | "vehicles"
+  | "fashion"
+  | "personals"
+  | "sports"
+  | "jobs"
+  | "apartment"
+  | "animals"
+  | "computer"
+  | "services"
+  | "others";
