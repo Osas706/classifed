@@ -28,7 +28,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.text());
-// app.use(formidable());
+app.use(formidable());
 
 //db connection
 connectDB();
