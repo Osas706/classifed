@@ -146,7 +146,7 @@ const SearchClient = () => {
           <div className="mx-auto my-10 flex flex-col items-center gap-[10px]">
             <h3 className="flex items-center text-navy">There are currently no results for this search <TbMoodCry /></h3>
             <p>You can click on the button below to create a new ad</p>
-            <Link className="rounded bg-navy px-[15px] py-[10px] text-white" href="/app/create-ad">Post an Ad</Link>
+            <Link className="rounded bg-navy px-[15px] py-[10px] text-white" href="/dashboard/create-ad">Post an Ad</Link>
           </div>
         )}
       </div>

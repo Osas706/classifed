@@ -104,7 +104,7 @@ const AdItem = ({ item, adImage, title, price, description, id, state, condition
 
   return (
     <div className="group w-full mx-auto rounded-2xl border border-navy/10 dark:border-white/10 transition-[0.25s] bg-white dark:bg-surface-dark shadow-sm hover:shadow-lg hover:-translate-y-1 overflow-hidden flex flex-col">
-      <div className="relative overflow-hidden">
+      <div className="overflow-hidden relative">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="w-full h-[200px] object-cover bg-[whitesmoke] dark:bg-white/5 transition-transform duration-300 group-hover:scale-105"
@@ -115,7 +115,7 @@ const AdItem = ({ item, adImage, title, price, description, id, state, condition
         <button
           onClick={isBookmarked ? removeFromBookmark : addToBookmark}
           aria-label={isBookmarked ? "Remove bookmark" : "Add bookmark"}
-          className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-white/90 dark:bg-navy-deep/90 backdrop-blur-sm shadow-sm hover:scale-110 transition"
+          className="flex absolute top-3 right-3 justify-center items-center w-9 h-9 rounded-full shadow-sm backdrop-blur-sm transition bg-white/90 dark:bg-navy-deep/90 hover:scale-110"
         >
           {isBookmarked ? (
             <IoBookmark className="text-lg text-accent" />
@@ -131,24 +131,24 @@ const AdItem = ({ item, adImage, title, price, description, id, state, condition
         )}
       </div>
 
-      <div className="p-4 flex flex-col flex-1">
-        <p className="text-navy-ink dark:text-white font-semibold text-base truncate">{title}</p>
+      <div className="flex flex-col flex-1 p-4">
+        <p className="text-base font-semibold truncate text-navy-ink dark:text-white">{title}</p>
 
         <p className="text-navy-ink/70 dark:text-white/60 text-xs mt-1.5 line-clamp-2 min-h-[32px]">
           {description}
         </p>
 
         <div className="flex items-center gap-3 mt-3 text-[11px] text-muted dark:text-white/50">
-          <span className="flex items-center gap-1">
+          <span className="flex gap-1 items-center">
             <RiMapPinLine className="text-accent" /> {state || "—"}
           </span>
-          <span className="flex items-center gap-1">
+          <span className="flex gap-1 items-center">
             <CiShoppingTag className="text-accent" /> {condition || "—"}
           </span>
         </div>
 
-        <div className="flex justify-between items-center border-t border-navy/10 dark:border-white/10 pt-3 mt-3">
-          <p className="text-navy dark:text-white text-lg font-bold">
+        <div className="flex justify-between items-center pt-3 mt-3 border-t border-navy/10 dark:border-white/10">
+          <p className="text-lg font-bold text-navy dark:text-white">
             {price === 0 || price === undefined
               ? "On inquiry"
               : formatConvertedPrice(price, displayCurrency)}
@@ -156,7 +156,7 @@ const AdItem = ({ item, adImage, title, price, description, id, state, condition
 
           <Link
             className="flex items-center gap-1 py-1.5 px-3.5 bg-navy hover:bg-navy-deep text-white rounded-full text-sm font-medium transition"
-            href={`/app/ad/${id}`}
+            href={`/dashboard/ad/${id}`}
           >
             View <HiOutlineArrowRight className="text-xs" />
           </Link>

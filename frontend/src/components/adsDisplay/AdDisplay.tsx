@@ -47,12 +47,12 @@ const AdDisplay = ({ adList, setAdList }: AdDisplayProps) => {
 
   return (
     <div className="mt-[30px]" id="ad-display">
-      <div className="flex items-center justify-between gap-3">
-        <h2 className="text-2xl sm:text-3xl font-bold text-navy-ink dark:text-white">Recent ads for you</h2>
+      <div className="flex gap-3 justify-between items-center">
+        <h2 className="text-2xl font-bold sm:text-3xl text-navy-ink dark:text-white">Recent ads for you</h2>
 
         <Link
           className="shrink-0 flex items-center gap-2 rounded-full border border-navy dark:border-white/20 px-4 py-2 sm:px-5 sm:py-2.5 text-sm font-semibold text-navy dark:text-white hover:bg-navy hover:text-white dark:hover:bg-white/10 transition"
-          href="/app/categories"
+          href="/dashboard/categories"
         >
           <HiOutlineSquares2X2 className="text-base" /> View All
         </Link>
@@ -92,7 +92,7 @@ const AdDisplay = ({ adList, setAdList }: AdDisplayProps) => {
       )}
 
       {numberOfPages > 1 && (
-        <nav className="flex items-center justify-center gap-2 mt-10">
+        <nav className="flex gap-2 justify-center items-center mt-10">
           <button
             onClick={prevPage}
             disabled={currentPage === 1}

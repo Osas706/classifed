@@ -60,20 +60,20 @@ const Sidebar = () => {
   };
 
   const navItems = [
-    { to: "/app", label: "Home", icon: MdOutlineHome, end: true },
-    { to: "/app/discover", label: "Discover", icon: RiCompassDiscoverLine },
-    { to: "/app/categories", label: "Categories", icon: TbCategory },
+    { to: "/dashboard", label: "Home", icon: MdOutlineHome, end: true },
+    { to: "/dashboard/discover", label: "Discover", icon: RiCompassDiscoverLine },
+    { to: "/dashboard/categories", label: "Categories", icon: TbCategory },
     ...(user
       ? [
-          { to: "/app/bookmark", label: "Bookmark", icon: MdOutlineBookmarks, badge: bookmarks?.length },
-          { to: "/app/create-ad", label: "Create Ad", icon: MdAdd },
-          { to: `/app/profile/${user}`, label: "Profile", icon: CgProfile },
+          { to: "/dashboard/bookmark", label: "Bookmark", icon: MdOutlineBookmarks, badge: bookmarks?.length },
+          { to: "/dashboard/create-ad", label: "Create Ad", icon: MdAdd },
+          { to: `/dashboard/profile/${user}`, label: "Profile", icon: CgProfile },
         ]
       : []),
   ];
 
-  const isHome = pathname === "/app" || pathname === "/";
-  const currentPage = !isHome ? navItems.find((item) => item.to === pathname || (item.to !== "/app" && pathname.startsWith(item.to))) : null;
+  const isHome = pathname === "/dashboard" || pathname === "/";
+  const currentPage = !isHome ? navItems.find((item) => item.to === pathname || (item.to !== "/dashboard" && pathname.startsWith(item.to))) : null;
 
   return (
     <>

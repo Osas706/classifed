@@ -33,11 +33,11 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   return {
     title,
     description,
-    alternates: { canonical: `/app/ad/${params.id}` },
+    alternates: { canonical: `/dashboard/ad/${params.id}` },
     openGraph: {
       title,
       description,
-      url: `${SITE_URL}/app/ad/${params.id}`,
+      url: `${SITE_URL}/dashboard/ad/${params.id}`,
       type: "website",
       images: ad.adImage ? [ad.adImage] : undefined,
     },
@@ -65,7 +65,7 @@ export default async function AdPage({ params }: { params: { id: string } }) {
       priceCurrency: "NGN",
       price: ad.price || 0,
       availability: "https://schema.org/InStock",
-      url: `${SITE_URL}/app/ad/${params.id}`,
+      url: `${SITE_URL}/dashboard/ad/${params.id}`,
     },
   };
 
@@ -73,9 +73,9 @@ export default async function AdPage({ params }: { params: { id: string } }) {
     <div className="flex flex-col gap-8 p-2.5">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-        <div className="lg:col-span-2 flex flex-col gap-6">
-          <div className="bg-white dark:bg-surface-dark border border-navy/15 dark:border-white/10 rounded-2xl overflow-hidden">
+      <div className="grid grid-cols-1 gap-6 items-start lg:grid-cols-3">
+        <div className="flex flex-col gap-6 lg:col-span-2">
+          <div className="overflow-hidden bg-white rounded-2xl border dark:bg-surface-dark border-navy/15 dark:border-white/10">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={ad.adImage}
@@ -83,34 +83,34 @@ export default async function AdPage({ params }: { params: { id: string } }) {
               className="w-full max-h-[420px] object-cover bg-[whitesmoke] dark:bg-white/5"
             />
 
-            <div className="p-6 flex flex-col gap-4">
+            <div className="flex flex-col gap-4 p-6">
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold capitalize text-navy dark:text-white">{ad.title}</h1>
+                <h1 className="text-2xl font-bold capitalize sm:text-3xl text-navy dark:text-white">{ad.title}</h1>
                 <AdPrice price={ad?.price} terms={ad?.terms} />
               </div>
 
-              <p className="text-navy-ink dark:text-white/70 leading-relaxed">{ad.description}</p>
+              <p className="leading-relaxed text-navy-ink dark:text-white/70">{ad.description}</p>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-navy/10 dark:border-white/10">
+              <div className="grid grid-cols-2 gap-4 pt-4 border-t sm:grid-cols-4 border-navy/10 dark:border-white/10">
                 <div className="flex flex-col gap-1">
                   <span className="flex items-center gap-1.5 text-xs text-muted dark:text-white/50">
                     <RiPriceTag3Line /> Category
                   </span>
-                  <span className="text-sm font-semibold text-navy dark:text-white capitalize">{ad.category || "—"}</span>
+                  <span className="text-sm font-semibold capitalize text-navy dark:text-white">{ad.category || "—"}</span>
                 </div>
 
                 <div className="flex flex-col gap-1">
                   <span className="flex items-center gap-1.5 text-xs text-muted dark:text-white/50">
                     <RiShieldCheckLine /> Condition
                   </span>
-                  <span className="text-sm font-semibold text-navy dark:text-white capitalize">{ad.condition || "—"}</span>
+                  <span className="text-sm font-semibold capitalize text-navy dark:text-white">{ad.condition || "—"}</span>
                 </div>
 
                 <div className="flex flex-col gap-1">
                   <span className="flex items-center gap-1.5 text-xs text-muted dark:text-white/50">
                     <RiMapPinLine /> Location
                   </span>
-                  <span className="text-sm font-semibold text-navy dark:text-white capitalize">
+                  <span className="text-sm font-semibold capitalize text-navy dark:text-white">
                     {[ad.state, ad.country].filter(Boolean).join(", ") || "—"}
                   </span>
                 </div>
@@ -124,7 +124,7 @@ export default async function AdPage({ params }: { params: { id: string } }) {
               </div>
 
               {ad.terms && (
-                <span className="w-fit rounded-full bg-accent-soft dark:bg-white/10 text-accent dark:text-accent px-3 py-1 text-xs font-semibold">
+                <span className="px-3 py-1 text-xs font-semibold rounded-full w-fit bg-accent-soft dark:bg-white/10 text-accent dark:text-accent">
                   {ad.terms}
                 </span>
               )}
@@ -156,11 +156,11 @@ export default async function AdPage({ params }: { params: { id: string } }) {
       <AdReviews adId={ad._id} />
 
       <div className="relative pt-8">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-navy/15 dark:via-white/15 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent to-transparent via-navy/15 dark:via-white/15" />
 
-        <div className="flex items-center gap-3 mb-6">
-          <h2 className="text-xl sm:text-2xl font-bold font-sora text-navy dark:text-white">More Ads From This Seller</h2>
-          <span className="flex-1 h-px bg-gradient-to-r from-navy/10 dark:from-white/10 to-transparent" />
+        <div className="flex gap-3 items-center mb-6">
+          <h2 className="text-xl font-bold sm:text-2xl font-sora text-navy dark:text-white">More Ads From This Seller</h2>
+          <span className="flex-1 h-px bg-gradient-to-r to-transparent from-navy/10 dark:from-white/10" />
         </div>
 
         <MoreFromSeller relatedAds={relatedAds.filter((item: any) => item._id !== ad._id)} />

@@ -75,13 +75,13 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       <header className="w-[90%] max-w-[1100px] mx-auto px-5 py-4 sm:py-6 flex flex-wrap sm:flex-nowrap justify-between items-center gap-3">
         <Link href="/" className="font-sora text-lg sm:text-[22px] font-extrabold text-navy flex items-center shrink-0">
           247
-          <span className="text-navy-ink ml-px flex items-center gap-1">
+          <span className="flex gap-1 items-center ml-px text-navy-ink">
             Market <FaStore />
           </span>
         </Link>
 
         <Link
-          href="/app"
+          href="/dashboard"
           className="w-full sm:w-auto justify-center bg-navy text-white px-4 sm:px-[22px] py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-[15px] flex items-center gap-2 transition-[0.25s] hover:bg-navy-deep"
         >
           Go to Marketplace <HiOutlineArrowRight />
@@ -93,7 +93,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           <HiOutlineArrowLeft /> Back to Blog
         </Link>
 
-        <div className="flex items-center gap-4 text-xs text-muted mb-4">
+        <div className="flex gap-4 items-center mb-4 text-xs text-muted">
           <span className="flex items-center gap-1.5">
             <RiCalendarLine /> {formatDate(post.date)}
           </span>
@@ -109,7 +109,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         <div className="flex flex-col gap-5">
           {post.content.map((block, i) =>
             block.startsWith("## ") ? (
-              <h2 key={i} className="font-sora text-navy text-xl font-bold mt-2">
+              <h2 key={i} className="mt-2 text-xl font-bold font-sora text-navy">
                 {block.replace("## ", "")}
               </h2>
             ) : (
@@ -121,10 +121,10 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         </div>
 
         <div className="mt-10 bg-white border border-[#e7e2d8] rounded-2xl px-7 py-8 text-center">
-          <h3 className="font-sora text-navy text-lg font-bold mb-2">Ready to trade on 247Market?</h3>
-          <p className="text-muted text-sm mb-5">Browse thousands of listings or post your own in minutes.</p>
+          <h3 className="mb-2 text-lg font-bold font-sora text-navy">Ready to trade on 247Market?</h3>
+          <p className="mb-5 text-sm text-muted">Browse thousands of listings or post your own in minutes.</p>
           <Link
-            href="/app"
+            href="/dashboard"
             className="inline-flex items-center gap-2 bg-navy text-white px-[26px] py-3 rounded-full font-bold text-sm transition-[0.25s] hover:bg-navy-deep"
           >
             Go to Marketplace <HiOutlineArrowRight />
@@ -134,8 +134,8 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
       {related.length > 0 && (
         <section className="w-[90%] max-w-[900px] mx-auto pb-[100px]">
-          <h2 className="font-sora text-navy text-xl font-bold mb-6 text-center">More from the blog</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <h2 className="mb-6 text-xl font-bold text-center font-sora text-navy">More from the blog</h2>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
             {related.map((p) => (
               <Link
                 href={`/blog/${p.slug}`}

@@ -72,11 +72,11 @@ const DashboardHeader = () => {
   return (
     <div className="hidden lg:block sticky top-0 z-20 w-full bg-white dark:bg-navy-deep border-b border-[#e7e2d8] dark:border-white/10">
       <div className="w-[92%] max-w-[1400px] mx-auto flex items-center justify-between gap-3 py-5">
-        <p className="text-base sm:text-lg font-bold text-navy-ink dark:text-white truncate">
+        <p className="text-base font-bold truncate sm:text-lg text-navy-ink dark:text-white">
           {welcomeText}
         </p>
 
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex gap-3 items-center shrink-0">
           <CurrencySelector value={displayCurrency} onChange={setDisplayCurrency} />
 
           <button
@@ -89,10 +89,10 @@ const DashboardHeader = () => {
 
           {user && (
             <Link
-              href={`/app/profile/${user}`}
+              href={`/dashboard/profile/${user}`}
               className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full border border-[#e7e2d8] dark:border-white/15 bg-white dark:bg-navy hover:bg-accent-soft dark:hover:bg-white/10 transition shrink-0"
             >
-              <span className="w-7 h-7 flex items-center justify-center rounded-full bg-navy dark:bg-accent text-white dark:text-navy text-xs font-bold shrink-0">
+              <span className="flex justify-center items-center w-7 h-7 text-xs font-bold text-white rounded-full bg-navy dark:bg-accent dark:text-navy shrink-0">
                 {getInitials(firstName, lastName)}
               </span>
               <span className="text-sm font-medium text-navy-ink dark:text-white truncate max-w-[100px]">

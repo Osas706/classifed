@@ -9,9 +9,9 @@ const BASE_URL =
 const client = axios.create({
   baseURL: BASE_URL,
   // timeout: 15000,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  // headers: {
+  //   "Content-Type": "application/json",
+  // },
 });
 
 // Attach stored JWT token to every request automatically

@@ -66,13 +66,13 @@ const DiscoverClient = () => {
 
   return (
     <div className="flex flex-col gap-6 p-2.5">
-      <div className="flex items-center gap-3">
-        <div className="w-11 h-11 rounded-xl bg-accent-soft dark:bg-white/10 text-accent flex items-center justify-center text-xl shrink-0">
+      <div className="flex gap-3 items-center">
+        <div className="flex justify-center items-center w-11 h-11 text-xl rounded-xl bg-accent-soft dark:bg-white/10 text-accent shrink-0">
           <RiCompassDiscoverLine />
         </div>
 
         <div>
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-navy dark:text-white leading-tight">
+          <h1 className="text-xl font-bold leading-tight sm:text-2xl md:text-3xl text-navy dark:text-white">
             Explore local deals and hidden gems
           </h1>
           <p className="text-muted dark:text-white/60 text-sm mt-0.5">
@@ -90,21 +90,21 @@ const DiscoverClient = () => {
       )}
 
       {!loading && discoverAds.length === 0 && (
-        <div className="flex flex-col items-center gap-2 py-20 text-center">
-          <h3 className="flex items-center gap-2 text-navy dark:text-white text-lg">
+        <div className="flex flex-col gap-2 items-center py-20 text-center">
+          <h3 className="flex gap-2 items-center text-lg text-navy dark:text-white">
             There are currently no ads in your region <TbMoodCry />
           </h3>
-          <p className="text-muted dark:text-white/60 text-sm">You can click below to create the first one</p>
+          <p className="text-sm text-muted dark:text-white/60">You can click below to create the first one</p>
           <Link
             className="mt-2 rounded-lg bg-navy px-4 py-2.5 text-white text-sm font-semibold hover:bg-navy-deep transition"
-            href="/app/create-ad"
+            href="/dashboard/create-ad"
           >
             Post an Ad
           </Link>
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
         {pageAds.map((item) => (
           <AdItem
             key={item._id}
@@ -122,7 +122,7 @@ const DiscoverClient = () => {
       </div>
 
       {!loading && numberOfPages > 1 && (
-        <nav className="flex items-center justify-center gap-2 mt-4">
+        <nav className="flex gap-2 justify-center items-center mt-4">
           <button
             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}

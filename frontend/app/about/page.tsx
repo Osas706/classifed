@@ -66,13 +66,13 @@ export default function AboutPage() {
       <header className="w-[90%] max-w-[1100px] mx-auto px-5 py-4 sm:py-6 flex flex-wrap sm:flex-nowrap justify-between items-center gap-3">
         <Link href="/" className="font-sora text-lg sm:text-[22px] font-extrabold text-navy flex items-center shrink-0">
           247
-          <span className="text-navy-ink ml-px flex items-center gap-1">
+          <span className="flex gap-1 items-center ml-px text-navy-ink">
             Market <FaStore />
           </span>
         </Link>
 
         <Link
-          href="/app"
+          href="/dashboard"
           className="w-full sm:w-auto justify-center bg-navy text-white px-4 sm:px-[22px] py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-[15px] flex items-center gap-2 transition-[0.25s] hover:bg-navy-deep"
         >
           Go to Marketplace <HiOutlineArrowRight />
@@ -116,7 +116,7 @@ export default function AboutPage() {
           <span>7</span>
         </div>
         <div>
-          <h2 className="font-sora text-2xl text-navy mb-4 font-extrabold">Our story</h2>
+          <h2 className="mb-4 text-2xl font-extrabold font-sora text-navy">Our story</h2>
           <p className="text-muted text-base leading-[1.7] mb-4">
             We built 247Market to bring Nigeria&apos;s informal buying and selling online, with
             the trust and structure it deserves. What began as a way to make it easier to sell a
@@ -143,14 +143,14 @@ export default function AboutPage() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {VALUES.map((v) => (
             <div
               key={v.title}
               className="bg-white border border-[#e7e2d8] rounded-2xl px-6 py-[30px] text-left transition-[0.25s] hover:-translate-y-1 hover:shadow-[0_20px_34px_-18px_rgba(7,19,40,0.25)] hover:border-transparent"
             >
               <v.icon className="text-[30px] text-accent mb-4 bg-accent-soft p-2.5 rounded-xl box-content" />
-              <h3 className="text-lg mb-2 text-navy font-bold">{v.title}</h3>
+              <h3 className="mb-2 text-lg font-bold text-navy">{v.title}</h3>
               <p className="text-sm text-muted leading-[1.6]">{v.text}</p>
             </div>
           ))}
@@ -163,7 +163,7 @@ export default function AboutPage() {
           Buy, sell and discover cars, phones, apartments, jobs and more — today.
         </p>
         <Link
-          href="/app"
+          href="/dashboard"
           className="px-6 py-3.5 lg:px-[30px] lg:py-[15px] rounded-full font-bold text-base transition-[0.25s] inline-flex items-center gap-2 bg-accent text-navy-deep shadow-[0_14px_30px_-10px_rgba(18,184,134,0.6)] hover:bg-[#0fa374]"
         >
           Get Started <HiOutlineArrowRight />

@@ -109,7 +109,7 @@ const Home = ({ stats }: HomeProps) => {
         </h2>
 
         <Link
-          href="/app"
+          href="/dashboard"
           className="bg-navy text-white px-3 py-[9px] text-[12px] whitespace-nowrap sm:px-4 sm:text-[13px] lg:px-[22px] lg:py-3 lg:text-[15px] rounded-full font-semibold flex items-center gap-1.5 sm:gap-2 shrink-0 transition-[0.25s] hover:bg-navy-deep hover:-translate-y-px"
         >
           <span className="hidden sm:inline">Go to Marketplace</span>
@@ -132,10 +132,10 @@ const Home = ({ stats }: HomeProps) => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-[50px]">
-            <Link href="/app" className={btnPrimary}>
+            <Link href="/dashboard" className={btnPrimary}>
               Start Exploring <HiOutlineArrowRight />
             </Link>
-            <Link href="/app/create-ad" className={btnSecondary}>
+            <Link href="/dashboard/create-ad" className={btnSecondary}>
               Post an Ad
             </Link>
           </div>
@@ -349,7 +349,7 @@ const Home = ({ stats }: HomeProps) => {
         <h2 className="text-[28px] lg:text-[32px] mb-3 font-extrabold">Ready to get started?</h2>
         <p className="text-base opacity-85 mb-[30px]">Join 247Market and turn your listings into sales today.</p>
         <Link
-          href="/app"
+          href="/dashboard"
           className="px-6 py-3.5 lg:px-[30px] lg:py-[15px] rounded-full font-bold text-base transition-[0.25s] inline-flex items-center gap-2 bg-accent text-navy-deep shadow-[0_14px_30px_-10px_rgba(18,184,134,0.6)] hover:bg-[#0fa374]"
         >
           Get Started <HiOutlineArrowRight />
