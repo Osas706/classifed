@@ -34,9 +34,13 @@ client.interceptors.request.use(
 client.interceptors.response.use(
   (response) => response,
   (error) => {
-    const message =
-      error?.response?.data?.message || error?.message || "Something went wrong";
-    return Promise.reject(new Error(message));
+    console.log("API URL:", error.config?.baseURL);
+    console.log("Request:", error.config?.url);
+    console.log("Status:", error.response?.status);
+    console.log("Response:", error.response?.data);
+    console.log("Error:", error.message);
+
+    return Promise.reject(error);
   }
 );
 
