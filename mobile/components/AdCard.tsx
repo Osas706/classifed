@@ -24,8 +24,8 @@ export default function AdCard({ ad, onPress }: Props) {
       onPress={onPress}
       activeOpacity={0.85}
     >
-      {ad.displayImage ? (
-        <Image source={{ uri: ad.displayImage }} style={styles.image} />
+      {ad.adImage ? (
+        <Image source={{ uri: ad.adImage }} style={styles.image} />
       ) : (
         <View style={[styles.imagePlaceholder, { backgroundColor: colors.background }]}>
           <Ionicons name="image-outline" size={32} color={COLORS.textSecondary} />

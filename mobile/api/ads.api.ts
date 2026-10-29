@@ -3,22 +3,22 @@ import client from "./client";
 import { Ad } from "../types/ad.types";
 
 export const listAds = () =>
-  client.get<{ ads: Ad[] }>("/api/ads/list");
+  client.get<{ data: Ad[] }>("/api/ads/list");
 
 export const getAd = (id: string) =>
-  client.get<{ ad: Ad }>(`/api/ads/${id}`);
+  client.get<{ data: Ad }>(`/api/ads/${id}`);
 
 export const searchAds = (query: string) =>
-  client.get<{ ads: Ad[] }>(`/api/ads/search?q=${query}`);
+  client.get<{ data: Ad[] }>(`/api/ads/search?q=${query}`);
 
 export const discoverAds = () =>
-  client.get<{ ads: Ad[] }>("/api/ads/discover");
+  client.get<{ data: Ad[] }>("/api/ads/discover");
 
 export const getAdStats = () =>
-  client.get("/api/ads/stats");
+  client.get<{ data: any }>("/api/ads/stats");
 
 export const getMyAds = (userId: string) =>
-  client.get<{ ads: Ad[] }>(`/api/ads/my-ads/${userId}`);
+  client.get<{ data: Ad[] }>(`/api/ads/my-ads/${userId}`);
 
 export const addAd = (formData: FormData) =>
   client.post("/api/ads/add", formData, {

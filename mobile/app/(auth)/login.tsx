@@ -18,8 +18,8 @@ import { COLORS, SPACING, FONT_SIZES, BORDER_RADIUS } from "../../constants/them
 
 export default function LoginScreen() {
   const { login, isLoading } = useAuthStore();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("zee@gmail.com");
+  const [password, setPassword] = useState("12345678");
 
   const handleLogin = async () => {
     if (!validateEmail(email)) return Toast.show({ type: "error", text1: "Invalid email address" });
@@ -31,6 +31,7 @@ export default function LoginScreen() {
     } catch (err: any) {
       Toast.show({ type: "error", text1: "Login failed", text2: err.message });
     }
+    // router.replace("/(tabs)");
   };
 
   return (
@@ -40,7 +41,7 @@ export default function LoginScreen() {
     >
       <View style={styles.inner}>
         <Text style={styles.title}>Welcome back</Text>
-        <Text style={styles.subtitle}>Sign in to your Classifed account</Text>
+        <Text style={styles.subtitle}>Sign in to your 247Market account</Text>
 
         <TextInput
           style={styles.input}
