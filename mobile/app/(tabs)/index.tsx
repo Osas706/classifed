@@ -49,7 +49,7 @@ export default function HomeScreen() {
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={CATEGORIES}
+        data={CATEGORIES.map((c) => c.charAt(0).toUpperCase() + c.slice(1))}
         keyExtractor={(item) => item}
         style={styles.categoryList}
         contentContainerStyle={{ paddingHorizontal: SPACING.md }}
@@ -92,6 +92,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.md,
     paddingVertical: SPACING.xs,
     borderRadius: BORDER_RADIUS.full,
+    borderWidth: 1,
+    borderColor: "#F0F0F5",
     backgroundColor: "#F0F0F5",
     marginRight: SPACING.xs,
     alignSelf: "flex-start",
