@@ -41,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const adRoutes: MetadataRoute.Sitemap = adIds.map((id) => ({
-    url: `${SITE_URL}/app/ad/${id}`,
+    url: `${SITE_URL}/dashboard/ad/${id}`,
     changeFrequency: "weekly",
     priority: 0.6,
   }));

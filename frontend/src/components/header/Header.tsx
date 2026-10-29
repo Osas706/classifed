@@ -18,7 +18,7 @@ const Header = () => {
     urlParams.set("searchLocation", searchLocation);
     urlParams.set("searchCategory", searchCategory);
 
-    router.push(`/app/search?${urlParams.toString()}`);
+    router.push(`/dashboard/search?${urlParams.toString()}`);
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Header = () => {
 
         {/* Gradient overlay for legibility + polish over the sliding photos */}
         <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(7,19,40,0.75)_0%,rgba(7,19,40,0.35)_45%,rgba(7,19,40,0.05)_75%)] pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t via-transparent to-transparent pointer-events-none from-black/50" />
 
         <div className="absolute bottom-[30%] max-lg:bottom-[38%] max-sm:bottom-[42%] left-[6vw] flex max-w-[50%] max-lg:max-w-[70%] max-sm:max-w-[80%] flex-col items-start gap-[1.5vw] animate-[fadeIn_3s]">
           <h2 className="text-[58px] max-lg:text-[26px] max-sm:text-xl font-medium text-white drop-shadow-[2px_3px_6px_rgba(0,0,0,0.65)] leading-tight">

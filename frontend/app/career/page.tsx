@@ -44,12 +44,12 @@ export default function CareerPage() {
           className="font-sora text-lg sm:text-[22px] font-extrabold text-navy flex items-center shrink-0"
         >
           247
-          <span className="text-navy-ink ml-px flex items-center gap-1">
+          <span className="flex gap-1 items-center ml-px text-navy-ink">
             Market <FaStore />
           </span>
         </Link>
 
-        <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
+        <div className="flex gap-3 justify-end items-center w-full sm:w-auto">
           <Link
             href="/about"
             className="hidden sm:inline-block text-navy/70 hover:text-navy font-semibold text-sm px-3 py-2 transition-[0.2s]"
@@ -63,7 +63,7 @@ export default function CareerPage() {
             Contact
           </Link>
           <Link
-            href="/app"
+            href="/dashboard"
             className="w-full sm:w-auto justify-center bg-navy text-white px-4 sm:px-[22px] py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-[15px] flex items-center gap-2 transition-[0.25s] hover:bg-navy-deep"
           >
             Go to Marketplace <HiOutlineArrowRight />

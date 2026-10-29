@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/app/create-ad", "/app/profile/", "/app/bookmark", "/reset-password/"],
+        disallow: ["/dashboard/create-ad", "/dashboard/profile/", "/dashboard/bookmark", "/reset-password/"],
       },
     ],
     sitemap: "https://247market.org/sitemap.xml",

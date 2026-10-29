@@ -29,13 +29,13 @@ export default function ContactPage() {
       <header className="w-[90%] max-w-[1100px] mx-auto px-5 py-4 sm:py-6 flex flex-wrap sm:flex-nowrap justify-between items-center gap-3">
         <Link href="/" className="font-sora text-lg sm:text-[22px] font-extrabold text-navy flex items-center shrink-0">
           247
-          <span className="text-navy-ink ml-px flex items-center gap-1">
+          <span className="flex gap-1 items-center ml-px text-navy-ink">
             Market <FaStore />
           </span>
         </Link>
 
         <Link
-          href="/app"
+          href="/dashboard"
           className="w-full sm:w-auto justify-center bg-navy text-white px-4 sm:px-[22px] py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-[15px] flex items-center gap-2 transition-[0.25s] hover:bg-navy-deep"
         >
           Go to Marketplace <HiOutlineArrowRight />
@@ -71,7 +71,7 @@ export default function ContactPage() {
             <RiMailLine className="text-[24px] text-accent bg-accent-soft p-2 rounded-[10px] box-content shrink-0" />
             <div>
               <h3 className="font-sora text-navy font-bold text-[15px] mb-1">Email us</h3>
-              <a href={`mailto:${SUPPORT_EMAIL}`} className="text-accent font-bold text-sm hover:underline">
+              <a href={`mailto:${SUPPORT_EMAIL}`} className="text-sm font-bold text-accent hover:underline">
                 {SUPPORT_EMAIL}
               </a>
             </div>
@@ -81,7 +81,7 @@ export default function ContactPage() {
             <RiTimeLine className="text-[24px] text-accent bg-accent-soft p-2 rounded-[10px] box-content shrink-0" />
             <div>
               <h3 className="font-sora text-navy font-bold text-[15px] mb-1">Response time</h3>
-              <p className="text-muted text-sm">We typically reply within 1–2 business days.</p>
+              <p className="text-sm text-muted">We typically reply within 1–2 business days.</p>
             </div>
           </div>
 
@@ -89,7 +89,7 @@ export default function ContactPage() {
             <RiMapPinLine className="text-[24px] text-accent bg-accent-soft p-2 rounded-[10px] box-content shrink-0" />
             <div>
               <h3 className="font-sora text-navy font-bold text-[15px] mb-1">Where we operate</h3>
-              <p className="text-muted text-sm">Nigeria, Ghana, and across Africa.</p>
+              <p className="text-sm text-muted">Nigeria, Ghana, and across Africa.</p>
             </div>
           </div>
         </div>

@@ -140,13 +140,13 @@ export default async function CountryAdsPage({ params }: { params: { country: st
       <header className="w-[90%] max-w-[1100px] mx-auto px-5 py-4 sm:py-6 flex flex-wrap sm:flex-nowrap justify-between items-center gap-3">
         <Link href="/" className="font-sora text-lg sm:text-[22px] font-extrabold text-navy flex items-center shrink-0">
           247
-          <span className="text-navy-ink ml-px flex items-center gap-1">
+          <span className="flex gap-1 items-center ml-px text-navy-ink">
             Market <FaStore />
           </span>
         </Link>
 
         <Link
-          href="/app"
+          href="/dashboard"
           className="w-full sm:w-auto justify-center bg-navy text-white px-4 sm:px-[22px] py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-[15px] flex items-center gap-2 transition-[0.25s] hover:bg-navy-deep"
         >
           Go to Marketplace <HiOutlineArrowRight />
@@ -165,21 +165,21 @@ export default async function CountryAdsPage({ params }: { params: { country: st
 
         <div className="flex justify-center gap-10 mb-[34px] flex-wrap">
           <div className="flex flex-col">
-            <strong className="font-sora text-xl font-extrabold text-navy">{listingCount}</strong>
+            <strong className="text-xl font-extrabold font-sora text-navy">{listingCount}</strong>
             <span className="text-xs text-muted">Active listings</span>
           </div>
           <div className="flex flex-col">
-            <strong className="font-sora text-xl font-extrabold text-navy">{data.currency}</strong>
+            <strong className="text-xl font-extrabold font-sora text-navy">{data.currency}</strong>
             <span className="text-xs text-muted">Local currency</span>
           </div>
           <div className="flex flex-col">
-            <strong className="font-sora text-xl font-extrabold text-navy">{data.cities.length}+</strong>
+            <strong className="text-xl font-extrabold font-sora text-navy">{data.cities.length}+</strong>
             <span className="text-xs text-muted">Cities covered</span>
           </div>
         </div>
 
         <Link
-          href="/app"
+          href="/dashboard"
           className="inline-flex items-center gap-2 bg-navy text-white px-[30px] py-[15px] rounded-full font-bold text-base transition-[0.25s] shadow-[0_10px_24px_-8px_rgba(13,33,64,0.55)] hover:bg-navy-deep hover:-translate-y-0.5"
         >
           Browse {data.name} listings <HiOutlineArrowRight />
@@ -190,7 +190,7 @@ export default async function CountryAdsPage({ params }: { params: { country: st
         <div className="bg-white border border-[#e7e2d8] rounded-2xl px-[26px] py-7">
           <RiMapPinLine className="text-[26px] text-accent bg-accent-soft p-2 rounded-[10px] box-content mb-3" />
           <h2 className="font-sora text-navy mb-3 text-[17px]">Top cities</h2>
-          <ul className="list-none flex flex-col gap-2 text-muted text-sm">
+          <ul className="flex flex-col gap-2 text-sm list-none text-muted">
             {data.cities.map((city) => (
               <li key={city}>{city}</li>
             ))}
@@ -200,7 +200,7 @@ export default async function CountryAdsPage({ params }: { params: { country: st
         <div className="bg-white border border-[#e7e2d8] rounded-2xl px-[26px] py-7">
           <RiPriceTag3Line className="text-[26px] text-accent bg-accent-soft p-2 rounded-[10px] box-content mb-3" />
           <h2 className="font-sora text-navy mb-3 text-[17px]">Popular categories</h2>
-          <ul className="list-none flex flex-col gap-2 text-muted text-sm">
+          <ul className="flex flex-col gap-2 text-sm list-none text-muted">
             {data.popularCategories.map((cat) => (
               <li key={cat}>{cat}</li>
             ))}
@@ -218,7 +218,7 @@ export default async function CountryAdsPage({ params }: { params: { country: st
               className="bg-white border border-[#e7e2d8] rounded-xl px-3.5 py-5 flex flex-col items-center gap-2 transition-[0.2s] hover:-translate-y-[3px] hover:shadow-[0_14px_26px_-14px_rgba(7,19,40,0.25)]"
             >
               <span className="text-3xl">{c.flag}</span>
-              <strong className="text-navy text-sm">{c.name}</strong>
+              <strong className="text-sm text-navy">{c.name}</strong>
             </Link>
           ))}
         </div>

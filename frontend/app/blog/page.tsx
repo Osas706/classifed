@@ -33,13 +33,13 @@ export default function BlogIndexPage() {
       <header className="w-[90%] max-w-[1100px] mx-auto px-5 py-4 sm:py-6 flex flex-wrap sm:flex-nowrap justify-between items-center gap-3">
         <Link href="/" className="font-sora text-lg sm:text-[22px] font-extrabold text-navy flex items-center shrink-0">
           247
-          <span className="text-navy-ink ml-px flex items-center gap-1">
+          <span className="flex gap-1 items-center ml-px text-navy-ink">
             Market <FaStore />
           </span>
         </Link>
 
         <Link
-          href="/app"
+          href="/dashboard"
           className="w-full sm:w-auto justify-center bg-navy text-white px-4 sm:px-[22px] py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-[15px] flex items-center gap-2 transition-[0.25s] hover:bg-navy-deep"
         >
           Go to Marketplace <HiOutlineArrowRight />
@@ -66,7 +66,7 @@ export default function BlogIndexPage() {
             key={post.slug}
             className="bg-white border border-[#e7e2d8] rounded-2xl px-[26px] py-7 flex flex-col transition-[0.25s] hover:-translate-y-1 hover:shadow-[0_18px_30px_-16px_rgba(7,19,40,0.25)] hover:border-transparent"
           >
-            <div className="flex items-center gap-4 text-xs text-muted mb-3">
+            <div className="flex gap-4 items-center mb-3 text-xs text-muted">
               <span className="flex items-center gap-1.5">
                 <RiCalendarLine /> {formatDate(post.date)}
               </span>

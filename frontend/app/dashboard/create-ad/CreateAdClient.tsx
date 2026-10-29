@@ -147,7 +147,7 @@ const CreateAdClient = () => {
     try {
       const res = await axios.post(`${url}/api/ads/add`, formData);
       if (res.data.success) {
-        router.push(`/app/ad/${res.data.ad?._id}`);
+        router.push(`/dashboard/ad/${res.data.ad?._id}`);
         toast.success(res.data.message);
       }
     } catch (error: any) {
@@ -166,7 +166,7 @@ const CreateAdClient = () => {
         <h1 className="mb-1 text-2xl sm:text-[28px] md:text-[36px] text-navy-ink">Create Your Ad</h1>
         <p className="mb-5 sm:mb-[26px] text-sm sm:text-base text-muted">What can we advertise for you today?</p>
 
-        <div className="flex items-center justify-center overflow-x-auto">
+        <div className="flex overflow-x-auto justify-center items-center">
           {STEPS.map((s, index) => (
             <div key={s.id} className="flex items-center shrink-0">
               <div className="flex min-w-[56px] sm:min-w-[90px] flex-col items-center gap-1.5">
@@ -269,8 +269,8 @@ const CreateAdClient = () => {
 
             <label htmlFor="terms" className="flex flex-col gap-1.5 text-sm font-semibold text-navy-ink">
               Your Terms
-              <div className="flex h-6 items-center gap-6">
-                <label htmlFor="fixedPrice" className="flex flex-row items-center gap-2 font-medium">
+              <div className="flex gap-6 items-center h-6">
+                <label htmlFor="fixedPrice" className="flex flex-row gap-2 items-center font-medium">
                   <input
                     type="checkbox"
                     name="fixedPrice"
@@ -282,7 +282,7 @@ const CreateAdClient = () => {
                   Fixed Price
                 </label>
 
-                <label htmlFor="negotiable" className="flex flex-row items-center gap-2 font-medium">
+                <label htmlFor="negotiable" className="flex flex-row gap-2 items-center font-medium">
                   <input
                     type="checkbox"
                     name="negotiable"
@@ -479,7 +479,7 @@ const CreateAdClient = () => {
               </div>
             </div>
 
-            <label className="flex flex-row items-center gap-2 text-sm font-medium text-navy-ink">
+            <label className="flex flex-row gap-2 items-center text-sm font-medium text-navy-ink">
               <input type="checkbox" required className="w-min accent-navy" />
               By Continuing, I agree to the terms of use & privacy policy.
             </label>
@@ -487,7 +487,7 @@ const CreateAdClient = () => {
         )}
       </div>
 
-      <div className="flex flex-col-reverse sm:flex-row justify-between gap-3 sm:gap-4">
+      <div className="flex flex-col-reverse gap-3 justify-between sm:flex-row sm:gap-4">
         {step > 1 && (
           <button
             type="button"
