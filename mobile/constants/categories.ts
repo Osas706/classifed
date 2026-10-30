@@ -4,6 +4,7 @@ import { AdCategory } from "../types/ad.types";
 export const CATEGORIES: AdCategory[] = [
   "all",
   "electronics",
+  "cars",
   "vehicles",
   "fashion",
   "sports",
