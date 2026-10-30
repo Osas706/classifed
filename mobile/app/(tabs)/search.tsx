@@ -23,7 +23,7 @@ export default function SearchScreen() {
     setSearched(true);
     try {
       const { data } = await searchAds(query.trim());
-      setResults(data.ads);
+      setResults(data?.data);
     } catch {
       setResults([]);
     } finally {
@@ -33,7 +33,7 @@ export default function SearchScreen() {
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
-      <Text style={[styles.title, { color: colors.text }]}>Search Ads</Text>
+      <Text style={[styles.title, { color: colors.text }]}>What are you looking for today?</Text>
       <View style={styles.searchRow}>
         <TextInput
           style={[styles.input, { backgroundColor: colors.card, color: colors.text, borderColor: colors.border }]}
