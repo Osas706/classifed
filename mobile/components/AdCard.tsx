@@ -31,10 +31,12 @@ export default function AdCard({ ad, onPress }: Props) {
           <Ionicons name="image-outline" size={32} color={COLORS.textSecondary}  />
         </View>
       )}
+
       <View style={styles.info}>
         <Text style={[styles.title, { color: colors.text }]} numberOfLines={2}>{ad.title}</Text>
         <Text style={[styles.desc, { color: colors.text }]} numberOfLines={4}>{ad.description}</Text>
-
+        <Text style={styles.price}>{formatPrice(ad.price, displayCurrency)}</Text>
+        
         {(ad.state || ad.country) && (
           <View style={styles.locationRow}>
             <Ionicons name="location-outline" size={11} color={COLORS.textSecondary} />
@@ -53,7 +55,7 @@ export default function AdCard({ ad, onPress }: Props) {
           </View>
         )}
 
-                <Text style={styles.price}>{formatPrice(ad.price, displayCurrency)}</Text>
+     
       </View>
     </TouchableOpacity>
   );
