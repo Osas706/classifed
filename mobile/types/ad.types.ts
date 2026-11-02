@@ -39,6 +39,7 @@ export interface AdFormData {
 export type AdCategory =
   | "all"
   | "electronics"
+  | "cars"
   | "vehicles"
   | "fashion"
   | "personals"

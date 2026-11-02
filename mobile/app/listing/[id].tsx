@@ -44,8 +44,8 @@ export default function ListingDetailScreen() {
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
       <ScrollView>
-        {ad.displayImage ? (
-          <Image source={{ uri: ad.displayImage }} style={styles.image} />
+        {ad.adImage ? (
+          <Image source={{ uri: ad.adImage }} style={styles.image} />
         ) : (
           <View style={[styles.imagePlaceholder, { backgroundColor: colors.card }]}>
             <Ionicons name="image-outline" size={64} color={COLORS.textSecondary} />
