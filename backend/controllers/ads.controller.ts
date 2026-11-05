@@ -14,39 +14,56 @@ export const addAd = async (req: any, res: Response) => {
     firstName, lastName, email, phoneNumber, country, state, lat, long, user,
   } = req.fields;
 
-  let adImage = req?.files?.adImage?.path;
-  let displayImage = req?.files?.displayImage?.path;
+  const adImageFile = req?.files?.adImage?.path as string | undefined;
+  const displayImageFile = req?.files?.displayImage?.path as string | undefined;
+  let adImage: string | undefined;
+  let displayImage: string | undefined;
 
-  if (adImage) {
+  const uploadToCloudinary = async (filePath: string, watermark: boolean) => {
     const dstPath = `./output-with-watermark-${crypto.randomUUID()}.jpg`;
-    const options = { ratio: 0.45, opacity: 0.7, dstPath };
-    let uploadPath = adImage;
+    let uploadPath = filePath;
 
-    try {
-      await Jimp.addWatermark(adImage, "mark.png", options);
-      uploadPath = dstPath;
-    } catch (error) {
-      console.log("Watermarking failed, uploading original image instead:", error);
+    if (watermark) {
+      try {
+        await Jimp.addWatermark(filePath, "mark.png", { ratio: 0.45, opacity: 0.7, dstPath });
+        uploadPath = dstPath;
+      } catch (error) {
+        console.log("Watermarking failed, uploading original image instead:", error);
+      }
     }
 
     try {
-      const adUploadedResponse: any = await cloudinary.uploader.upload(uploadPath);
-      adImage = adUploadedResponse?.secure_url;
+      const uploaded: any = await cloudinary.uploader.upload(uploadPath, { resource_type: "auto" });
+      if (uploaded?.secure_url) return uploaded.secure_url as string;
     } catch (error) {
       console.log(error);
+      if (uploadPath !== filePath) {
+        try {
+          const fallback: any = await cloudinary.uploader.upload(filePath, { resource_type: "auto" });
+          if (fallback?.secure_url) return fallback.secure_url as string;
+        } catch (fallbackError) {
+          console.log(fallbackError);
+        }
+      }
     } finally {
       if (uploadPath === dstPath) fs.unlink(dstPath, () => {});
     }
+
+    return undefined;
+  };
+
+  if (adImageFile) {
+    adImage = await uploadToCloudinary(adImageFile, true);
+    if (!adImage?.startsWith("http")) {
+      return res.status(400).json({ success: false, message: "Image upload failed. Please try another photo." });
+    }
   }
 
-  if (displayImage) {
-    const displayUploadedResponse: any = await cloudinary.uploader
-      .upload(displayImage)
-      .catch((error) => {
-        console.log(error);
-      });
-
-    displayImage = displayUploadedResponse?.secure_url;
+  if (displayImageFile) {
+    displayImage = await uploadToCloudinary(displayImageFile, false);
+    if (!displayImage?.startsWith("http")) {
+      return res.status(400).json({ success: false, message: "Profile photo upload failed. Please try another photo." });
+    }
   }
 
   const ad = new AdModel({
