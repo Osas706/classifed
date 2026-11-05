@@ -1,28 +1,31 @@
 // mobile/constants/theme.ts
 export const COLORS = {
-  primary: "#6C5CE7",
-  primaryLight: "#A29BFE",
-  secondary: "#00CEC9",
-  accent: "#FD79A8",
-  success: "#00B894",
-  error: "#D63031",
-  warning: "#FDCB6E",
+  primary: "#0d2140",
+  primaryLight: "#d9f5ea",
+  navyDeep: "#071328",
+  navyInk: "#0a1128",
+  secondary: "#12b886",
+  accent: "#12b886",
+  accentSoft: "#d9f5ea",
+  success: "#12b886",
+  error: "#c0392b",
+  warning: "#d97706",
 
-  backgroundLight: "#F8F9FE",
-  backgroundDark: "#0F0F1A",
+  backgroundLight: "#fbf8f3",
+  backgroundDark: "#071328",
 
   cardLight: "#FFFFFF",
-  cardDark: "#1A1A2E",
+  cardDark: "#102844",
 
-  textPrimary: "#2D3436",
-  textSecondary: "#636E72",
+  textPrimary: "#0a1128",
+  textSecondary: "#647087",
   textInverse: "#FFFFFF",
 
-  borderLight: "#E0E0E0",
-  borderDark: "#2D2D3F",
+  borderLight: "rgba(13,33,64,0.1)",
+  borderDark: "rgba(255,255,255,0.1)",
 
   tabBarLight: "#FFFFFF",
-  tabBarDark: "#1A1A2E",
+  tabBarDark: "#102844",
 };
 
 export const FONT_SIZES = {

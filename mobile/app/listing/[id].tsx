@@ -25,10 +25,10 @@ export default function ListingDetailScreen() {
   const isBookmarked = bookmarks.some((b) => b._id === id);
 
   const toggleBookmark = async () => {
-    if (!user) return;
+    if (!user || !selectedAd) return;
     isBookmarked
-      ? await removeBookmark(user._id, id!)
-      : await addBookmark(user._id, id!);
+      ? await removeBookmark(user._id, selectedAd)
+      : await addBookmark(user._id, selectedAd);
   };
 
   if (isLoading || !selectedAd) {
@@ -59,7 +59,7 @@ export default function ListingDetailScreen() {
               <Ionicons
                 name={isBookmarked ? "bookmark" : "bookmark-outline"}
                 size={24}
-                color={isBookmarked ? COLORS.primary : COLORS.textSecondary}
+                color={isBookmarked ? COLORS.accent : COLORS.textSecondary}
               />
             </TouchableOpacity>
           </View>

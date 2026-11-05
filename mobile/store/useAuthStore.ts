@@ -1,16 +1,16 @@
 // mobile/store/useAuthStore.ts
 import { create } from "zustand";
-import * as SecureStore from "expo-secure-store";
 import { loginUser, registerUser } from "../api/auth.api";
 import { getMe } from "../api/user.api";
 import { User, LoginPayload, RegisterPayload } from "../types/user.types";
-import { secureDelete, secureGet, secureSet } from "@/utils/storage";
+import { secureDelete, secureGet, secureSet, storageDelete, storageGet, storageSet } from "../utils/storage";
 
 interface AuthState {
   user: User | null;
   userId: string | null;
   token: string | null;
   isLoading: boolean;
+  hasHydrated: boolean;
   error: string | null;
 
   login: (payload: LoginPayload) => Promise<void>;
@@ -21,11 +21,24 @@ interface AuthState {
   clearError: () => void;
 }
 
+const cacheUser = async (user: User, token: string) => {
+  await secureSet("token", token);
+  await secureSet("userId", user._id);
+  await storageSet("user", JSON.stringify(user));
+};
+
+const unwrapUser = (data: any): User | null => {
+  if (data?.user?._id) return data.user;
+  if (data?._id) return data;
+  return null;
+};
+
 const useAuthStore = create<AuthState>((set, get) => ({
   user: null,
   userId: null,
   token: null,
   isLoading: false,
+  hasHydrated: false,
   error: null,
 
   login: async (payload) => {
@@ -35,9 +48,7 @@ const useAuthStore = create<AuthState>((set, get) => ({
       const { data } = await loginUser(payload);
 
       const { token, userInfo } = data;
-
-      await secureSet("token", token);
-      await secureSet("userId", userInfo._id);
+      await cacheUser(userInfo, token);
 
       set({
         user: userInfo,
@@ -47,7 +58,7 @@ const useAuthStore = create<AuthState>((set, get) => ({
       });
     } catch (err: any) {
       set({
-        error: err.message,
+        error: err?.response?.data?.message || err.message,
         isLoading: false,
       });
 
@@ -59,16 +70,16 @@ const useAuthStore = create<AuthState>((set, get) => ({
     set({ isLoading: true, error: null });
     try {
       const { data } = await registerUser(payload);
-      await SecureStore.setItemAsync("token", data.token);
-      await SecureStore.setItemAsync("userId", data.user._id);
+      const user = data.userInfo || data.user;
+      await cacheUser(user, data.token);
       set({
-        user: data.user,
+        user,
         token: data.token,
-        userId: data.user._id,
+        userId: user._id,
         isLoading: false,
       });
     } catch (err: any) {
-      set({ error: err.message, isLoading: false });
+      set({ error: err?.response?.data?.message || err.message, isLoading: false });
       throw err;
     }
   },
@@ -82,6 +93,7 @@ const useAuthStore = create<AuthState>((set, get) => ({
   logout: async () => {
     await secureDelete("token");
     await secureDelete("userId");
+    await storageDelete("user");
     set({ user: null, token: null, userId: null });
   },
 
@@ -104,18 +116,38 @@ const useAuthStore = create<AuthState>((set, get) => ({
   // },
 
   loadFromStorage: async () => {
-    const token = await secureGet("token");
-    const userId = await secureGet("userId");
-    if (token && userId) {
-      set({ token, userId });
-      try {
-        const { data } = await getMe(userId);
-        set({ user: data.user });
-      } catch {
-        await secureDelete("token");
-        await secureDelete("userId");
-        set({ token: null, userId: null });
+    try {
+      const token = await secureGet("token");
+      const userId = await secureGet("userId");
+      const cached = await storageGet("user");
+      if (cached) {
+        try {
+          set({ user: JSON.parse(cached) });
+        } catch {
+          // ignore a corrupt cache and wait for the network profile
+        }
       }
+      if (token && userId) {
+        set({ token, userId });
+        try {
+          const { data } = await getMe(userId);
+          const user = unwrapUser(data);
+          if (user) {
+            await storageSet("user", JSON.stringify(user));
+            set({ user });
+          }
+        } catch (err: any) {
+          const status = err?.response?.status;
+          if (status === 400 || status === 401 || status === 404) {
+            await secureDelete("token");
+            await secureDelete("userId");
+            await storageDelete("user");
+            set({ token: null, userId: null, user: null });
+          }
+        }
+      }
+    } finally {
+      set({ hasHydrated: true });
     }
   },
 
@@ -124,7 +156,11 @@ const useAuthStore = create<AuthState>((set, get) => ({
     if (!userId) return;
     try {
       const { data } = await getMe(userId);
-      set({ user: data.user });
+      const user = unwrapUser(data);
+      if (user) {
+        await storageSet("user", JSON.stringify(user));
+        set({ user });
+      }
     } catch (err: any) {
       set({ error: err.message });
     }

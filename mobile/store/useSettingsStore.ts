@@ -2,7 +2,7 @@
 import { create } from "zustand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ad } from "../types/ad.types";
-import { getBookmarks, addToBookmark, removeFromBookmark } from "../api/bookmarks.api";
+import { getBookmarks, addToBookmark, removeFromBookmark, emptyBookmarks } from "../api/bookmarks.api";
 
 type Theme = "light" | "dark";
 
@@ -15,8 +15,9 @@ interface SettingsState {
   setDisplayCurrency: (currency: string) => Promise<void>;
   loadSettings: () => Promise<void>;
   fetchBookmarks: (userId: string) => Promise<void>;
-  addBookmark: (userId: string, adId: string) => Promise<void>;
-  removeBookmark: (userId: string, adId: string) => Promise<void>;
+  addBookmark: (userId: string, ad: Ad) => Promise<void>;
+  removeBookmark: (userId: string, ad: Ad) => Promise<void>;
+  clearBookmarks: (userId: string) => Promise<void>;
 }
 
 const useSettingsStore = create<SettingsState>((set, get) => ({
@@ -47,20 +48,27 @@ const useSettingsStore = create<SettingsState>((set, get) => ({
   fetchBookmarks: async (userId) => {
     try {
       const { data } = await getBookmarks(userId);
-      set({ bookmarks: data.bookmarkedAds });
+      set({ bookmarks: data.bookmarkedAds || [] });
     } catch {
       // silently fail
     }
   },
 
-  addBookmark: async (userId, adId) => {
-    await addToBookmark(userId, adId);
+  addBookmark: async (userId, ad) => {
+    set({ bookmarks: [...get().bookmarks.filter((item) => item._id !== ad._id), ad] });
+    await addToBookmark(userId, ad);
     await get().fetchBookmarks(userId);
   },
 
-  removeBookmark: async (userId, adId) => {
-    await removeFromBookmark(userId, adId);
+  removeBookmark: async (userId, ad) => {
+    set({ bookmarks: get().bookmarks.filter((item) => item._id !== ad._id) });
+    await removeFromBookmark(userId, ad);
     await get().fetchBookmarks(userId);
+  },
+
+  clearBookmarks: async (userId) => {
+    await emptyBookmarks(userId);
+    set({ bookmarks: [] });
   },
 }));
 

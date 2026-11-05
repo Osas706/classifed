@@ -1,19 +1,19 @@
-// mobile/utils/formatPrice.ts
-import { EXCHANGE_RATES, CURRENCIES } from "../constants/currencies";
+import { CURRENCIES } from "../constants/currencies";
 
 export function formatPrice(
   priceInNGN: number | undefined,
   displayCurrency: string = "NGN"
 ): string {
-  if (priceInNGN === undefined || priceInNGN === null) return "Contact seller";
+  if (priceInNGN === undefined || priceInNGN === null || Number(priceInNGN) === 0) {
+    return "On inquiry";
+  }
 
-  const rate = EXCHANGE_RATES[displayCurrency] ?? 1;
-  const converted = priceInNGN * rate;
-  const currency = CURRENCIES.find((c) => c.code === displayCurrency);
-  const symbol = currency?.symbol ?? displayCurrency;
+  const currency = CURRENCIES.find((c) => c.code === displayCurrency) || CURRENCIES[0];
+  const converted = Number(priceInNGN) * currency.rateFromNGN;
+  const decimals = converted >= 1000 || currency.code === "NGN" ? 0 : 2;
 
-  return `${symbol}${converted.toLocaleString("en-US", {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
+  return `${currency.symbol}${converted.toLocaleString(undefined, {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
   })}`;
 }

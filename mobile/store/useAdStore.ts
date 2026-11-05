@@ -31,7 +31,7 @@ const useAdStore = create<AdState>((set) => ({
     set({ isLoading: true, error: null });
     try {
       const { data } = await listAds();
-      set({ ads: data.ads, isLoading: false });
+      set({ ads: data.data || [], isLoading: false });
     } catch (err: any) {
       set({ error: err.message, isLoading: false });
     }
@@ -41,7 +41,7 @@ const useAdStore = create<AdState>((set) => ({
     set({ isLoading: true, error: null });
     try {
       const { data } = await discoverAds();
-      set({ discoverAds: data.ads, isLoading: false });
+      set({ discoverAds: data.data || [], isLoading: false });
     } catch (err: any) {
       set({ error: err.message, isLoading: false });
     }
@@ -60,7 +60,7 @@ const useAdStore = create<AdState>((set) => ({
   searchAds: async (query) => {
     try {
       const { data } = await searchAds(query);
-      return data.ads;
+      return data.data || [];
     } catch {
       return [];
     }

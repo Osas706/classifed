@@ -1,10 +1,9 @@
 // mobile/hooks/useAuth.ts
-import { useEffect } from "react";
 import { router } from "expo-router";
 import useAuthStore from "../store/useAuthStore";
 
 export function useAuth() {
-  const { user, token, isLoading, error, logout, clearError } = useAuthStore();
+  const { user, userId, token, isLoading, error, logout, clearError, refreshUser } = useAuthStore();
 
   const isAuthenticated = !!token;
 
@@ -14,5 +13,5 @@ export function useAuth() {
     }
   };
 
-  return { user, token, isAuthenticated, isLoading, error, logout, requireAuth, clearError };
+  return { user, userId, token, isAuthenticated, isLoading, error, logout, requireAuth, clearError, refreshUser };
 }

@@ -14,7 +14,7 @@ export function useTheme() {
       background: isDark ? COLORS.backgroundDark : COLORS.backgroundLight,
       card: isDark ? COLORS.cardDark : COLORS.cardLight,
       text: isDark ? COLORS.textInverse : COLORS.textPrimary,
-      subText: COLORS.textSecondary,
+      subText: isDark ? "rgba(255,255,255,0.65)" : COLORS.textSecondary,
       border: isDark ? COLORS.borderDark : COLORS.borderLight,
       tabBar: isDark ? COLORS.tabBarDark : COLORS.tabBarLight,
       primary: COLORS.primary,

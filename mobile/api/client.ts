@@ -1,8 +1,8 @@
 // mobile/api/client.ts
 import axios from "axios";
-import * as SecureStore from "expo-secure-store";
+import { secureGet } from "../utils/storage";
 
-const BASE_URL =
+export const BASE_URL =
   process.env.EXPO_PUBLIC_API_URL ||
   "https://classifed-247market.onrender.com";
 
@@ -18,7 +18,7 @@ const client = axios.create({
 client.interceptors.request.use(
   async (config) => {
     try {
-      const token = await SecureStore.getItemAsync("token");
+      const token = await secureGet("token");
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -43,5 +43,25 @@ client.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+// React Native file uploads must go through fetch. Axios drops the multipart
+// boundary, so the API stores a temp path instead of a Cloudinary URL.
+export async function postForm<T = any>(path: string, formData: FormData): Promise<T> {
+  const token = await secureGet("token");
+  const response = await fetch(`${BASE_URL}${path}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: formData,
+  });
+
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok || data?.success === false) {
+    throw new Error(data?.message || "Request failed");
+  }
+  return data as T;
+}
 
 export default client;
