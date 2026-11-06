@@ -85,12 +85,13 @@ export default function BookmarksScreen() {
             <Text style={[styles.emptyText, { color: colors.subText }]}>You haven't bookmarked any ad</Text>
           </View>
         }
-        ListFooterComponent={bookmarks.length > 0 ? <Pagination page={page} total={totalPages} onChange={setPage} /> : null}
+        ListFooterComponent={bookmarks.length > 0 ? <Pagination page={page} total={totalPages} onChange={setPage} /> : undefined}
       />
     </SafeAreaView>
   );
 }
 
+// Styling
 const styles = StyleSheet.create({
   container: { flex: 1 },
   list: { padding: SPACING.md, paddingBottom: SPACING.xl },

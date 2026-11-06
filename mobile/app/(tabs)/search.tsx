@@ -109,8 +109,9 @@ export default function SearchScreen() {
       />
     </SafeAreaView>
   );
-}
+};
 
+// Styling
 const styles = StyleSheet.create({
   container: { flex: 1 },
   list: { padding: SPACING.md, paddingBottom: SPACING.xl },

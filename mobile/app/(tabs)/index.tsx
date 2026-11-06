@@ -140,7 +140,7 @@ export default function HomeScreen() {
           </View>
         }
         renderItem={({ item }) => <AdCard ad={item} onPress={() => router.push(`/listing/${item._id}`)} />}
-        ListEmptyComponent={!loading ? <Text style={[styles.empty, { color: colors.subText }]}>No ads in this category yet</Text> : null}
+        ListEmptyComponent={!loading ? <Text style={[styles.empty, { color: colors.subText }]}>No ads in this category yet</Text> : undefined}
         ListFooterComponent={<Pagination page={page} total={totalPages} onChange={setPage} />}
       />
     </SafeAreaView>
