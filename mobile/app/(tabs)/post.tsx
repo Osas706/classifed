@@ -179,13 +179,13 @@ export default function PostAdScreen() {
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>
           {step === 0 && (
             <>
-              <Field label="Title" value={form.title} onChangeText={(v) => setField("title", v)} placeholder="Enter your ad title..." colors={colors} />
-              <Field label="Ad Description" value={form.description} onChangeText={(v) => setField("description", v)} placeholder="Describe your ad..." colors={colors} multiline />
+              <Field label="Title" value={form.title} onChangeText={(v: any) => setField("title", v)} placeholder="Enter your ad title..." colors={colors} />
+              <Field label="Ad Description" value={form.description} onChangeText={(v: any) => setField("description", v)} placeholder="Describe your ad..." colors={colors} multiline />
               <OptionPicker label="Select Category" value={form.category} placeholder="Select category for your ad" options={AD_CATEGORIES.map((item) => ({ label: item.label, value: item.key }))} onChange={(v) => setField("category", v)} />
               <View style={{ height: SPACING.md }} />
               <OptionPicker label="Select Condition" value={form.condition} placeholder="Select Condition" options={CONDITIONS.map((item) => ({ label: item, value: item }))} onChange={(v) => setField("condition", v)} />
               <View style={{ height: SPACING.md }} />
-              <Field label="Price (₦)" value={form.price} onChangeText={(v) => setField("price", v)} placeholder="0" colors={colors} keyboardType="numeric" />
+              <Field label="Price (₦)" value={form.price} onChangeText={(v: any) => setField("price", v)} placeholder="0" colors={colors} keyboardType="numeric" />
               <Text style={[styles.label, { color: colors.text }]}>Your Terms</Text>
               <View style={styles.termsRow}>
                 {["Fixed Price", "Negotiable"].map((term) => (
@@ -212,8 +212,8 @@ export default function PostAdScreen() {
               <Text style={[styles.hint, { color: colors.subText }]}>
                 Add latitude and longitude for the exact location of your ad.
               </Text>
-              <Field label="Latitude" value={form.lat} onChangeText={(v) => setField("lat", v)} placeholder="e.g. 6.5244" colors={colors} keyboardType="numeric" />
-              <Field label="Longitude" value={form.long} onChangeText={(v) => setField("long", v)} placeholder="e.g. 3.3792" colors={colors} keyboardType="numeric" />
+              <Field label="Latitude" value={form.lat} onChangeText={(v: any) => setField("lat", v)} placeholder="e.g. 6.5244" colors={colors} keyboardType="numeric" />
+              <Field label="Longitude" value={form.long} onChangeText={(v: any) => setField("long", v)} placeholder="e.g. 3.3792" colors={colors} keyboardType="numeric" />
             </>
           )}
 
@@ -225,12 +225,12 @@ export default function PostAdScreen() {
                   <Ionicons name="person-outline" size={32} color={COLORS.textSecondary} />
                 )}
               </TouchableOpacity>
-              <Field label="First Name" value={form.firstName} onChangeText={(v) => setField("firstName", v)} placeholder="Your first name" colors={colors} />
-              <Field label="Last Name" value={form.lastName} onChangeText={(v) => setField("lastName", v)} placeholder="Your last name" colors={colors} />
-              <Field label="Email" value={form.email} onChangeText={(v) => setField("email", v)} placeholder="Enter a valid email" colors={colors} keyboardType="email-address" />
-              <Field label="Phone Number" value={form.phoneNumber} onChangeText={(v) => setField("phoneNumber", v)} placeholder="xxx-xxx-xxx-xxxx" colors={colors} keyboardType="phone-pad" />
-              <Field label="Country" value={form.country} onChangeText={(v) => setField("country", v)} placeholder="Nigeria" colors={colors} />
-              <Field label="State" value={form.state} onChangeText={(v) => setField("state", v)} placeholder="Lagos" colors={colors} />
+              <Field label="First Name" value={form.firstName} onChangeText={(v: any) => setField("firstName", v)} placeholder="Your first name" colors={colors} />
+              <Field label="Last Name" value={form.lastName} onChangeText={(v: any) => setField("lastName", v)} placeholder="Your last name" colors={colors} />
+              <Field label="Email" value={form.email} onChangeText={(v: any) => setField("email", v)} placeholder="Enter a valid email" colors={colors} keyboardType="email-address" />
+              <Field label="Phone Number" value={form.phoneNumber} onChangeText={(v: any) => setField("phoneNumber", v)} placeholder="xxx-xxx-xxx-xxxx" colors={colors} keyboardType="phone-pad" />
+              <Field label="Country" value={form.country} onChangeText={(v: any) => setField("country", v)} placeholder="Nigeria" colors={colors} />
+              <Field label="State" value={form.state} onChangeText={(v: any) => setField("state", v)} placeholder="Lagos" colors={colors} />
             </>
           )}
 
@@ -296,6 +296,8 @@ function Field({ label, colors, multiline, ...props }: any) {
   );
 }
 
+
+// Styling
 const styles = StyleSheet.create({
   container: { flex: 1 },
   scroll: { padding: SPACING.md, paddingBottom: 40 },
