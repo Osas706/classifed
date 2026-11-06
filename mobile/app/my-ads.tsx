@@ -55,7 +55,7 @@ export default function MyAdsScreen() {
           contentContainerStyle={styles.list}
           renderItem={({ item }) => <AdCard ad={item} onPress={() => router.push(`/listing/${item._id}`)} />}
           ListEmptyComponent={<Text style={[styles.empty, { color: colors.subText }]}>You have not posted any ads yet</Text>}
-          ListFooterComponent={ads.length > 0 ? <Pagination page={page} total={totalPages} onChange={setPage} /> : null}
+          ListFooterComponent={ads.length > 0 ? <Pagination page={page} total={totalPages} onChange={setPage} /> : undefined}
         />
       )}
     </View>
